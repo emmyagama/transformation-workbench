@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "transformation-workbench"
+version = "0.1.0"
+description = "Portfolio demo for AI automation and transformation workflows using synthetic business-process data."
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = ["mcp>=2,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "mcp[cli]>=2,<3", "jsonschema>=4.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+transformation_workbench = ["data/*.csv"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
