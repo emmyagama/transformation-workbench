@@ -1,0 +1,18 @@
+{
+  "captured_at": "2026-11-15",
+  "session": "20261115_26",
+  "request_id": "goose-a2a-003",
+  "provider": "ollama",
+  "model": "llama3.2:3b",
+  "hosted_model_used": false,
+  "tool_call_succeeded": true,
+  "deterministic_summary_sha256": "6e2181ec04b63ac44c4f3a365d7f13a8d477e69e35b6266ceec5488dd3672d3a",
+  "deterministic_summary_length": 1181,
+  "final_model_text_sha256": "338e4d02dd3f59883bfc326b109a07e6ed64e80821e62a23c98ac21fac2d761a",
+  "final_model_text_length": 1952,
+  "final_text_equals_summary": false,
+  "final_text_contains_summary": false,
+  "criterion": "goose_final_prose_must_reproduce_schema_validated_summary",
+  "outcome": "failed_pending_stronger_local_model",
+  "note": "The tool call and structured result succeeded. The local 3B model paraphrased and misinterpreted the result instead of copying summary.rendered_markdown."
+}
