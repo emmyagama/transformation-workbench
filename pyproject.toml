@@ -8,16 +8,36 @@ version = "0.1.0"
 description = "Portfolio demo for AI automation and transformation workflows using synthetic business-process data."
 readme = "README.md"
 requires-python = ">=3.11,<3.12"
-dependencies = ["mcp>=2,<3"]
+dependencies = [
+    "a2a-sdk[http-server]==1.3.0",
+    "httpx>=0.28.1,<0.29",
+    "mcp>=2,<3",
+    "uvicorn>=0.30,<1",
+]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0", "mcp[cli]>=2,<3", "jsonschema>=4.0"]
+dev = [
+    "pytest>=8.0",
+    "anyio>=4.0",
+    "mcp[cli]>=2,<3",
+    "jsonschema>=4.0",
+    "cryptography>=42,<51",
+    "starlette>=0.37",
+    "wsproto>=1.2,<2",
+]
+openresponses = [
+    "cryptography>=42,<51",
+    "starlette>=0.37",
+    "jsonschema>=4.0",
+    "wsproto>=1.2,<2",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
 transformation_workbench = ["data/*.csv"]
+"transformation_workbench.openresponses_adapter" = ["schemas/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

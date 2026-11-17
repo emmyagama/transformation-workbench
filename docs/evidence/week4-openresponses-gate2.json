@@ -1,0 +1,481 @@
+{
+  "generated_at": "2026-11-17T07:04:20.921309+00:00",
+  "suite": {
+    "path": "<local-pinned-suite-clone>",
+    "commit": "dce9ddb91921427c2ba06901c7dfaf0cc7056799"
+  },
+  "adapter": {
+    "model": "local-fake-model",
+    "transport": "local-fake-upstream"
+  },
+  "summary": {
+    "passed": 17,
+    "failed": 0,
+    "harness_errors": 0,
+    "total": 17,
+    "filter_isolated": true,
+    "total_adapter_upstream_operations": 19,
+    "expected_adapter_upstream_operations": 19,
+    "operation_budget_match": true
+  },
+  "tests": [
+    {
+      "id": "basic-response",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 57,
+      "stream_events": null,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 1,
+        "response_turns": 1,
+        "compact_requests": 0,
+        "paths": [
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 1,
+        "response_requests": 1,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "assistant-phase",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 18,
+      "stream_events": null,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 1,
+        "response_turns": 1,
+        "compact_requests": 0,
+        "paths": [
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 1,
+        "response_requests": 1,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "response-output-phase-schema",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 0,
+      "stream_events": null,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 0,
+        "response_turns": 0,
+        "compact_requests": 0,
+        "paths": []
+      },
+      "adapter_operations": {
+        "upstream_requests": 0,
+        "response_requests": 0,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "streaming-response",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 68,
+      "stream_events": 9,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 1,
+        "response_turns": 1,
+        "compact_requests": 0,
+        "paths": [
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 1,
+        "response_requests": 1,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "websocket-response",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 76,
+      "stream_events": 9,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 1,
+        "response_turns": 1,
+        "compact_requests": 0,
+        "paths": [
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 1,
+        "response_requests": 1,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "websocket-sequential-responses",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 65,
+      "stream_events": 18,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 2,
+        "response_turns": 2,
+        "compact_requests": 0,
+        "paths": [
+          "/responses",
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 2,
+        "response_requests": 2,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "websocket-continuation",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 60,
+      "stream_events": 18,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 2,
+        "response_turns": 2,
+        "compact_requests": 0,
+        "paths": [
+          "/responses",
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 2,
+        "response_requests": 2,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "websocket-reconnect-store-false-recovery",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 75,
+      "stream_events": 19,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 2,
+        "response_turns": 2,
+        "compact_requests": 0,
+        "paths": [
+          "/responses",
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 2,
+        "response_requests": 2,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "websocket-previous-response-not-found",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 31,
+      "stream_events": 1,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 0,
+        "response_turns": 0,
+        "compact_requests": 0,
+        "paths": []
+      },
+      "adapter_operations": {
+        "upstream_requests": 0,
+        "response_requests": 0,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "websocket-failed-continuation-evicts-cache",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 51,
+      "stream_events": 11,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 2,
+        "response_turns": 2,
+        "compact_requests": 0,
+        "paths": [
+          "/responses",
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 2,
+        "response_requests": 2,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "websocket-compact-new-chain",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 55,
+      "stream_events": 9,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 2,
+        "response_turns": 2,
+        "compact_requests": 1,
+        "paths": [
+          "/responses",
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 2,
+        "response_requests": 1,
+        "compact_summary_requests": 1
+      }
+    },
+    {
+      "id": "system-prompt",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 32,
+      "stream_events": null,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 1,
+        "response_turns": 1,
+        "compact_requests": 0,
+        "paths": [
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 1,
+        "response_requests": 1,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "tool-calling",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 16,
+      "stream_events": null,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 1,
+        "response_turns": 1,
+        "compact_requests": 0,
+        "paths": [
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 1,
+        "response_requests": 1,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "image-input",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 18,
+      "stream_events": null,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 1,
+        "response_turns": 1,
+        "compact_requests": 0,
+        "paths": [
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 1,
+        "response_requests": 1,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "multi-turn",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 19,
+      "stream_events": null,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 1,
+        "response_turns": 1,
+        "compact_requests": 0,
+        "paths": [
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 1,
+        "response_requests": 1,
+        "compact_summary_requests": 0
+      }
+    },
+    {
+      "id": "compact-response",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 16,
+      "stream_events": null,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 1,
+        "response_turns": 1,
+        "compact_requests": 1,
+        "paths": [
+          "/responses"
+        ]
+      },
+      "adapter_operations": {
+        "upstream_requests": 1,
+        "response_requests": 0,
+        "compact_summary_requests": 1
+      }
+    },
+    {
+      "id": "compact-missing-model",
+      "status": "passed",
+      "errors": [],
+      "duration_ms": 10,
+      "stream_events": null,
+      "suite_summary": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "total": 1
+      },
+      "filter_isolated": true,
+      "fake_upstream": {
+        "requests": 0,
+        "response_turns": 0,
+        "compact_requests": 0,
+        "paths": []
+      },
+      "adapter_operations": {
+        "upstream_requests": 0,
+        "response_requests": 0,
+        "compact_summary_requests": 0
+      }
+    }
+  ]
+}

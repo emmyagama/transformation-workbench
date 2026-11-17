@@ -1,0 +1,87 @@
+{
+  "trace_version": "1.0",
+  "captured_at": "2026-11-15",
+  "source": "Sanitized trace derived from Goose session export",
+  "goose_version": "1.59.0",
+  "provider": "ollama",
+  "model": "llama3.2:3b",
+  "session": "20261115_25",
+  "request_id": "goose-a2a-002",
+  "summon_load": {
+    "source": "a2a-coordinator",
+    "loaded": true
+  },
+  "advertised_tools": [
+    "a2a-coordinator__run_a2a_diagnosis",
+    "delegate",
+    "load",
+    "load_skill"
+  ],
+  "tool_result_is_error": false,
+  "trace": [
+    {
+      "step": "discover_card",
+      "agent": "Workbench Evidence Specialist",
+      "method": "GET",
+      "path": "/.well-known/agent-card.json",
+      "skill_id": "workbench_evidence",
+      "attempt": 1
+    },
+    {
+      "step": "send_task",
+      "agent": "Workbench Evidence Specialist",
+      "method": "POST",
+      "path": "/",
+      "skill_id": "workbench_evidence",
+      "task_id": "bb27239d-b9a7-4d99-9583-effa045bd363",
+      "context_id": "01d07257-5385-4f63-a898-b0a3fa52b085",
+      "state": "TASK_STATE_COMPLETED",
+      "attempt": 1
+    },
+    {
+      "step": "discover_card",
+      "agent": "Workbench Solution Designer",
+      "method": "GET",
+      "path": "/.well-known/agent-card.json",
+      "skill_id": "solution_options",
+      "attempt": 1
+    },
+    {
+      "step": "send_task",
+      "agent": "Workbench Solution Designer",
+      "method": "POST",
+      "path": "/",
+      "skill_id": "solution_options",
+      "task_id": "eb2f7a6f-7ac2-4f6b-ab3d-99a5f81aaf92",
+      "context_id": "2c15355e-0435-4b77-b8b4-2b06f0a8597a",
+      "state": "TASK_STATE_COMPLETED",
+      "attempt": 1
+    }
+  ],
+  "metrics": {
+    "input_rows": 15,
+    "measurable_closed": 9,
+    "cycle_time_sum_hours": 261.5,
+    "mean_cycle_time_hours": 29.06,
+    "median_cycle_time_hours": 9.0,
+    "sla_met_count": 6,
+    "sla_met_percent": 66.7,
+    "rework_cases": 2,
+    "rework_rate_percent": 22.2,
+    "rework_volume": 3,
+    "backlog_cases": 2,
+    "backlog_overdue": 1,
+    "excluded_count": 4
+  },
+  "options": [
+    "option-triage-backlog",
+    "option-data-quality",
+    "option-rework-review"
+  ],
+  "limitations": [
+    "Synthetic data only.",
+    "Read-only local workflow.",
+    "No hosted model, deployment, or business action.",
+    "Local 3B model final prose was unreliable; deterministic summary rendering is authoritative."
+  ]
+}
