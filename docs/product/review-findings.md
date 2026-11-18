@@ -40,3 +40,5 @@ read-only code and document review, local test run, and targeted reproductions.
 - Verbose CLI: protocol/server logs on stderr.
 - Approved CLI: `status=approved`, `consequential_action_permitted=False`,
   `decided_by=cli_assertion`.
+- Clean clone of commit `1f7f060`: **246 passed**, clean `pip check`, and a
+  pending CLI JSON demo with empty stderr.

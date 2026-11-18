@@ -1,7 +1,7 @@
 # Transformation Workbench evaluation
 
-**Snapshot:** 2026-11-18 local review snapshot. The numbers below describe this
-review state, not a production release.
+**Snapshot:** 2026-11-18 local review snapshot at commit `1f7f060`. The numbers
+below describe this review state, not a production release.
 
 ## Automated checks
 
@@ -44,6 +44,18 @@ claim guards, replay handling, and loopback/proxy controls.
 - bounded specialist failure and invalid intake;
 - coordinator and Evidence Specialist rejection of path-like IDs before network
   or MCP work.
+
+## Clean-clone check
+
+A fresh clone of commit `1f7f060` was created in a temporary directory, with a
+new Python 3.11 virtual environment and an editable install of
+`.[dev,openresponses]`. In that clone:
+
+- `pytest -q`: **246 passed**.
+- `pip check`: no broken requirements.
+- CLI JSON demo: exit 0, empty stderr, `status=complete`,
+  `approval.status=pending`, `consequential_action_permitted=false`, 13 metrics,
+  4 exceptions, and 3 case observations.
 
 ## Known limits
 
