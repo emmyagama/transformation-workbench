@@ -1,7 +1,7 @@
 # AAIF evidence cards
 
 One card per current AAIF project. Status is explicit: integrated evidence,
-hands-on result, partial, or deferred by owner.
+hands-on spike, partial, or deferred by owner.
 
 | Project | Depth | Status | Card |
 | --- | --- | --- | --- |
@@ -11,10 +11,10 @@ hands-on result, partial, or deferred by owner.
 | AGENTS.md | Integrated / deep | Guidance present; compliance evidence partial | [AGENTS.md](agents-md.md) |
 | Agent2Agent (A2A) | Integrated / deep | Local trace and tests present | [A2A](a2a.md) |
 | Open Responses | Hands-on spike | Adapter + Console passed; bare Console 1 pass, 16 fail | [Open Responses](open-responses.md) |
-| agentgateway | Documentation review / deferred | Deferred by owner; documentation review only; no hands-on run | [agentgateway](agentgateway.md) |
-| Agent Router | Documentation review / deferred | Deferred by owner; documentation review only; no hands-on run | [Agent Router](agent-router.md) |
-| OpenSandbox | Documentation review / deferred | Deferred by owner; documentation review only; no hands-on run | [OpenSandbox](opensandbox.md) |
-| OpenEnv | Documentation review / deferred | Deferred by owner; documentation review only; no hands-on run | [OpenEnv](openenv.md) |
+| agentgateway | Documentation review only | Deferred by owner (2026-11-18); no hands-on run | [agentgateway](agentgateway.md) |
+| Agent Router | Documentation review only | Deferred by owner (2026-11-18); no hands-on run | [Agent Router](agent-router.md) |
+| OpenSandbox | Documentation review only | Deferred by owner (2026-11-18); no hands-on run | [OpenSandbox](opensandbox.md) |
+| OpenEnv | Documentation review only | Deferred by owner (2026-11-18); no hands-on run | [OpenEnv](openenv.md) |
 
 ## Honest coverage statement
 
