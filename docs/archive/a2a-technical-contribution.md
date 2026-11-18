@@ -351,7 +351,7 @@ post-change model behavior is claimed.
 
 Evidence:
 
-- `docs/evidence/goose-session-excerpt.md`
+- `docs/archive/goose-session-excerpt.md`
 - `docs/evidence/goose-summary-evaluation-20261115.json`
 - `docs/archive/goose-coordinator.md`
 - `docs/archive/a2a-acceptance-evaluation.md`
@@ -393,7 +393,7 @@ Statuses used here:
 
 | # | Claim | Status | Evidence | Boundary |
 | ---: | --- | --- | --- | --- |
-| 1 | Goose loaded the project coordinator agent through Summon `load`, not an `@` mention | **CAPTURED LOCAL** | `docs/evidence/goose-session-excerpt.md`; `docs/evidence/a2a-trace-20261115.json`; `docs/archive/goose-coordinator.md` | Sanitized, self-authored excerpt; no raw export hash |
+| 1 | Goose loaded the project coordinator agent through Summon `load`, not an `@` mention | **CAPTURED LOCAL** | `docs/archive/goose-session-excerpt.md`; `docs/evidence/a2a-trace-20261115.json`; `docs/archive/goose-coordinator.md` | Sanitized, self-authored excerpt; no raw export hash |
 | 2 | Earlier hosted Goose diagnostic and wording-repeat sessions succeeded | **OWNER-REPORTED** | Request IDs `goose-a2a-live-8d618f6b9df94d6ebce302727ee1510e` and `goose-a2a-repeat-019d021b50364edbaac6217df4f70ec5` in the closeout instructions; no checked-in sanitized trace found | Only Goose inference was hosted; A2A specialist exchanges remained local; no new hosted run during closeout |
 | 3 | The Goose session advertised only the coordinator tool plus Summon tools | **CAPTURED LOCAL** | `advertised_tools` in `docs/evidence/a2a-trace-20261115.json`; `tests/test_week3_acceptance.py:22-50` | Based on the captured export |
 | 4 | The coordinator MCP surface exposes one tool and no Workbench tools | **VERIFIED LOCAL** | `src/transformation_workbench/coordinator_mcp_server.py`; `tests/test_coordinator_mcp.py`; `tests/test_week3_acceptance.py` | MCP annotations are hints; surface enforcement is implementation-level |

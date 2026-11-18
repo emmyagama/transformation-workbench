@@ -66,7 +66,7 @@ verified from a repository artifact.
   `load`, then called only the coordinator MCP tool.
 - The tool result shows both A2A specialists completed with task/context IDs.
 - Sanitized trace: `docs/evidence/a2a-trace-20261115.json`.
-- Sanitized session excerpt: `docs/evidence/goose-session-excerpt.md`.
+- Sanitized session excerpt: `docs/archive/goose-session-excerpt.md`.
 
 ## Goose final-prose criterion
 

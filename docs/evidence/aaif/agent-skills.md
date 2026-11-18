@@ -40,5 +40,5 @@ facts from recommendations. They do not add action capability.
 
 - `.agents/skills/process-diagnostic/SKILL.md`
 - `.agents/skills/executive-brief/SKILL.md`
-- `docs/evidence/goose-session-excerpt.md`
+- `docs/archive/goose-session-excerpt.md`
 - `docs/evidence/goose-summary-evaluation-20261115.json`

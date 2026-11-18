@@ -161,7 +161,7 @@ Full evaluation record: `docs/archive/a2a-acceptance-evaluation.md`.
 Persisted evidence:
 
 - `docs/evidence/a2a-trace-20261115.json`
-- `docs/evidence/goose-session-excerpt.md`
+- `docs/archive/goose-session-excerpt.md`
 - `docs/evidence/goose-summary-evaluation-20261115.json`
 
 ## Deterministic summary and Goose prose evaluation

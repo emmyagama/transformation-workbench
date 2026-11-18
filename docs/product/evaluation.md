@@ -7,7 +7,7 @@ below describe this review state, not a production release.
 
 | Check | Command | Result |
 | --- | --- | --- |
-| Full test suite | `.\.venv\Scripts\python.exe -m pytest -q` | 246 passed |
+| Full test suite | `.\.venv\Scripts\python.exe -m pytest -q` | 249 passed |
 | Dependency consistency | `.\.venv\Scripts\python.exe -m pip check` | No broken requirements |
 | CLI smoke test | `python -m transformation_workbench ...` | Exit 0; clean stderr; markdown and JSON render |
 | Approval default | CLI without a decision | `pending`; consequential action **no** |
@@ -51,7 +51,7 @@ A fresh clone of commit `d84203e` was created in a temporary directory, with a
 new Python 3.11 virtual environment and an editable install of
 `.[dev,openresponses]`. In that clone:
 
-- `pytest -q`: **246 passed**.
+- `pytest -q`: **249 passed**.
 - `pip check`: no broken requirements.
 - CLI JSON demo: exit 0, empty stderr, `status=complete`,
   `approval.status=pending`, `consequential_action_permitted=false`, 13 metrics,

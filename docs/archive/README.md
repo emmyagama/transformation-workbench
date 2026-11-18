@@ -6,7 +6,7 @@ claims.
 
 - [A2A protocol slice](a2a-protocol-slice.md)
 - [A2A specialists and typed handoffs](a2a-specialists.md)
-- [Goose coordinator integration](goose-coordinator.md)
+- [Goose coordinator integration](goose-coordinator.md)\n- [Goose session excerpt](goose-session-excerpt.md)
 - [A2A acceptance evaluation](a2a-acceptance-evaluation.md)
 - [Technical contribution: local A2A collaboration](a2a-technical-contribution.md)
 - [Open Responses adapter](openresponses-adapter.md)

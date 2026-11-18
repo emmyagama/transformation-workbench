@@ -89,7 +89,7 @@ decision; it is not identity verification and not an action authorization.
 - End-to-end CLI with markdown and JSON output.
 - Intake validation, case-ID validation, fixed-evidence verification, and claim
   guards.
-- Enforceable demo approval state machine and 246 automated tests at the current
+- Enforceable demo approval state machine and 249 automated tests at the current
   review snapshot.
 
 ## Not implemented

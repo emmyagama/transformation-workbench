@@ -1,4 +1,4 @@
-﻿# End-to-end sample report (sanitized excerpt)
+# End-to-end sample report (sanitized excerpt)
 
 Command:
 

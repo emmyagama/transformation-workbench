@@ -40,11 +40,11 @@ read-only code and document review, local test run, and targeted reproductions.
 
 ## Verification
 
-- Full local suite: **246 passed**.
+- Full local suite: **249 passed**.
 - `pip check`: no broken requirements.
 - Quiet CLI: exit 0, empty stderr.
 - Verbose CLI: protocol/server logs on stderr.
 - Approved CLI: `status=approved`, `consequential_action_permitted=False`,
   `decided_by=cli_assertion`.
-- Clean clone of commit `d84203e`: **246 passed**, clean `pip check`, and a
+- Clean clone of commit `d84203e`: **249 passed**, clean `pip check`, and a
   pending CLI JSON demo with empty stderr.

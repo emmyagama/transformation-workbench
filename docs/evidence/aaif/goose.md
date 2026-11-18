@@ -39,6 +39,6 @@ hosted outcomes remain owner-reported because no sanitized trace was checked in.
 ## Evidence links
 
 - `docs/archive/goose-coordinator.md`
-- `docs/evidence/goose-session-excerpt.md`
+- `docs/archive/goose-session-excerpt.md`
 - `docs/evidence/goose-summary-evaluation-20261115.json`
 - `.agents/agents/transformation-analyst.md`

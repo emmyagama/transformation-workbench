@@ -1,4 +1,4 @@
-﻿"""CLI for the read-only end-to-end Transformation Workbench demo."""
+"""CLI for the read-only end-to-end Transformation Workbench demo."""
 
 from __future__ import annotations
 
@@ -154,7 +154,7 @@ def _timeout_seconds(value: str) -> float:
         parsed = float(value)
     except ValueError as exc:
         raise argparse.ArgumentTypeError("timeout must be a number") from exc
-    if not 0 < parsed <= 120:
+    if not 1 <= parsed <= 120:
         raise argparse.ArgumentTypeError("timeout must be between 1 and 120")
     return parsed
 

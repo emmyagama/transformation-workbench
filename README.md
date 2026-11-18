@@ -21,7 +21,7 @@ authorization system.
   guards.
 - Demo approval state machine that fails closed; approval does not create an
   action capability.
-- Local verification snapshot: **246 passed** and clean `pip check` on
+- Local verification snapshot: **249 passed** and clean `pip check` on
   2026-11-18.
 - Not implemented: write actions, real data, deployment, hosted model operation
   in the Workbench/A2A/MCP path, production authentication, or any
@@ -66,7 +66,7 @@ docs/product/                      Architecture, threat model, evaluation, busin
 docs/demos/                        Demo scripts and evaluation notes
 docs/evidence/                     Sanitized evidence and sample output
 docs/evidence/aaif/                One evidence card per AAIF project
-docs/workflows/                    Repeatable historical workflows
+docs/archive/                      Dated technical records
 docs/tutorials/                    Setup and MCP tutorial
 opencode.json                      Optional local-only MCP config; not committed
 ```

@@ -1,4 +1,4 @@
-﻿---
+---
 name: a2a-coordinator
 description: Runs one read-only local A2A diagnosis through the coordinator MCP tool and reports the typed evidence and options.
 ---

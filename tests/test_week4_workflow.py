@@ -1,4 +1,4 @@
-﻿"""Week 4 end-to-end workflow, approval, and safety tests."""
+"""Week 4 end-to-end workflow, approval, and safety tests."""
 
 from __future__ import annotations
 
@@ -515,6 +515,29 @@ def test_cli_rejects_invalid_retry_count_without_traceback(
     captured = capsys.readouterr()
     assert error.value.code == 2
     assert "max-retries must be between 0 and 5" in captured.err
+    assert "Traceback" not in captured.err
+
+
+@pytest.mark.parametrize("value", ["0", "0.5", "121"])
+def test_cli_rejects_invalid_timeout_without_traceback(
+    value: str,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    with pytest.raises(SystemExit) as error:
+        workflow_cli.main(
+            [
+                "--request-id",
+                "week4-timeout",
+                "--desired-outcome",
+                "Review the synthetic service-request intake.",
+                "--timeout",
+                value,
+            ]
+        )
+
+    captured = capsys.readouterr()
+    assert error.value.code == 2
+    assert "timeout must be between 1 and 120" in captured.err
     assert "Traceback" not in captured.err
 
 

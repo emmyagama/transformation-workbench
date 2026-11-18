@@ -23,7 +23,7 @@ keeps the chain visible:
   reconciliation, and unsupported-claim guards.
 - A deterministic markdown/JSON report with evidence appendix and protocol trace.
 - A demo approval state machine that fails closed; no write path exists.
-- 246 automated tests at the current local review snapshot.
+- 249 automated tests at the current local review snapshot.
 
 ## What is intentionally not implemented
 

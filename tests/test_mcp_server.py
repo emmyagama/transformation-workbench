@@ -401,9 +401,9 @@ async def test_process_context_resource(client: Client) -> None:
 @pytest.mark.anyio
 async def test_diagnostic_prompt(client: Client) -> None:
     listed = await client.list_prompts()
-    assert "week1_diagnostic" in {prompt.name for prompt in listed.prompts}
+    assert "baseline_diagnostic" in {prompt.name for prompt in listed.prompts}
 
-    result = await client.get_prompt("week1_diagnostic")
+    result = await client.get_prompt("baseline_diagnostic")
     message = result.messages[0]
     assert message.role == "user"
     assert "calculate_baseline_metrics" in message.content.text
