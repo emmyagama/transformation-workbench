@@ -156,9 +156,9 @@ provider-native or portable compaction.
 
 - [Evidence-card index](docs/evidence/aaif/README.md)
 
-Five projects have integrated evidence with limitations recorded, Open Responses
-has a bounded hands-on result, and four spikes are explicitly blocked because the
-required binaries, container runtime, packages, or approvals were unavailable.
+Five projects have integrated evidence with limitations recorded, and Open
+Responses has a bounded hands-on result. Four spikes are deferred by the owner
+(2026-11-18): they were documentation-reviewed only and are not hands-on coverage.
 The index does **not** claim 10/10 hands-on coverage.
 
 ## Dated technical records

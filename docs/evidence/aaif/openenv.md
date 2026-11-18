@@ -1,6 +1,6 @@
 # AAIF evidence card: OpenEnv
 
-**Status: BLOCKED — documentation inspected, no hands-on run.**
+**Status: DEFERRED BY OWNER (2026-11-18) — documentation inspected; no hands-on run.**
 
 ## Problem addressed
 
@@ -35,5 +35,5 @@ does not.
 
 ## Evidence links
 
-- Detailed blocker card: [`../spikes/openenv.md`](../spikes/openenv.md)
+- Detailed deferral and blocker card: [`../spikes/openenv.md`](../spikes/openenv.md)
 - `docs/product/architecture.md`

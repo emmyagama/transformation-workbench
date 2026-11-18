@@ -1,7 +1,7 @@
 # Spike evidence: agentgateway
 
-**Status: BLOCKED — documentation inspected; no hands-on run.** Date inspected:
-2026-11-18. This is a truthful blocker card, not an evaluation result.
+**Status: DEFERRED BY OWNER (2026-11-18) — documentation inspected; no hands-on run.**
+Inspected 2026-11-18. This is a truthful deferral and blocker record, not an evaluation result.
 
 ## Why it was considered
 
@@ -43,7 +43,7 @@ human approval for.
 
 - Read the official quickstart and MCP documentation.
 - Probed for the required executable and container runtime.
-- Recorded the blocker without downloading, installing, or running anything.
+- Recorded the deferral and blocker without downloading, installing, or running anything.
 
 ## Fit assessment
 
@@ -52,7 +52,7 @@ this review produced no gateway run, tool-list observation, latency result, or
 security finding. Do not describe agentgateway as integrated, evaluated, or
 recommended.
 
-## What would unblock it
+## What a later hands-on pass would require
 
 With explicit approval and a disposable environment:
 

@@ -1,6 +1,6 @@
 # AAIF evidence card: OpenSandbox
 
-**Status: BLOCKED — documentation inspected, no hands-on run.**
+**Status: DEFERRED BY OWNER (2026-11-18) — documentation inspected; no hands-on run.**
 
 ## Problem addressed
 
@@ -34,5 +34,5 @@ execution path is proposed; that path is currently prohibited.
 
 ## Evidence links
 
-- Detailed blocker card: [`../spikes/opensandbox.md`](../spikes/opensandbox.md)
+- Detailed deferral and blocker card: [`../spikes/opensandbox.md`](../spikes/opensandbox.md)
 - `docs/product/threat-model.md`

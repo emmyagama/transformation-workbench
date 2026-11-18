@@ -1,6 +1,6 @@
 # AAIF evidence card: Agent Router
 
-**Status: BLOCKED — documentation inspected, no hands-on run.**
+**Status: DEFERRED BY OWNER (2026-11-18) — documentation inspected; no hands-on run.**
 
 ## Problem addressed
 
@@ -33,6 +33,6 @@ routing requirement to evaluate.
 
 ## Evidence links
 
-- Detailed blocker card: [`../spikes/agent-router.md`](../spikes/agent-router.md)
+- Detailed deferral and blocker card: [`../spikes/agent-router.md`](../spikes/agent-router.md)
 - Rename announcement: <https://aaif.io/blog/agent-router-joins-aaif>
 - `docs/product/architecture.md`

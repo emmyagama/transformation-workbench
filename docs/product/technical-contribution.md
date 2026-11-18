@@ -46,7 +46,7 @@ keeps the chain visible:
 
 - Re-run the full local suite and `pip check` on the intended commit.
 - Confirm the sample report and links resolve on the public branch.
-- Keep blocked spike cards labeled blocked; do not claim 10/10 hands-on.
+- Keep deferred spike cards labeled deferred; do not claim 10/10 hands-on.
 - Remove internal scheduling language from the public surface.
 - Treat this repository merge as the publication event; obtain separate approval
   before submitting the material elsewhere.
