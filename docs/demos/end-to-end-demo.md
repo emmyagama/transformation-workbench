@@ -1,6 +1,6 @@
 # End-to-end Transformation Workbench demo
 
-**Length:** 3"5 minutes. **Mode:** local, read-only, synthetic data only.
+**Length:** 3–5 minutes. **Mode:** local, read-only, synthetic data only.
 
 The demo runs one synthetic intake request through local A2A specialists, the
 read-only MCP fixture, and a human review checkpoint. It makes no hosted model
@@ -42,7 +42,7 @@ Expected highlights:
 - known limitations, including synthetic data and the absence of a business
   action
 
-The full output is long by design; show the executive brief, sections 4"7, and
+The full output is long by design; show the executive brief, sections 4–7, and
 the approval checkpoint rather than scrolling every appendix line.
 
 ## Show the structured output

@@ -102,10 +102,10 @@ integrity and fixture consistency, not remote attestation.
 
 MCP failures are decomposed:
 
-- resource unavailable/read failure â†’ task fails with `mcp_resource_unavailable`;
-- metrics tool failure â†’ task fails with `mcp_tool_error`;
-- exception-list failure â†’ `tool_errors` + `missing_data`, no invented rows;
-- case-detail failure â†’ `tool_errors` + `missing_data` for that case.
+- resource unavailable/read failure → task fails with `mcp_resource_unavailable`;
+- metrics tool failure → task fails with `mcp_tool_error`;
+- exception-list failure → `tool_errors` + `missing_data`, no invented rows;
+- case-detail failure → `tool_errors` + `missing_data` for that case.
 
 The source accepts an injected session factory so failure tests use fakes and
 never touch the filesystem or network.

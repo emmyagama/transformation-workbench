@@ -1,4 +1,4 @@
-# End-to-end sample report (sanitized excerpt)
+﻿# End-to-end sample report (sanitized excerpt)
 
 Command:
 
@@ -30,7 +30,7 @@ rest of the demonstrated content is deterministic for this request and case set.
 
 The synthetic fixture contains 15 input rows. 9 closed cases are measurable; 6 met their SLA target (66.7%), and 3 missed. Mean cycle time is 29.06 hours and median cycle time is 9 hours. 2 measurable cases had rework (22.2%), with 3 rework events. At the snapshot, backlog is 2 cases; 1 overdue. 4 rows are excluded for data-quality reasons, including a duplicate and a missing close timestamp.
 
-The evidence supports a review of backlog triage, data quality, and rework handling. It does not establish root cause or quantify any future outcome. The proposed future-state workflow keeps calculations deterministic and pauses at a human approval checkpoint. No write, network, or business action exists in this demo.
+The evidence supports a review of backlog triage, data quality, and rework handling. It does not establish root cause or quantify any future outcome. The proposed future-state workflow keeps calculations deterministic and pauses at a human approval checkpoint. No external network, write, or business action exists in this demo.
 
 Requested outcome: Review the synthetic service-request intake and decide which evidence to inspect next.
 
@@ -80,7 +80,7 @@ Requested outcome: Review the synthetic service-request intake and decide which 
 - Status: **pending**
 - Approval reference: `apr-b4d505037db42e64`
 - Consequential action permitted: **no**; this is a review state only.
-The workflow is paused before any consequential action. A human reviewer must decide before review continues. No write, network, or business action is performed.
+The workflow is paused before any consequential action. A human reviewer must decide before review continues. No external network, write, or business action is performed.
 ```
 
 The omitted sections contain the proposed future-state steps, risks and

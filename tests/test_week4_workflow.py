@@ -1,4 +1,4 @@
-"""Week 4 end-to-end workflow, approval, and safety tests."""
+﻿"""Week 4 end-to-end workflow, approval, and safety tests."""
 
 from __future__ import annotations
 
@@ -79,7 +79,7 @@ def test_report_is_complete_and_read_only() -> None:
     assert "## 14. Human approval checkpoint" in report.rendered_markdown
     assert "Consequential action permitted: **no**" in report.rendered_markdown
     assert "Synthetic-data demonstration." in report.rendered_markdown
-    assert "No write, network, or business action is performed." in (
+    assert "No external network, write, or business action is performed." in (
         report.rendered_markdown
     )
 
@@ -109,7 +109,7 @@ def test_approved_report_still_cannot_execute_action() -> None:
     assert report.approval.status is ApprovalStatus.APPROVED
     assert report.approval.consequential_action_permitted is False
     assert "A CLI review decision marked the report approved" in report.rendered_markdown
-    assert "No write, network, or business action was performed." in (
+    assert "No external network, write, or business action was performed." in (
         report.rendered_markdown
     )
 
@@ -144,7 +144,7 @@ def test_decline_is_recorded_and_has_no_action_path() -> None:
     assert report.approval.status is ApprovalStatus.DECLINED
     assert report.approval.consequential_action_permitted is False
     assert "A CLI review decision marked the report declined" in report.rendered_markdown
-    assert "No write, network, or business action was performed." in (
+    assert "No external network, write, or business action was performed." in (
         report.rendered_markdown
     )
 

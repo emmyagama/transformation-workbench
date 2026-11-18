@@ -23,8 +23,10 @@ authorization system.
   action capability.
 - Local verification snapshot: **246 passed** and clean `pip check` on
   2026-11-18.
-- Not implemented: write actions, real data, deployment, hosted model operation,
-  production authentication, or any financial/savings claim.
+- Not implemented: write actions, real data, deployment, hosted model operation
+  in the Workbench/A2A/MCP path, production authentication, or any
+  financial/savings claim. The separate optional Open Responses adapter had one
+  documented Console validation run, described below.
 
 ## Scope
 

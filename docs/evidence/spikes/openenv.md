@@ -1,6 +1,6 @@
 # Spike evidence: OpenEnv
 
-**Status: BLOCKED â€” documentation inspected; no hands-on run.** Date inspected:
+**Status: BLOCKED — documentation inspected; no hands-on run.** Date inspected:
 2026-11-18. This is a truthful blocker card, not an evaluation result.
 
 ## Why it was considered

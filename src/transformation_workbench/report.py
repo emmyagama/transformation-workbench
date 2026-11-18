@@ -188,8 +188,8 @@ def _executive_brief(
         "The evidence supports a review of backlog triage, data quality, and "
         "rework handling. It does not establish root cause or quantify any "
         "future outcome. The proposed future-state workflow keeps calculations "
-        "deterministic and pauses at a human approval checkpoint. No write, "
-        "network, or business action exists in this demo.\n\n"
+        "deterministic and pauses at a human approval checkpoint. No external "
+        "network, write, or business action exists in this demo.\n\n"
         f"Requested outcome: {intake.desired_outcome}"
     )
 
@@ -284,8 +284,8 @@ def _future_state(result: object) -> list[FutureStateStep]:
             step_id="future.approval",
             title="Pause at the human approval checkpoint",
             description=(
-                "Stop at a pending review state. The demo has no write, "
-                "network, or business action endpoint to call."
+                "Stop at a pending review state. The demo has no external "
+                "network, write, or business action endpoint to call."
             ),
             evidence_ids=["assumption.no_consequential_action"],
         ),
@@ -395,7 +395,8 @@ def _assumptions(result: object) -> list[str]:
             "All inputs are synthetic; the fixture is fixed and packaged with the demo.",
             "The deterministic report is the authoritative user-facing output.",
             "The local model prose is not part of the authoritative report path.",
-            "Approval is a demo review state; no write, network, or business action exists.",
+            "Approval is a demo review state; no external network, write, or "
+            "business action exists.",
             "No financial outcome or enterprise deployment is claimed.",
         ]
     )
@@ -542,7 +543,7 @@ def _evidence_appendix(
         ("assumption.safe_intake", "Intake and case IDs are bounded and checked."),
         (
             "assumption.no_consequential_action",
-            "No write, network, or business action exists.",
+            "No external network, write, or business action exists.",
         ),
     ):
         appendix.append(
@@ -689,18 +690,18 @@ def _render(report: TransformationReport) -> str:
 def _approval_instruction(status: str) -> str:
     if status == "approved":
         return (
-            "A CLI review decision marked the report approved. No write, "
-            "network, or business action was performed."
+            "A CLI review decision marked the report approved. No external "
+            "network, write, or business action was performed."
         )
     if status == "declined":
         return (
-            "A CLI review decision marked the report declined. No write, "
-            "network, or business action was performed."
+            "A CLI review decision marked the report declined. No external "
+            "network, write, or business action was performed."
         )
     return (
         "The workflow is paused before any consequential action. A human "
-        "reviewer must decide before review continues. No write, network, or "
-        "business action is performed."
+        "reviewer must decide before review continues. No external network, "
+        "write, or business action is performed."
     )
 
 

@@ -1,13 +1,13 @@
 # Spike evidence: Agent Router
 
-**Status: BLOCKED â€” documentation inspected; no hands-on run.** Date inspected:
+**Status: BLOCKED — documentation inspected; no hands-on run.** Date inspected:
 2026-11-18. This is a truthful blocker card, not an evaluation result.
 
 ## Correct project identity
 
 Agent Router is `theagentrouter/agent-router`, formerly **Envoy AI Gateway**,
 and an Agentic AI Foundation project. It is not the separate product
-â€œAgentRouteâ€. The repository, CLI (`aigw`), CRDs, and API group remain stable
+“AgentRoute”. The repository, CLI (`aigw`), CRDs, and API group remain stable
 through the rename.
 
 Official sources:

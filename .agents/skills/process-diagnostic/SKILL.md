@@ -1,6 +1,6 @@
 ---
 name: process-diagnostic
-description: Retrieves and verifies the synthetic Transformation Workbench service-request baseline, exceptions, and case details using the read-only MCP tools. Use when diagnosing the Week 1 intake process, checking metric reconciliation, or inspecting an excluded or duplicate row.
+description: Retrieves and verifies the synthetic Transformation Workbench service-request baseline, exceptions, and case details using the read-only MCP tools. Use when diagnosing the intake process, checking metric reconciliation, or inspecting an excluded or duplicate row.
 ---
 
 # Process Diagnostic

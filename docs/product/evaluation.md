@@ -61,7 +61,9 @@ new Python 3.11 virtual environment and an editable install of
 
 - The fixture is synthetic, fixed, and small. Results do not generalize.
 - The acceptance environment is a single Windows workstation.
-- No hosted model, gateway, sandbox, or environment-host path is exercised.
+- No hosted model, gateway, sandbox, or environment-host path is exercised in
+  the Workbench/A2A/MCP workflow. The separate optional Open Responses adapter
+  had one documented Console validation run and a separate bare-route failure.
 - The approval checkpoint is a demo state machine, not a production
   authorization system.
 - The report is deterministic in content, but A2A task and context IDs vary per

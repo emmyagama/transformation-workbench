@@ -22,7 +22,7 @@ The repository guidance defines synthetic-data-only rules, explicit human
 approval for consequential actions, no arbitrary shell tools, bounded MCP
 surfaces, no secrets, and no unapproved installs or commits. It also names the
 local Python and test conventions. The current review followed those rules by
-keeping changes local, adding tests, and not committing or publishing.
+keeping changes local, adding tests, and using the repository review process.
 
 ## One observed limitation
 
@@ -41,4 +41,4 @@ hosts. The missing piece is a recorded compliance check, not a new integration.
 - `AGENTS.md`
 - `README.md`
 - `docs/product/threat-model.md`
-- `Week_4_and_Days_23-30_Execution_Runbook.md`
+- `docs/product/review-findings.md`
