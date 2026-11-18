@@ -24,7 +24,7 @@ authoritative path.
 flowchart LR
     CLI[workflow_cli] --> WF[workflow.run_workflow]
     WF --> INTAKE[IntakeRequest validation]
-    WF --> COORD[Phase2Coordinator]
+    WF --> COORD[A2A coordinator]
     COORD -->|A2A card + task| EVID[Evidence Specialist]
     EVID -->|MCP stdio| MCP[MCP server]
     MCP --> FIXTURE[(Fixed synthetic fixture)]
