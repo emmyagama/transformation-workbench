@@ -1,6 +1,6 @@
 # Transformation Workbench evaluation
 
-**Snapshot:** 2026-11-18 local review snapshot at commit `1f7f060`. The numbers
+**Snapshot:** 2026-11-18 local review snapshot at commit `d84203e`. The numbers
 below describe this review state, not a production release.
 
 ## Automated checks
@@ -47,7 +47,7 @@ claim guards, replay handling, and loopback/proxy controls.
 
 ## Clean-clone check
 
-A fresh clone of commit `1f7f060` was created in a temporary directory, with a
+A fresh clone of commit `d84203e` was created in a temporary directory, with a
 new Python 3.11 virtual environment and an editable install of
 `.[dev,openresponses]`. In that clone:
 

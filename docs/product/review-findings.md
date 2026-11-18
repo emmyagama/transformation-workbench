@@ -1,7 +1,7 @@
 # Independent review findings and dispositions
 
-**Review date:** 2026-11-18. **Scope:** the uncommitted end-to-end demo,
-approval state, safety tests, and product/evidence documentation. **Method:**
+**Review date:** 2026-11-18. **Scope:** the end-to-end demo, approval state,
+safety tests, and product/evidence documentation. **Method:**
 read-only code and document review, local test run, and targeted reproductions.
 
 ## Findings fixed
@@ -19,6 +19,12 @@ read-only code and document review, local test run, and targeted reproductions.
 | Verbose logging relied on ambient handlers | Low | Fixed: the CLI installs and replaces its own stderr handler and sets the child log level explicitly |
 | Blocked projects were labeled "hands-on spike" | Low | Fixed: the AAIF index now says "documentation review / blocked" |
 | Owner-held Goose exports were not clearly distinguished from checked-in evidence | Low | Fixed: cards state that the exports are owner-held and not in the repository |
+| Public AGENTS.md card linked to an unpublished internal runbook | Medium | Fixed: the card now links only committed public evidence |
+| Public-language sweep left dated week/phase framing on public pages | Medium | Fixed: historical records moved under `docs/archive/` with product-oriented titles, and public pages point to current product docs |
+| Hosted-model claim did not distinguish the optional adapter run | Medium | Fixed: README and evaluation scope the claim to the Workbench/A2A/MCP path and cross-reference the separate adapter result |
+| Public documents contained encoding corruption | Medium | Fixed: mojibake and lost punctuation were replaced with UTF-8 characters, and links were rechecked |
+| Timeout help text included a value the validator rejects | Low | Fixed: help and validation now both use 1–120 |
+| Report text said “no network” although loopback HTTP/stdio is used | Low | Fixed: report text now says “no external network, write, or business action” |
 
 ## Residual limitations
 
@@ -40,5 +46,5 @@ read-only code and document review, local test run, and targeted reproductions.
 - Verbose CLI: protocol/server logs on stderr.
 - Approved CLI: `status=approved`, `consequential_action_permitted=False`,
   `decided_by=cli_assertion`.
-- Clean clone of commit `1f7f060`: **246 passed**, clean `pip check`, and a
+- Clean clone of commit `d84203e`: **246 passed**, clean `pip check`, and a
   pending CLI JSON demo with empty stderr.
