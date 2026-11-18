@@ -1,15 +1,21 @@
-# Week 3 Phase 2 — specialists, typed handoffs, and failure handling
+# A2A specialists, typed handoffs, and failure handling
+
+> **Current-status note:** this is a dated technical record. The later read-only
+> end-to-end demo adds a code-enforced approval state in
+> `src/transformation_workbench/approval.py`, but still has no write or business
+> action path. See `docs/product/architecture.md` and
+> `docs/product/threat-model.md`.
 
 ## Scope
 
-Phase 2 extends the Phase 1 protocol slice with two narrow A2A specialists, a
+The specialist stage extends the protocol slice with two narrow A2A specialists, a
 coordinator, and typed handoffs. Everything runs on loopback with the fixed
 synthetic fixture. There are no hosted model calls, API keys, cloud endpoints,
 write tools, or business actions.
 
-Phase 1 remains a separate protocol slice (`specialist.py`, `coordinator.py`,
+The protocol slice remains separate (`specialist.py`, `coordinator.py`,
 `boundary.py`, `tests/test_a2a_integration.py`, and
-`docs/week3-phase1-a2a.md`). Phase 2 adds separate modules under
+`docs/archive/a2a-protocol-slice.md`). The specialist stage adds separate modules under
 `src/transformation_workbench/a2a/`.
 
 ## Architecture
@@ -184,7 +190,7 @@ For an immutable review snapshot that excludes `.venv`, set
 `PYTHONPATH=<snapshot>\src`, `PYTHONDONTWRITEBYTECODE=1`, and run the shared
 Python 3.11 interpreter with `-p no:cacheprovider`.
 
-Phase 2-specific tests:
+specialist stage-specific tests:
 
 ```powershell
 .venv\Scripts\python.exe -m pytest `
@@ -235,7 +241,7 @@ in this document.
   configuration only (17/17, 19 operations, 50/56 conservative total); it is
   not a hosted A2A run and does not generalize to the bare Console route or all
   Open Responses implementations. The local Goose coordinator MCP integration
-  is documented separately in `docs/week3-goose-coordinator.md`.
+  is documented separately in `docs/archive/goose-coordinator.md`.
 - A2A retry tests use local injected failures; they do not prove behavior under
   a real network partition.
 - Context, metric, exception, and case-observation verification checks the fixed

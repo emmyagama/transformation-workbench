@@ -508,6 +508,83 @@ def valid_solution_payload(pack: EvidencePack) -> dict[str, Any]:
     return design_options(pack).model_dump(mode="json")
 
 
+def valid_coordinator_result(
+    request_id: str = "week4-test",
+    case_ids: list[str] | None = None,
+) -> CoordinatorResult:
+    from transformation_workbench.a2a.contracts import (
+        Calculation,
+        CoordinatorResult,
+        ProtocolTraceEvent,
+    )
+
+    pack = valid_evidence_pack(request_id=request_id, case_ids=case_ids)
+    options = design_options(pack)
+    return CoordinatorResult(
+        request_id=request_id,
+        measured_facts=pack,
+        calculations=[
+            Calculation(
+                calculation_id="calc.sla_misses",
+                label="SLA misses among measurable closed cases",
+                formula="measurable_closed - sla_met_count",
+                value=3,
+                unit="count",
+                evidence_ids=[
+                    "metric.measurable_closed",
+                    "metric.sla_met_count",
+                ],
+            ),
+            Calculation(
+                calculation_id="calc.excluded_share",
+                label="Excluded rows as a share of input rows",
+                formula="excluded_count / input_rows * 100",
+                value=26.7,
+                unit="percent",
+                evidence_ids=["metric.excluded_count", "metric.input_rows"],
+            ),
+        ],
+        assumptions=["Synthetic test result."],
+        solution_options=options,
+        trace=[
+            ProtocolTraceEvent(
+                step="discover_card",
+                agent="Workbench Evidence Specialist",
+                method="GET",
+                path="/.well-known/agent-card.json",
+                skill_id="workbench_evidence",
+            ),
+            ProtocolTraceEvent(
+                step="send_task",
+                agent="Workbench Evidence Specialist",
+                method="POST",
+                path="/",
+                skill_id="workbench_evidence",
+                task_id="task-evidence",
+                context_id="context-evidence",
+                state="TASK_STATE_COMPLETED",
+            ),
+            ProtocolTraceEvent(
+                step="discover_card",
+                agent="Workbench Solution Designer",
+                method="GET",
+                path="/.well-known/agent-card.json",
+                skill_id="solution_options",
+            ),
+            ProtocolTraceEvent(
+                step="send_task",
+                agent="Workbench Solution Designer",
+                method="POST",
+                path="/",
+                skill_id="solution_options",
+                task_id="task-solution",
+                context_id="context-solution",
+                state="TASK_STATE_COMPLETED",
+            ),
+        ],
+    )
+
+
 def call_result(
     payload: dict[str, Any] | None = None,
     *,

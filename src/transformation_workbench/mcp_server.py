@@ -1,6 +1,7 @@
-"""Read-only Week 1 MCP server over the deterministic analysis core."""
+"""Read-only MCP server over the deterministic analysis core."""
 
 import logging
+import os
 import sys
 from datetime import datetime, timezone
 from decimal import ROUND_HALF_UP, Decimal
@@ -33,7 +34,7 @@ READ_ONLY_ANNOTATIONS = ToolAnnotations(
     open_world_hint=False,
 )
 
-PROCESS_CONTEXT = """# Transformation Workbench - Week 1 process context
+PROCESS_CONTEXT = """# Transformation Workbench process context
 
 This is a fictional, synthetic email-based service-request process. It supports
 deterministic baseline metrics only and makes no claims about real savings,
@@ -54,7 +55,7 @@ productivity, or enterprise deployment.
 - Data policy: synthetic data only; read-only; no caller-supplied paths
 """
 
-DIAGNOSTIC_PROMPT = """Review the Week 1 baseline for the synthetic Transformation Workbench.
+DIAGNOSTIC_PROMPT = """Review the baseline for the synthetic Transformation Workbench.
 
 1. Call `calculate_baseline_metrics` with no arguments.
 2. Call `list_case_exceptions` with no arguments.
@@ -121,7 +122,7 @@ mcp = MCPServer(
     name="Transformation Workbench",
     version="0.1.0",
     instructions=(
-        "Read-only Week 1 baseline metrics over a fixed synthetic fixture. "
+        "Read-only baseline metrics over a fixed synthetic fixture. "
         "No caller-supplied paths, writes, network calls, or external actions."
     ),
 )
@@ -129,7 +130,7 @@ mcp = MCPServer(
 
 @mcp.tool(structured_output=True, annotations=READ_ONLY_ANNOTATIONS)
 def calculate_baseline_metrics() -> BaselineMetrics:
-    """Calculate deterministic Week 1 baseline metrics from the fixed fixture."""
+    """Calculate deterministic baseline metrics from the fixed fixture."""
     logger.info("tool=calculate_baseline_metrics")
     metrics = compute_metrics(_load_dataset())
     presentation = metrics.to_presentation()
@@ -163,7 +164,7 @@ def calculate_baseline_metrics() -> BaselineMetrics:
 
 @mcp.tool(structured_output=True, annotations=READ_ONLY_ANNOTATIONS)
 def list_case_exceptions() -> CaseExceptionList:
-    """List rows excluded from Week 1 metrics with explicit reasons."""
+    """List rows excluded from baseline metrics with explicit reasons."""
     logger.info("tool=list_case_exceptions")
     metrics = compute_metrics(_load_dataset())
     exceptions = [
@@ -203,7 +204,7 @@ def get_case_details(
         ),
     ] = None,
 ) -> CaseDetails:
-    """Return one synthetic row and its Week 1 classification."""
+    """Return one synthetic row and its baseline classification."""
     logger.info(
         "tool=get_case_details case_id=%r row_number=%r",
         case_id,
@@ -222,21 +223,21 @@ def get_case_details(
 @mcp.resource(
     "workbench://process-context",
     name="process_context",
-    title="Week 1 process context",
+    title="Process context",
     description="Synthetic process, snapshot, SLA targets, and data policy.",
     mime_type="text/markdown",
 )
 def process_context() -> str:
-    """Synthetic process, snapshot, SLA targets, and data policy for Week 1."""
+    """Synthetic process, snapshot, SLA targets, and data policy."""
     return PROCESS_CONTEXT
 
 
 @mcp.prompt(
-    name="week1_diagnostic",
-    title="Week 1 baseline diagnostic",
+    name="baseline_diagnostic",
+    title="Baseline diagnostic",
 )
-def week1_diagnostic() -> str:
-    """Guide a read-only review of Week 1 metrics, exceptions, and backlog."""
+def baseline_diagnostic() -> str:
+    """Guide a read-only review of metrics, exceptions, and backlog."""
     return DIAGNOSTIC_PROMPT
 
 
@@ -471,8 +472,13 @@ def _as_optional_float(value: object) -> float | None:
 
 
 def main() -> None:
+    requested_level = os.environ.get(
+        "TRANSFORMATION_WORKBENCH_LOG_LEVEL",
+        "INFO",
+    ).upper()
+    level = getattr(logging, requested_level, logging.INFO)
     logging.basicConfig(
-        level=logging.INFO,
+        level=level,
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
         stream=sys.stderr,
         force=True,

@@ -1,6 +1,6 @@
-# Week 2 demo and evaluation
+# Agent-host demo and evaluation
 
-**Status:** Week 2 runtime evidence captured on 2026-11-15 in ten sanitized
+**Status:** Runtime evidence captured on 2026-11-15 in ten sanitized
 Goose exports. The evidence shows Summon loading `transformation-analyst`, both
 project skills loading where required, matching baselines across two runs, and
 safe behavior in the duplicate, unknown-lookup, contradictory-claim, and
@@ -53,7 +53,7 @@ explicit `--with-builtin summon` or the agent is not loaded.
    skills. Explain that `AGENTS.md` supplies constraints, the agent supplies the
    role, the skills supply reusable procedures, and Summon loads the agent.
 3. **Run the workflow.** Use the commands in
-   [`docs/workflows/week2-transformation-diagnostic.md`](../workflows/week2-transformation-diagnostic.md).
+   [`agent-host-diagnostic-workflow.md`](agent-host-diagnostic-workflow.md).
 4. **Show the evidence.** The tool call should return the baseline and four
    exclusions. Inspect row 15 as duplicate `C-014` of `C-007`.
 5. **Show the brief.** The response should separate measured facts,
@@ -179,7 +179,7 @@ demonstration.
 | Tool call | One workbench tool call succeeded |
 | Quality warning | Final text included an irrelevant fictional Linux path |
 
-Do not tune the 3B model on this memory-constrained machine for Week 2. The
+Do not tune the 3B model on this memory-constrained machine for the agent-host workflow. The
 primary demonstration should use the separately configured hosted provider
 without exposing credentials in the repository or evidence.
 

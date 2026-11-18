@@ -1,10 +1,10 @@
-# Week 4 Open Responses Gate 3 runbook
+# Open Responses validation runbook
 
 ## Status
 
 Completed on 2026-11-17. No rerun is authorized. Results and operation
 accounting are recorded below. Evidence:
-`docs/evidence/week4-openresponses-gate3.json`.
+`docs/evidence/openresponses-gate3.json`.
 
 ## Authorization limits
 
@@ -57,7 +57,7 @@ Optional parameters:
 - `-AllowedUpstreamHost` defaults to the URL host and must match it.
 - `-AuthHeader` defaults to `Authorization`.
 - `-AuthScheme` defaults to `Bearer`.
-- `-Output` defaults to `docs\evidence\week4-openresponses-gate3.json`.
+- `-Output` defaults to `docs\evidence\openresponses-gate3.json`.
 
 The Console key is entered only at the hidden prompt created by the launcher.
 Do not paste it into chat, a prompt, a command line, or a file.
@@ -92,7 +92,7 @@ Do not paste it into chat, a prompt, a command line, or a file.
 - This pass applies only to the local adapter plus Console upstream. The earlier
   direct Console route result (1 pass, 16 fail) remains a separate, unchanged
   failure.
-- Evidence: `docs/evidence/week4-openresponses-gate3.json`.
+- Evidence: `docs/evidence/openresponses-gate3.json`.
 
 Evidence provenance note: the JSON `suite.path` value is redacted to
 `<local-pinned-suite-clone>` for publication; the recorded suite commit and

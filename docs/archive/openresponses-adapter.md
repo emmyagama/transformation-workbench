@@ -1,4 +1,4 @@
-# Week 4 Open Responses adapter: Gates 1-3 with genuine compaction
+# Open Responses adapter: validation gates with compaction
 
 ## Snapshot
 
@@ -9,10 +9,10 @@
 - Focused adapter tests: **35 passed**
 - Full local tests at closeout: **214 passed**
 - Gate 2 pinned suite result: **17 passed, 0 failed**
-- Gate 2 evidence: `docs/evidence/week4-openresponses-gate2.json`
+- Gate 2 evidence: `docs/evidence/openresponses-gate2.json`
 - Gate 3 result: **17 passed, 0 failed**, **19** suite operations,
   **50/56** conservative total
-- Gate 3 evidence: `docs/evidence/week4-openresponses-gate3.json`
+- Gate 3 evidence: `docs/evidence/openresponses-gate3.json`
 
 ## Scope and boundaries
 
@@ -159,7 +159,7 @@ The harness:
 6. Runs exactly one suite test per Bun invocation.
 7. Records the result, fake-upstream counts, and adapter operation counts
    without storing request or response bodies.
-8. Writes `docs/evidence/week4-openresponses-gate2.json`.
+8. Writes `docs/evidence/openresponses-gate2.json`.
 
 Per-test CLI shape:
 
@@ -211,7 +211,7 @@ The owner-run harness is split into:
 - `scripts/run_openresponses_gate3.py`: verifies the pinned suite, filters one
   test at a time, calls only the loopback adapter, records operation counts,
   enforces the 23-operation suite allocation, and writes
-  `docs/evidence/week4-openresponses-gate3.json`.
+  `docs/evidence/openresponses-gate3.json`.
 
 The completed Gate 3 configuration used model `gpt-6.1-sol`, one complete run
 of the 17 pinned tests, and no retries. The accounting was `31` prior operations
@@ -222,7 +222,7 @@ reserve. The runner stopped within the 23-operation suite allocation.
 Gate 3 result: **17 passed, 0 failed, 0 harness errors**, with **19** actual
 suite operations. The evidence records the per-test outcomes, durations, and
 operation counts without credentials. No rerun is authorized. See
-[the Gate 3 runbook](week4-openresponses-gate3-runbook.md).
+[the Gate 3 runbook](openresponses-gate3-runbook.md).
 
 A local dry-run of the Gate 3 runner against the fake upstream previously
 passed all 17 tests with 19 adapter operations. That validated the harness and

@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+import os
 import re
 import sys
 from collections.abc import AsyncIterator, Callable, Sequence
@@ -15,6 +16,7 @@ from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from pydantic import ValidationError
 
+from ..security import SafetyError, validate_case_id
 from .contracts import (
     PROCESS_CONTEXT_URI,
     REQUIRED_METRIC_FIELDS,
@@ -92,9 +94,15 @@ class McpEvidenceSource:
         session_factory: SessionFactory | None = None,
         timeout: float = 20.0,
     ) -> None:
+        server_env = {}
+        if "TRANSFORMATION_WORKBENCH_LOG_LEVEL" in os.environ:
+            server_env["TRANSFORMATION_WORKBENCH_LOG_LEVEL"] = os.environ[
+                "TRANSFORMATION_WORKBENCH_LOG_LEVEL"
+            ]
         self._server_params = server_params or StdioServerParameters(
             command=sys.executable,
             args=["-m", "transformation_workbench.mcp_server"],
+            env=server_env,
         )
         self._session_factory = session_factory or self._default_session
         self._timeout = timeout
@@ -468,8 +476,14 @@ def _coerce_metric_value(raw: Any, unit: str) -> int | float:
 def _normalize_case_ids(case_ids: Sequence[str]) -> list[str]:
     normalized: list[str] = []
     for value in case_ids:
-        cleaned = str(value).strip()
-        if cleaned and cleaned not in normalized:
+        raw = str(value).strip()
+        if not raw:
+            continue
+        try:
+            cleaned = validate_case_id(raw)
+        except SafetyError as exc:
+            raise EvidenceSourceError("invalid_request", exc.message) from exc
+        if cleaned not in normalized:
             normalized.append(cleaned)
     if len(normalized) > MAX_REQUESTED_CASES:
         raise EvidenceSourceError(

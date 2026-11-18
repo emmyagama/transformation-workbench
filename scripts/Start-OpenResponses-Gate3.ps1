@@ -14,7 +14,7 @@ param(
     [ValidateRange(1, 300)]
     [int]$TimeoutSeconds = 60,
 
-    [string]$Output = 'docs\evidence\week4-openresponses-gate3.json',
+    [string]$Output = 'docs\evidence\openresponses-gate3.json',
 
     [string]$AuthHeader = 'Authorization',
 

@@ -39,6 +39,7 @@ from .contracts import (
 )
 from .evidence_specialist import EVIDENCE_SKILL_ID
 from .solution_designer import SOLUTION_SKILL_ID
+from ..security import SafetyError, validate_case_id
 from .validation import (
     ContractValidationError,
     validate_evidence_pack,
@@ -602,8 +603,14 @@ def _transient_code(exc: Exception) -> str | None:
 def _normalize_case_ids(case_ids: Sequence[str]) -> list[str]:
     normalized: list[str] = []
     for value in case_ids:
-        cleaned = str(value).strip()
-        if cleaned and cleaned not in normalized:
+        raw = str(value).strip()
+        if not raw:
+            continue
+        try:
+            cleaned = validate_case_id(raw)
+        except SafetyError as exc:
+            raise CoordinatorError(exc.code, exc.message) from exc
+        if cleaned not in normalized:
             normalized.append(cleaned)
     if len(normalized) > MAX_REQUESTED_CASES:
         raise CoordinatorError(

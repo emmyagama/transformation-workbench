@@ -1,10 +1,10 @@
-# Week 2 repeatable workflow: transformation diagnosis and executive brief
+# Repeatable agent-host workflow: transformation diagnosis and executive brief
 
 This workflow runs the project-scoped `transformation-analyst` agent against the
 existing read-only Transformation Workbench MCP server. It uses the project
 instructions, both project skills, and only the workbench MCP extension.
 
-**Status:** Week 2 runtime evidence was captured on 2026-11-15 in ten sanitized
+**Status:** Runtime evidence was captured on 2026-11-15 in ten sanitized
 Goose exports. The parent sessions show Summon `load` and `delegate` for
 `transformation-analyst`; the delegated sessions show `load_skill` for
 `process-diagnostic`, and for `executive-brief` where a brief was requested. They
@@ -23,7 +23,7 @@ metadata in the sanitized exports.
 | `.agents/skills/process-diagnostic/SKILL.md` | Evidence retrieval, verification, and safe error handling |
 | `.agents/skills/executive-brief/SKILL.md` | Decision-brief structure and unsupported-claim guardrails |
 | `src/transformation_workbench/mcp_server.py` | Read-only MCP tools over the fixed fixture |
-| `docs/demos/week2-demo-and-evaluation.md` | Demo script, expected values, and evaluation matrix |
+| `docs/archive/agent-host-demo-evaluation.md` | Demo script, expected values, and evaluation matrix |
 
 The custom agent does not define MCP servers. The session command supplies only
 the Transformation Workbench extension and explicitly enables Summon. A Goose

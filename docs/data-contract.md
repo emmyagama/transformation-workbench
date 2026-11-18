@@ -1,4 +1,4 @@
-# Week 1 data contract — Transformation Workbench
+# Synthetic data contract — Transformation Workbench
 
 ## Purpose and boundary
 
@@ -44,7 +44,7 @@ Do not add arbitrary input paths, network access, write tools, or real business 
 - Excluded rows: 4, with the four reason codes above.
 - Reconciliation: 9 measurable + 4 excluded + 2 backlog = 15 input rows.
 
-## Week 1 must-test cases
+## Core must-test cases
 
 - Exact expected rollups above.
 - Inclusive SLA boundary (C-009).
@@ -60,4 +60,4 @@ Do not add arbitrary input paths, network access, write tools, or real business 
 - Median for an even-sized measurable set is the mean of the two middle values; an open case exactly at its SLA age is not overdue (overdue is strict `>`).
 - Missing required fields and conflicting status/timestamp fields follow the documented reason precedence.
 
-Do not implement filesystem path-traversal handling for Week 1: no tool takes a path, and no tool writes. Assert that tool schemas expose no path or write/action parameter. Defer a broad filesystem threat matrix to a later phase if the architecture ever adds such capability.
+Do not implement filesystem path-traversal handling for the baseline: no tool takes a path, and no tool writes. Assert that tool schemas expose no path or write/action parameter. Defer a broad filesystem threat matrix to a later phase if the architecture ever adds such capability.

@@ -30,7 +30,7 @@ The server is in `src/transformation_workbench/mcp_server.py`. It exposes:
 - tools: `calculate_baseline_metrics`, `list_case_exceptions`,
   `get_case_details`
 - resource: `workbench://process-context`
-- prompt: `week1_diagnostic`
+- prompt: `baseline_diagnostic`
 
 The fixture is package data, configured in `pyproject.toml`:
 
@@ -380,7 +380,7 @@ The resource is read-only context for the host. Its MIME type is
 `text/markdown`. The actual content is:
 
 ```markdown
-# Transformation Workbench - Week 1 process context
+# Transformation Workbench process context
 
 This is a fictional, synthetic email-based service-request process. It supports
 deterministic baseline metrics only and makes no claims about real savings,
@@ -404,12 +404,12 @@ productivity, or enterprise deployment.
 Resources supply context; they do not perform writes or calculations. The host
 can read this resource before or during a diagnostic conversation.
 
-## Prompt: week1_diagnostic
+## Prompt: baseline_diagnostic
 
 The prompt supplies a repeatable workflow for a host:
 
 ```text
-Review the Week 1 baseline for the synthetic Transformation Workbench.
+Review the baseline for the synthetic Transformation Workbench.
 
 1. Call `calculate_baseline_metrics` with no arguments.
 2. Call `list_case_exceptions` with no arguments.
