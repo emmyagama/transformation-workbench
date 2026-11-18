@@ -1,4 +1,4 @@
-# Week 3 Goose coordinator integration
+# Goose coordinator integration
 
 ## Scope
 
@@ -50,7 +50,7 @@ The response preserves the coordinator's typed result: measured facts,
 calculations, assumptions, solution options, recommendations, and sanitized
 A2A trace. Failures return a bounded `ToolError` with the coordinator error code.
 
-The coordinator MCP server does not register the Week 1 Workbench tools or the
+The coordinator MCP server does not register the baseline Workbench tools or the
 `workbench://process-context` resource. Those remain behind the Evidence
 Specialist's own MCP client boundary.
 
@@ -149,7 +149,7 @@ not claimed as a pass. No hosted model was used to mask this limitation.
 
 ## Fixed synthetic evaluation
 
-Full evaluation record: `docs/week3-acceptance-evaluation.md`.
+Full evaluation record: `docs/archive/a2a-acceptance-evaluation.md`.
 
 | Dimension | Result | Evidence |
 | --- | --- | --- |
@@ -160,9 +160,9 @@ Full evaluation record: `docs/week3-acceptance-evaluation.md`.
 
 Persisted evidence:
 
-- `docs/evidence/week3-a2a-trace-20261115.json`
-- `docs/evidence/week3-goose-session-excerpt.md`
-- `docs/evidence/week3-goose-summary-evaluation-20261115.json`
+- `docs/evidence/a2a-trace-20261115.json`
+- `docs/evidence/goose-session-excerpt.md`
+- `docs/evidence/goose-summary-evaluation-20261115.json`
 
 ## Deterministic summary and Goose prose evaluation
 

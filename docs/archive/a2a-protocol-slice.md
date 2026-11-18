@@ -1,4 +1,4 @@
-# Week 3 Phase 1 — local A2A vertical slice
+# A2A protocol slice
 
 ## Scope
 

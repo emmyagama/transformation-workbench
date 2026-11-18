@@ -1,4 +1,10 @@
-# Week 3 acceptance evaluation
+# A2A acceptance evaluation
+
+> **Current-status note:** this is a dated technical record. The later read-only
+> end-to-end demo adds a code-enforced approval state in
+> `src/transformation_workbench/approval.py`, but still has no write or business
+> action path. See `docs/product/architecture.md` and
+> `docs/product/threat-model.md`.
 
 ## Snapshot under test
 
@@ -6,7 +12,7 @@
 - HEAD: `17faecf55318b7474237f9cfa939855e4d6ec16e`
 - Original acceptance date: 2026-11-15; closeout verification: 2026-11-17
 - Local command: `.venv\Scripts\python.exe -m pytest -q`
-- Closeout result: **214 passed** (the original Week 3 snapshot recorded
+- Closeout result: **214 passed** (the original A2A milestone snapshot recorded
   **175 passed**; the closeout suite also includes the separate Open Responses
   adapter tests)
 
@@ -28,7 +34,7 @@
 | Duplicate/completed replay | `test_dual_real_a2a_exchange_and_duplicate_replay`, `test_coordinator_mcp_replay_uses_process_cache`, MCP end-to-end replay | cached result; MCP-level replay returns `duplicate_replay` without a second run |
 | Duplicate request with different inputs | `test_duplicate_request_with_different_inputs_is_rejected` | `request_conflict` |
 | Failed/cancelled task | `test_task_failure_and_cancel_stop_safely` | bounded `task_failure` |
-| Malformed/empty/wrong-MIME artifact | `test_empty_and_wrong_mime_artifacts_are_rejected`, Phase 1 artifact tests | `malformed_result` or `missing_artifact` |
+| Malformed/empty/wrong-MIME artifact | `test_empty_and_wrong_mime_artifacts_are_rejected`, protocol slice artifact tests | `malformed_result` or `missing_artifact` |
 | Invalid evidence/solution schema | `test_invalid_evidence_and_solution_schemas_are_rejected` | schema-specific bounded errors |
 | MCP resource failure | `test_mcp_resource_failure_crosses_a2a_as_task_failure` | task failure crosses A2A; no artifact |
 | MCP tool error / missing data | `test_incomplete_evidence_is_rejected_at_boundary` | coordinator rejects `incomplete_evidence` |
@@ -37,8 +43,8 @@
 | Exception-row tampering | `test_exception_record_must_match_fixture` | `exception_mismatch` |
 | Case-observation tampering | `test_case_observation_must_match_fixture` | `case_observation_mismatch` |
 | Unsupported percentage/impact claim | claim-guard contract tests and A2A tests | `unsupported_claim`; labeled unvalidated operational hypothesis allowed |
-| Non-loopback or non-root endpoint | Phase 1 tests | `invalid_agent_card` / `ValueError` |
-| Proxy environment variables | Phase 1 and Phase 2 proxy tests | loopback calls still go direct |
+| Non-loopback or non-root endpoint | protocol slice tests | `invalid_agent_card` / `ValueError` |
+| Proxy environment variables | protocol slice and specialist stage proxy tests | loopback calls still go direct |
 
 ## Goose/A2A/MCP evidence
 
@@ -59,8 +65,8 @@ verified from a repository artifact.
 - Session `20261115_25` loaded project agent `a2a-coordinator` through Summon
   `load`, then called only the coordinator MCP tool.
 - The tool result shows both A2A specialists completed with task/context IDs.
-- Sanitized trace: `docs/evidence/week3-a2a-trace-20261115.json`.
-- Sanitized session excerpt: `docs/evidence/week3-goose-session-excerpt.md`.
+- Sanitized trace: `docs/evidence/a2a-trace-20261115.json`.
+- Sanitized session excerpt: `docs/evidence/goose-session-excerpt.md`.
 
 ## Goose final-prose criterion
 
@@ -86,7 +92,7 @@ change, so no model behavior is claimed for it.
   authoritative user-facing output; tool invocation alone is not counted as
   prose success.
 
-Evidence: `docs/evidence/week3-goose-summary-evaluation-20261115.json`.
+Evidence: `docs/evidence/goose-summary-evaluation-20261115.json`.
 
 ## Dispositions
 

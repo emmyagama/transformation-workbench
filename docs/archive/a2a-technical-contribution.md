@@ -1,7 +1,7 @@
-# Week 3 technical contribution: local A2A collaboration
+# Technical contribution: local A2A collaboration
 
-**Status: WEEK 3 CONTRIBUTION — prepared for the complete Week 3 PR.** This
-document records the Week 3 A2A implementation and evidence. Earlier
+**Status: TECHNICAL CONTRIBUTION RECORD — retained for provenance.** This
+document records the local A2A implementation and evidence. Earlier
 owner-reported hosted Goose diagnostic and wording-repeat sessions succeeded;
 no new hosted Goose coordinator run occurred during the latest closeout verification.
 Only the Goose inference was hosted; the A2A specialist exchanges remained
@@ -9,6 +9,12 @@ local. No checked-in sanitized trace with those request IDs was found, so those
 outcomes are recorded as owner-reported. Hosted Goose inference cost/latency was not
 measured. The separate Open Responses adapter Gate 3 result is recorded as a
 distinct result, not as A2A evidence. Nothing here proves production readiness.
+
+> **Current-status note:** this is a dated technical record. The later read-only
+> end-to-end demo adds a code-enforced approval state in
+> `src/transformation_workbench/approval.py`, but still has no write or business
+> action path. See `docs/product/architecture.md` and
+> `docs/product/threat-model.md`.
 
 ## Scope and boundary
 
@@ -271,7 +277,7 @@ The captured options are:
 - `option-data-quality`
 - `option-rework-review`
 
-The original Week 3 A2A snapshot recorded **175 passed**. The closeout suite
+The original A2A milestone A2A snapshot recorded **175 passed**. The closeout suite
 now records **214 passed**; that full count includes the separate Open Responses
 adapter tests. These are local, synthetic-fixture results. They do not establish
 hosted Goose inference quality, real operational performance, savings, or production
@@ -279,8 +285,8 @@ readiness.
 
 Evidence:
 
-- `docs/week3-acceptance-evaluation.md`
-- `docs/evidence/week3-a2a-trace-20261115.json`
+- `docs/archive/a2a-acceptance-evaluation.md`
+- `docs/evidence/a2a-trace-20261115.json`
 - `tests/test_phase2_integration.py:22-153`
 - `tests/test_week3_acceptance.py:22-86`
 - `tests/test_phase2_contracts.py`
@@ -345,10 +351,10 @@ post-change model behavior is claimed.
 
 Evidence:
 
-- `docs/evidence/week3-goose-session-excerpt.md`
-- `docs/evidence/week3-goose-summary-evaluation-20261115.json`
-- `docs/week3-goose-coordinator.md`
-- `docs/week3-acceptance-evaluation.md`
+- `docs/evidence/goose-session-excerpt.md`
+- `docs/evidence/goose-summary-evaluation-20261115.json`
+- `docs/archive/goose-coordinator.md`
+- `docs/archive/a2a-acceptance-evaluation.md`
 - `tests/test_summary.py`
 
 ## Separate Open Responses adapter result
@@ -365,9 +371,9 @@ model-quality evidence.
 
 Evidence:
 
-- `docs/evidence/week4-openresponses-gate3.json`
-- `docs/week4-openresponses-gate3-runbook.md`
-- `docs/week4-openresponses-local-adapter.md`
+- `docs/evidence/openresponses-gate3.json`
+- `docs/archive/openresponses-gate3-runbook.md`
+- `docs/archive/openresponses-adapter.md`
 
 ## Claims and evidence
 
@@ -387,23 +393,23 @@ Statuses used here:
 
 | # | Claim | Status | Evidence | Boundary |
 | ---: | --- | --- | --- | --- |
-| 1 | Goose loaded the project coordinator agent through Summon `load`, not an `@` mention | **CAPTURED LOCAL** | `docs/evidence/week3-goose-session-excerpt.md`; `docs/evidence/week3-a2a-trace-20261115.json`; `docs/week3-goose-coordinator.md` | Sanitized, self-authored excerpt; no raw export hash |
+| 1 | Goose loaded the project coordinator agent through Summon `load`, not an `@` mention | **CAPTURED LOCAL** | `docs/evidence/goose-session-excerpt.md`; `docs/evidence/a2a-trace-20261115.json`; `docs/archive/goose-coordinator.md` | Sanitized, self-authored excerpt; no raw export hash |
 | 2 | Earlier hosted Goose diagnostic and wording-repeat sessions succeeded | **OWNER-REPORTED** | Request IDs `goose-a2a-live-8d618f6b9df94d6ebce302727ee1510e` and `goose-a2a-repeat-019d021b50364edbaac6217df4f70ec5` in the closeout instructions; no checked-in sanitized trace found | Only Goose inference was hosted; A2A specialist exchanges remained local; no new hosted run during closeout |
-| 3 | The Goose session advertised only the coordinator tool plus Summon tools | **CAPTURED LOCAL** | `advertised_tools` in `docs/evidence/week3-a2a-trace-20261115.json`; `tests/test_week3_acceptance.py:22-50` | Based on the captured export |
+| 3 | The Goose session advertised only the coordinator tool plus Summon tools | **CAPTURED LOCAL** | `advertised_tools` in `docs/evidence/a2a-trace-20261115.json`; `tests/test_week3_acceptance.py:22-50` | Based on the captured export |
 | 4 | The coordinator MCP surface exposes one tool and no Workbench tools | **VERIFIED LOCAL** | `src/transformation_workbench/coordinator_mcp_server.py`; `tests/test_coordinator_mcp.py`; `tests/test_week3_acceptance.py` | MCP annotations are hints; surface enforcement is implementation-level |
 | 5 | The coordinator performs real A2A discovery and sends tasks to both specialists | **VERIFIED LOCAL** | `src/transformation_workbench/a2a/phase2_coordinator.py:148-192`; `tests/test_phase2_integration.py:22-153`; trace artifact | Loopback only; local deterministic specialists |
-| 6 | The Evidence Specialist reads `workbench://process-context` and calls the existing read-only tools through MCP SDK v2 | **VERIFIED LOCAL** | `src/transformation_workbench/a2a/evidence_source.py:248-375`; `tests/test_phase2_integration.py:22-92`; `docs/week3-phase2-a2a.md` | Local MCP stdio; no Goose resource-exposure claim |
+| 6 | The Evidence Specialist reads `workbench://process-context` and calls the existing read-only tools through MCP SDK v2 | **VERIFIED LOCAL** | `src/transformation_workbench/a2a/evidence_source.py:248-375`; `tests/test_phase2_integration.py:22-92`; `docs/archive/a2a-specialists.md` | Local MCP stdio; no Goose resource-exposure claim |
 | 7 | Typed handoffs, request/case-set correlation, provenance, and schema validation are enforced | **VERIFIED LOCAL** | `src/transformation_workbench/a2a/contracts.py`; `validation.py:43-340`; `phase2_coordinator.py:160-192`; `tests/test_phase2_contracts.py`; `tests/test_phase2_coordinator.py` | Local contracts; not remote attestation |
 | 8 | Exception rows and requested case observations are verified against the fixed fixture | **VERIFIED LOCAL** | `src/transformation_workbench/a2a/validation.py:206-313`; `tests/test_phase2_integration.py:49-92`; `tests/test_phase2_contracts.py:191-229` | Synthetic fixture only |
 | 9 | The workflow is read-only and loopback-bounded in the demonstrated path | **VERIFIED LOCAL** | `coordinator_mcp_server.py:66-146`; `boundary.py:5-24`; `local_runtime.py:19-52`; `tests/test_coordinator_mcp.py` | Not a hardened OS sandbox |
-| 10 | Timeout/retry, unavailable specialist, duplicate replay/conflict, malformed artifacts, MCP failures, and unsupported claims have bounded behavior | **VERIFIED LOCAL** | `tests/test_phase2_coordinator.py:126-611`; `tests/test_coordinator_mcp.py:119-189`; `docs/week3-acceptance-evaluation.md` | Local fault injection; no real network partition |
+| 10 | Timeout/retry, unavailable specialist, duplicate replay/conflict, malformed artifacts, MCP failures, and unsupported claims have bounded behavior | **VERIFIED LOCAL** | `tests/test_phase2_coordinator.py:126-611`; `tests/test_coordinator_mcp.py:119-189`; `docs/archive/a2a-acceptance-evaluation.md` | Local fault injection; no real network partition |
 | 11 | A deterministic, schema-validated user-facing report with provenance and evidence references is produced and tested | **VERIFIED LOCAL** | `src/transformation_workbench/a2a/summary.py`; `tests/test_summary.py`; `tests/test_phase2_integration.py:144-153`; `coordinator_cli.py --format markdown` | Deterministic local output; not model prose quality |
-| 12 | The local deterministic suite passed | **VERIFIED LOCAL** | `docs/week3-acceptance-evaluation.md`; closeout suite **214 passed**; original snapshot **175 passed** | Recorded local result; the 214 count includes the separate adapter tests |
-| 13 | The local Goose final prose failed to reproduce the summary | **CAPTURED LOCAL** | `docs/evidence/week3-goose-summary-evaluation-20261115.json`; `docs/week3-goose-coordinator.md` | Failure of the 3B local model, not of the coordinator tool; no post-change model run |
+| 12 | The local deterministic suite passed | **VERIFIED LOCAL** | `docs/archive/a2a-acceptance-evaluation.md`; closeout suite **214 passed**; original snapshot **175 passed** | Recorded local result; the 214 count includes the separate adapter tests |
+| 13 | The local Goose final prose failed to reproduce the summary | **CAPTURED LOCAL** | `docs/evidence/goose-summary-evaluation-20261115.json`; `docs/archive/goose-coordinator.md` | Failure of the 3B local model, not of the coordinator tool; no post-change model run |
 | 14 | Hosted Goose inference cost and latency | **NOT PERFORMED** | No measured token, request, latency, or price evidence exists | Do not infer values or budget consumption |
 | 15 | Earlier hosted Goose wording-repeat | **OWNER-REPORTED** | Request ID `goose-a2a-repeat-019d021b50364edbaac6217df4f70ec5` in the closeout instructions; no checked-in sanitized trace found | Only Goose inference was hosted; A2A specialist exchanges remained local; no new hosted run during closeout |
-| 16 | Open Responses adapter Gate 3 against one adapter-plus-Console configuration | **CAPTURED HOSTED** | `docs/evidence/week4-openresponses-gate3.json`; `docs/week4-openresponses-gate3-runbook.md` | 17/17, 19 operations, 50/56; the direct Console route's 1-pass/16-fail result remains separate and unchanged; not general Open Responses conformance |
-| 17 | The demonstrated workflow uses no real business data, secrets, or business action | **VERIFIED LOCAL ARTIFACTS** | `AGENTS.md`; tests; sanitized evidence; `docs/week3-acceptance-evaluation.md` | This is a repository/evidence review, not an external audit |
+| 16 | Open Responses adapter Gate 3 against one adapter-plus-Console configuration | **CAPTURED HOSTED** | `docs/evidence/openresponses-gate3.json`; `docs/archive/openresponses-gate3-runbook.md` | 17/17, 19 operations, 50/56; the direct Console route's 1-pass/16-fail result remains separate and unchanged; not general Open Responses conformance |
+| 17 | The demonstrated workflow uses no real business data, secrets, or business action | **VERIFIED LOCAL ARTIFACTS** | `AGENTS.md`; tests; sanitized evidence; `docs/archive/a2a-acceptance-evaluation.md` | This is a repository/evidence review, not an external audit |
 | 18 | The adapter's encrypted compaction state is adapter-owned AES-256-GCM state | **VERIFIED LOCAL** | `src/transformation_workbench/openresponses_adapter/compaction.py`; `tests/test_openresponses_adapter.py` | Not provider-native, not OpenAI/Console-native, and not cross-provider or cross-adapter portable |
 
 ## Separate A2A repeat command
@@ -463,7 +469,7 @@ Observed state:
 - The files are generated setuptools/editable-install metadata; `PKG-INFO` is
   older than the corrected README and still contains an earlier description.
 - The directory is present in the frozen snapshot
-  `AAIF-Journey-review-week3-final2-20261115` because the snapshot copied
+  `AAIF-Journey-review-snapshot-20261115` because the snapshot copied
   `src/` without excluding `*.egg-info`; its files are listed in that snapshot's
   `SHA256SUMS.txt` lines 44-48.
 
@@ -496,7 +502,7 @@ No deletion, regeneration, or metadata edit was performed during this closeout.
   direct Console route result (1 pass, 16 fail) remains separate and unchanged.
   This is not general Open Responses conformance, model-quality evidence, or
   A2A evidence.
-- **Publication scope**: this contribution is included in the complete Week 3 PR
+- **Publication scope**: this contribution is included in the complete A2A milestone PR
   to `main`, with the implementation, tests, docs, and sanitized evidence needed
   for reproducibility. Merge and release are separate approvals.
 - **Local deterministic only**: the specialists are rule-based; the captured
@@ -505,7 +511,7 @@ No deletion, regeneration, or metadata edit was performed during this closeout.
   real network-partition testing.**
 - **Cancellation is outside the supported completion path**: cards do not
   advertise cancellation; no end-to-end `CancelTask` acceptance is claimed.
-  Phase 1 raises the SDK `UnsupportedOperationError`; Phase 2 executors send
+  protocol slice raises the SDK `UnsupportedOperationError`; specialist stage executors send
   cancellation updates rather than providing an end-to-end acceptance path.
 - **Sanitized trace**: the trace records discovery and both task/result
   exchanges, but not raw JSON-RPC request IDs, parameter bodies, or response
@@ -545,5 +551,5 @@ Before this contribution is published:
   future rerun separately rather than reusing this result.
 - Review the final text for secrets, local paths, usernames, provider
   credentials, and unsupported business or savings claims.
-- Publish only as the reviewed complete Week 3 PR to `main`; do not merge or
+- Publish only as the reviewed complete A2A milestone PR to `main`; do not merge or
   release in the same step.

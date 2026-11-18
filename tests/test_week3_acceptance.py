@@ -11,7 +11,7 @@ TRACE_PATH = (
     Path(__file__).resolve().parents[1]
     / "docs"
     / "evidence"
-    / "week3-a2a-trace-20261115.json"
+    / "a2a-trace-20261115.json"
 )
 
 
@@ -76,7 +76,7 @@ def test_persisted_trace_contains_no_secret_material() -> None:
 
 def test_goose_summary_evaluation_is_honestly_failed_pending() -> None:
     path = TRACE_PATH.with_name(
-        "week3-goose-summary-evaluation-20261115.json"
+        "goose-summary-evaluation-20261115.json"
     )
     evaluation = json.loads(path.read_text(encoding="utf-8"))
     assert evaluation["tool_call_succeeded"] is True

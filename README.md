@@ -1,56 +1,52 @@
 # Transformation Workbench
 
-Portfolio demo for AI automation and transformation roles. The workbench uses
-synthetic business-process data to calculate baseline KPIs deterministically in
-Python and exposes a bounded set of read-only tools through an MCP server.
-Consequential write actions are not implemented. Approval controls for future
-consequential actions are planned, not implemented.
+A portfolio demonstration of bounded, evidence-linked process diagnosis for AI
+automation and transformation roles. The Workbench calculates baseline KPIs from
+a fixed synthetic fixture, exposes only read-only tools through MCP, runs a local
+A2A evidence-to-options workflow, and renders a deterministic decision brief.
 
-## Status
+The demo is intentionally read-only. It has no business-system integration, no
+write or action endpoint, and no hosted model in the Workbench path. The human
+review checkpoint is a real code-enforced state, but it is not a production
+authorization system.
 
-Week 1 baseline is implemented: deterministic KPI calculations over a packaged
-synthetic fixture and read-only MCP tools. Week 2 adds a goose custom agent, two
-project skills, and a repeatable diagnosis workflow. Ten sanitized Goose exports
-captured on 2026-11-15 show Summon loading the agent, both skills loading where
-required, matching baselines across two runs, and safe handling of the duplicate,
-unknown-lookup, contradictory-claim, and action-request scenarios. The
-`workbench://process-context` read path was unavailable in those sessions, and
-provider/model and latency metadata were not captured.
+## Current status
 
-Week 3 implements two local A2A phases over loopback only: a real card-discovery
-and task round trip, then an Evidence Specialist and Solution Designer with
-typed handoffs, bounded failures, request-ID correlation, and claim guards.
-A Goose-facing coordinator MCP gate exposes only `run_a2a_diagnosis`; Goose
-loads the project agent through Summon and the coordinator performs both A2A
-exchanges. The local A2A specialist exchanges use no hosted model, API key,
-cloud endpoint, or business action. Earlier owner-reported hosted Goose
-coordinator sessions also succeeded, including a diagnostic run and a
-wording-repeat; only the Goose inference was hosted, while the A2A specialist
-exchanges remained local. No new hosted Goose coordinator run occurred during
-the latest closeout verification, and no checked-in sanitized trace of those
-earlier sessions was found. Human approval controls for future consequential actions
-remain planned. The deterministic report is the authoritative user-facing
-output; the local 3B model's free-form prose remains unreliable and is not
-counted as a pass.
+- End-to-end CLI: synthetic intake -> local A2A specialists -> read-only MCP
+  evidence -> deterministic report -> review pause.
+- Three bounded MCP tools over the packaged synthetic fixture.
+- Local A2A card discovery, task exchange, typed handoffs, validation, and
+  bounded failures.
+- Intake and case-ID safety checks, fixed-evidence verification, and claim
+  guards.
+- Demo approval state machine that fails closed; approval does not create an
+  action capability.
+- Local verification snapshot: **246 passed** and clean `pip check` on
+  2026-11-18.
+- Not implemented: write actions, real data, deployment, hosted model operation,
+  production authentication, or any financial/savings claim.
 
 ## Scope
 
-- Deterministic baseline KPI calculations over synthetic data
-- Bounded MCP tools with no arbitrary shell access
-- Planned human-in-the-loop approval for consequential actions
-- Local A2A card discovery, task exchange, and typed specialist handoffs
-- Clear separation between demonstrated behavior and planned behavior
+- Deterministic baseline KPI calculations over synthetic data.
+- Read-only MCP tools with no arbitrary shell or filesystem surface.
+- A local A2A evidence-to-options workflow with typed handoffs.
+- A code-enforced review checkpoint before any future consequential action.
+- Clear separation between demonstrated behavior, proposals, assumptions, and
+  planned work.
 
 ## Safety and data policy
 
-- Synthetic data only. Never use real business, customer, or personal data.
+- Synthetic data only. Never use real business, customer, employee, or personal
+  data.
 - Never commit secrets, credentials, or environment files.
-- OpenCode is one host application; Goose is the agent host used by the Week 2
-  and Week 3 workflows. Their MCP client components launch the local server.
-  Current MCP tools are read-only by implementation in the server. Neither host
-  nor `opencode.json` enforces read-only behavior.
-- Add enforceable human-approval controls before any future consequential write
-  or action.
+- OpenCode is one host application; Goose is the agent host used in the earlier
+  agent-host workflows. Their MCP client components launch the local server.
+  Current MCP tools are read-only by server implementation. Neither host nor
+  `opencode.json` is relied on for read-only enforcement.
+- Approval is code-enforced for the demo behavior: no action endpoint exists,
+  and the action method raises even after an approved decision. The review
+  decision is a CLI assertion, not identity verification.
 - Do not claim capabilities that the demo does not actually demonstrate.
 
 See `AGENTS.md` for the full working agreement.
@@ -64,9 +60,12 @@ src/transformation_workbench/      Python package
 src/transformation_workbench/data/ Packaged synthetic fixture
 tests/                             Automated tests
 scripts/                           Local validation harnesses
-docs/workflows/                    Repeatable workflows
-docs/demos/                        Demo and evaluation documentation
-docs/evidence/                     Sanitized evaluation evidence
+docs/product/                      Architecture, threat model, evaluation, business case
+docs/demos/                        Demo scripts and evaluation notes
+docs/evidence/                     Sanitized evidence and sample output
+docs/evidence/aaif/                One evidence card per AAIF project
+docs/workflows/                    Repeatable historical workflows
+docs/tutorials/                    Setup and MCP tutorial
 opencode.json                      Optional local-only MCP config; not committed
 ```
 
@@ -75,53 +74,96 @@ opencode.json                      Optional local-only MCP config; not committed
 ```powershell
 py -3.11 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev,openresponses]"
-.\.venv\Scripts\python.exe -m pytest
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe -m pip check
 ```
 
 See the [MCP baseline tutorial](docs/tutorials/mcp-business-process-baseline.md)
 for Windows and macOS/Linux setup, OpenCode configuration, tool examples, and
 the synthetic-data boundary.
 
-## Week 2 Goose workflow
+## Run the demo
 
-The project-scoped `transformation-analyst` agent uses `AGENTS.md`, the
-`process-diagnostic` and `executive-brief` skills, and only the read-only
-Transformation Workbench MCP extension.
+```powershell
+.\.venv\Scripts\python.exe -m transformation_workbench `
+  --request-id demo-review-001 `
+  --desired-outcome "Review the synthetic service-request intake and decide which evidence to inspect next." `
+  --case-id C-009 --case-id C-006 --case-id C-014 `
+  --format markdown
+```
 
-- [Repeatable diagnosis workflow](docs/workflows/week2-transformation-diagnostic.md)
-- [Demo and evaluation](docs/demos/week2-demo-and-evaluation.md)
+- [End-to-end demo script](docs/demos/end-to-end-demo.md)
+- [Sanitized sample report](docs/evidence/end-to-end-sample-report.md)
+- [Architecture](docs/product/architecture.md)
+- [Evaluation](docs/product/evaluation.md)
+- [Threat model](docs/product/threat-model.md)
+- [Business case](docs/product/business-case.md)
+- [Contribution 4: bounded, evidence-linked process diagnosis](docs/product/technical-contribution.md)
+- [Case study](docs/product/case-study.md)
+- [Independent review findings](docs/product/review-findings.md)
 
-The workflow keeps measured facts separate from recommendations and makes no
-business-system writes. Provider credentials belong outside the repository.
-Goose 1.59.0 has no `--agent` CLI flag; the workflow explicitly enables the
-Summon platform extension so the project agent can be loaded with
-`--no-profile`. The Python tests do not prove that the agent or skills were
-loaded; the sanitized runtime exports provide that evidence. Provider/model and
-latency metadata and the `workbench://process-context` read path remain
-documented gaps.
+The CLI prints a clean report by default. Use `--verbose` to keep protocol and
+server logs on stderr. `--format json` returns the structured report.
 
-## Week 3 local A2A
+## Capability areas
 
-- [Phase 1 protocol slice](docs/week3-phase1-a2a.md)
-- [Phase 2 specialists and typed handoffs](docs/week3-phase2-a2a.md)
-- [Goose coordinator integration](docs/week3-goose-coordinator.md)
-- [Week 3 acceptance evaluation](docs/week3-acceptance-evaluation.md)
-- [Technical contribution](docs/week3-technical-contribution.md)
-- [Sanitized A2A trace](docs/evidence/week3-a2a-trace-20261115.json)
+### Read-only MCP evidence
 
-## Open Responses adapter (optional, separate from A2A)
+The local MCP server exposes `calculate_baseline_metrics`,
+`list_case_exceptions`, and `get_case_details` over the fixed synthetic fixture,
+plus the `workbench://process-context` resource. Every measured fact carries
+tool/resource provenance.
 
-The optional Workbench-owned adapter under
-`src/transformation_workbench/openresponses_adapter/` translates Open Responses
-requests and implements adapter-owned AES-256-GCM compaction state. Gate 2 ran
-the pinned suite against a local fake upstream. Gate 3 then ran the same pinned
-suite once against the local adapter with OpenCode Console upstream: 17 passed,
-0 failed, 19 suite operations, and a conservative cumulative total of 50/56.
-This is one adapter-plus-Console configuration, not proof that the bare Console
-route is conformant, not general Open Responses conformance, and not
-provider-native or cross-provider portable compaction. The earlier direct
-Console route result (1 pass, 16 fail) remains a separate unchanged failure.
+### Agent-host workflow
 
-- [Adapter walkthrough and limits](docs/week4-openresponses-local-adapter.md)
-- [Gate 3 runbook and evidence](docs/week4-openresponses-gate3-runbook.md)
-- [Gate 3 JSON evidence](docs/evidence/week4-openresponses-gate3.json)
+The project agent uses `AGENTS.md`, the `process-diagnostic` and
+`executive-brief` skills, and only the read-only Workbench MCP extension. Earlier
+agent-host evidence is preserved separately, including its recorded gaps:
+`workbench://process-context` was unavailable in the captured sessions, and
+provider/model and latency metadata were not captured.
+
+- [Contribution 4](docs/product/technical-contribution.md)
+- [Case study](docs/product/case-study.md)
+
+### Local A2A collaboration
+
+The coordinator discovers two local A2A specialists and validates typed
+artifacts before rendering. The exchange is loopback-only. Earlier hosted Goose
+coordinator sessions are owner-reported, not independently traced, and no new
+hosted run is part of this snapshot.
+
+- [A2A protocol slice](docs/archive/a2a-protocol-slice.md)
+- [Typed specialists and handoffs](docs/archive/a2a-specialists.md)
+- [Acceptance evaluation](docs/archive/a2a-acceptance-evaluation.md)
+- [A2A evidence card](docs/evidence/aaif/a2a.md)
+
+### Open Responses adapter (optional)
+
+The optional adapter implements adapter-owned AES-256-GCM compaction state. The
+pinned suite passed 17/17 against the local adapter with OpenCode Console
+upstream in one run, with 19 operations and a conservative cumulative total of
+50/56. Gate 3 ran from an uncommitted working tree at `17faecf`, not from a
+clean committed revision. The separate bare Console route recorded **1 pass,
+16 fail**. This is not general Open Responses conformance and not
+provider-native or portable compaction.
+
+- [Adapter walkthrough and limits](docs/archive/openresponses-adapter.md)
+- [Gate 3 runbook and evidence](docs/archive/openresponses-gate3-runbook.md)
+
+### AAIF project coverage
+
+- [Evidence-card index](docs/evidence/aaif/README.md)
+
+Five projects have integrated evidence with limitations recorded, Open Responses
+has a bounded hands-on result, and four spikes are explicitly blocked because the
+required binaries, container runtime, packages, or approvals were unavailable.
+The index does **not** claim 10/10 hands-on coverage.
+
+## Dated technical records
+
+These records are retained for provenance and should be read as dated
+evidence, not as current product claims.
+
+- [Local A2A technical contribution](docs/archive/a2a-technical-contribution.md)
+- [Local A2A acceptance evaluation](docs/archive/a2a-acceptance-evaluation.md)
+- [Open Responses adapter record](docs/archive/openresponses-adapter.md)

@@ -39,7 +39,7 @@ SUITE_PATH = Path(
 )
 SUITE_COMMIT = "dce9ddb91921427c2ba06901c7dfaf0cc7056799"
 BUN_PATH = Path(os.environ.get("OPENRESPONSES_BUN_PATH", "bun"))
-DEFAULT_OUTPUT = Path("docs/evidence/week4-openresponses-gate2.json")
+DEFAULT_OUTPUT = Path("docs/evidence/openresponses-gate2.json")
 MODEL = "local-fake-model"
 API_KEY = "local-dummy-key"
 TEST_IDS = (

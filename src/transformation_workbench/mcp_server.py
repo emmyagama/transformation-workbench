@@ -1,6 +1,7 @@
 """Read-only Week 1 MCP server over the deterministic analysis core."""
 
 import logging
+import os
 import sys
 from datetime import datetime, timezone
 from decimal import ROUND_HALF_UP, Decimal
@@ -471,8 +472,13 @@ def _as_optional_float(value: object) -> float | None:
 
 
 def main() -> None:
+    requested_level = os.environ.get(
+        "TRANSFORMATION_WORKBENCH_LOG_LEVEL",
+        "INFO",
+    ).upper()
+    level = getattr(logging, requested_level, logging.INFO)
     logging.basicConfig(
-        level=logging.INFO,
+        level=level,
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
         stream=sys.stderr,
         force=True,

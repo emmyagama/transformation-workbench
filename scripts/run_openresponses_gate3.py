@@ -31,7 +31,7 @@ SUITE_PATH = Path(
 )
 SUITE_COMMIT = "dce9ddb91921427c2ba06901c7dfaf0cc7056799"
 BUN_PATH = Path(os.environ.get("OPENRESPONSES_BUN_PATH", "bun"))
-DEFAULT_OUTPUT = Path("docs/evidence/week4-openresponses-gate3.json")
+DEFAULT_OUTPUT = Path("docs/evidence/openresponses-gate3.json")
 DEFAULT_GATEWAY_URL = "http://127.0.0.1:8000"
 DEFAULT_MODEL = "gpt-6.1-sol"
 LOCAL_API_KEY = "local-test-token"

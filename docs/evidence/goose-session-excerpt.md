@@ -62,4 +62,4 @@ The session advertised only the coordinator tool plus Summon `delegate`, `load`,
 and `load_skill`; no Workbench metrics, exception, or case-detail tool was
 advertised. The final local-model prose did not reproduce the deterministic
 summary and is recorded as failed/pending in
-`week3-goose-summary-evaluation-20261115.json`.
+`goose-summary-evaluation-20261115.json`.
