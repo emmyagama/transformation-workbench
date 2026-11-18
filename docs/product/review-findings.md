@@ -23,8 +23,8 @@ read-only code and document review, local test run, and targeted reproductions.
 | Public-language sweep left dated week/phase framing on public pages | Medium | Fixed: historical records moved under `docs/archive/` with product-oriented titles, and public pages point to current product docs |
 | Hosted-model claim did not distinguish the optional adapter run | Medium | Fixed: README and evaluation scope the claim to the Workbench/A2A/MCP path and cross-reference the separate adapter result |
 | Public documents contained encoding corruption | Medium | Fixed: mojibake and lost punctuation were replaced with UTF-8 characters, and links were rechecked |
-| Timeout help text included a value the validator rejects | Low | Fixed: help and validation now both use 1–120 |
-| Report text said “no network” although loopback HTTP/stdio is used | Low | Fixed: report text now says “no external network, write, or business action” |
+| Timeout help text included a value the validator rejects | Low | Fixed: help and validation now both use 1â€“120 |
+| Report text said â€œno networkâ€ although loopback HTTP/stdio is used | Low | Fixed: report text now says â€œno external network, write, or business actionâ€ |
 
 ## Residual limitations
 
@@ -46,5 +46,5 @@ read-only code and document review, local test run, and targeted reproductions.
 - Verbose CLI: protocol/server logs on stderr.
 - Approved CLI: `status=approved`, `consequential_action_permitted=False`,
   `decided_by=cli_assertion`.
-- Clean clone of commit `d84203e`: **249 passed**, clean `pip check`, and a
+- Clean clone of commit `b0f2e3e`: **249 passed**, clean `pip check`, and a
   pending CLI JSON demo with empty stderr.
