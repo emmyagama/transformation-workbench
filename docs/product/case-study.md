@@ -48,8 +48,8 @@ These are measurements of a synthetic fixture, not an operating result.
 - No integration with a governed data source or business system.
 - No production deployment, authentication, or write gate.
 - No measured cost, latency, savings, or productivity outcome.
-- Four AAIF spikes remain blocked because the required tooling or approvals are
-  unavailable.
+- Four AAIF spikes are deferred by the owner (2026-11-18); no hands-on run
+  occurred, so their required tooling was not exercised.
 
 ## Decision
 

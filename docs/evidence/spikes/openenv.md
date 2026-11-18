@@ -1,7 +1,7 @@
 # Spike evidence: OpenEnv
 
-**Status: BLOCKED — documentation inspected; no hands-on run.** Date inspected:
-2026-11-18. This is a truthful blocker card, not an evaluation result.
+**Status: DEFERRED BY OWNER (2026-11-18) — documentation inspected; no hands-on run.**
+Inspected 2026-11-18. This is a truthful deferral and blocker record, not an evaluation result.
 
 ## Why it was considered
 
@@ -48,7 +48,7 @@ outside the authorized local boundary.
 there is no local reset/step result and no isolation test in this review. Do not
 describe it as integrated, evaluated, or required for the current demo.
 
-## What would unblock it
+## What a later hands-on pass would require
 
 With explicit approval and a disposable environment:
 

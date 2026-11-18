@@ -1,6 +1,6 @@
 # AAIF evidence card: agentgateway
 
-**Status: BLOCKED — documentation inspected, no hands-on run.**
+**Status: DEFERRED BY OWNER (2026-11-18) — documentation inspected; no hands-on run.**
 
 ## Problem addressed
 
@@ -32,5 +32,5 @@ does not demonstrate that need.
 
 ## Evidence links
 
-- Detailed blocker card: [`../spikes/agentgateway.md`](../spikes/agentgateway.md)
+- Detailed deferral and blocker card: [`../spikes/agentgateway.md`](../spikes/agentgateway.md)
 - `docs/product/architecture.md`

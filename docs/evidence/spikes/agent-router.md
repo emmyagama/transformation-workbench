@@ -1,7 +1,7 @@
 # Spike evidence: Agent Router
 
-**Status: BLOCKED — documentation inspected; no hands-on run.** Date inspected:
-2026-11-18. This is a truthful blocker card, not an evaluation result.
+**Status: DEFERRED BY OWNER (2026-11-18) — documentation inspected; no hands-on run.**
+Inspected 2026-11-18. This is a truthful deferral and blocker record, not an evaluation result.
 
 ## Correct project identity
 
@@ -65,7 +65,7 @@ credential separation, but this review has no run, no MCP route, no tool-list
 observation, and no policy test. Do not claim an integration or a security
 result.
 
-## What would unblock it
+## What a later hands-on pass would require
 
 With explicit approval and a disposable environment:
 
