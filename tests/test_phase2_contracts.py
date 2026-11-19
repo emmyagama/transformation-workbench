@@ -188,6 +188,16 @@ def test_self_reported_context_text_must_match_fixture() -> None:
         verify_evidence_against_fixture(broken)
 
 
+def test_stale_snapshot_is_rejected_against_fixture() -> None:
+    pack = valid_evidence_pack()
+    payload = pack.model_dump(mode="json")
+    payload["snapshot"] = "2026-03-12T17:00:00Z"
+    payload["process_context"]["snapshot"] = "2026-03-12T17:00:00Z"
+    broken = EvidencePack.model_validate(payload)
+    with pytest.raises(ContractValidationError, match="snapshot_mismatch"):
+        verify_evidence_against_fixture(broken)
+
+
 def test_exception_record_must_match_fixture() -> None:
     pack = valid_evidence_pack()
     payload = pack.model_dump(mode="json")

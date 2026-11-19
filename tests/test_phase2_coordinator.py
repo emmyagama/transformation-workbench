@@ -206,6 +206,41 @@ async def test_incomplete_evidence_is_rejected_at_boundary() -> None:
 
 
 @pytest.mark.anyio
+async def test_solution_failure_after_evidence_success_is_whole_failure() -> None:
+    request_id = "phase2-partial"
+    pack = valid_evidence_pack(request_id=request_id, case_ids=["C-009"])
+    source = StaticEvidenceSource(pack)
+
+    async with running_server(
+        lambda url: build_evidence_app(url, source=source)
+    ) as (evidence_url, evidence_seen):
+        async with running_server(
+            lambda url: build_specialist_app(
+                url,
+                build_solution_card(url),
+                FailingExecutor("synthetic solution failure"),
+            )
+        ) as (solution_url, _):
+            coordinator = Phase2Coordinator(
+                evidence_url,
+                solution_url,
+                timeout=5.0,
+                max_retries=0,
+            )
+            with pytest.raises(CoordinatorError) as excinfo:
+                await coordinator.run(request_id, ["C-009"])
+
+    assert excinfo.value.code == "task_failure"
+    assert source.calls == 1
+    assert any(item[0] == "POST" for item in evidence_seen)
+    assert not any(
+        event.step == "send_task"
+        and event.skill_id == "solution_options"
+        for event in excinfo.value.trace
+    )
+
+
+@pytest.mark.anyio
 async def test_task_failure_and_cancel_stop_safely() -> None:
     for executor in (
         FailingExecutor("synthetic task failure"),

@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+from pathlib import Path
 
 import pytest
 from pydantic import ValidationError
@@ -82,6 +83,34 @@ def test_report_is_complete_and_read_only() -> None:
     assert "No external network, write, or business action is performed." in (
         report.rendered_markdown
     )
+
+
+@pytest.mark.anyio
+async def test_action_request_is_safe_limitation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    async def fake_diagnosis(*args, **kwargs):
+        return valid_coordinator_result("week4-action")
+
+    monkeypatch.setattr(workflow, "run_local_diagnosis", fake_diagnosis)
+    intake = IntakeRequest(
+        request_id="week4-action",
+        desired_outcome=(
+            "Create a ticket and send an email to the client with the results."
+        ),
+        case_ids=["C-009"],
+    )
+
+    report = await run_workflow(intake)
+
+    assert report.status == "complete"
+    assert report.approval.status is ApprovalStatus.PENDING
+    assert report.approval.consequential_action_permitted is False
+    assert "Consequential action permitted: **no**" in report.rendered_markdown
+    assert "No external network, write, or business action exists" in (
+        report.rendered_markdown
+    )
+    assert "Create a ticket and send an email" in report.rendered_markdown
 
 
 def test_report_appendix_covers_metrics_exceptions_and_assumptions() -> None:
@@ -549,6 +578,29 @@ def test_cli_configures_child_logging_level(
     assert os.environ["TRANSFORMATION_WORKBENCH_LOG_LEVEL"] == "WARNING"
     workflow_cli._configure_logging(verbose=True)
     assert os.environ["TRANSFORMATION_WORKBENCH_LOG_LEVEL"] == "INFO"
+
+
+def test_cli_verbose_logs_do_not_echo_request_text(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    workflow_cli.main(
+        [
+            "--request-id",
+            "week4-redaction",
+            "--desired-outcome",
+            "Review the synthetic intake marker-7f3 and decide which evidence "
+            "to inspect next.",
+            "--case-id",
+            "C-009",
+            "--verbose",
+        ]
+    )
+    captured = capsys.readouterr()
+
+    assert captured.err
+    assert "marker-7f3" not in captured.err
+    assert "api_key" not in captured.err
+    assert str(Path.home()) not in captured.err
 
 
 def test_cli_verbose_keeps_logs_on_stderr(

@@ -1,0 +1,546 @@
+{
+  "pack_id": "level2-evaluation-pack",
+  "pack_version": "1.0.0",
+  "comparison_version": "1.0.0",
+  "baseline_commit": "d5a6c973cae4ee17cd66ed01352a64c159ceb0f8",
+  "method": "The A2A path uses the real local coordinator and specialists. The baseline path calls the same read-only evidence source and deterministic solution designer directly. Both use the same fixture, contracts, validators, and expected manifest.",
+  "limits": [
+    "Small synthetic sample; not a general benchmark.",
+    "Deterministic fakes test orchestration and contracts, not model reasoning.",
+    "The baseline has no A2A protocol trace, discovery, retry, or timeout semantics.",
+    "Cases that depend on A2A protocol behavior or the full report/approval workflow are not applicable to the baseline.",
+    "No hosted model, provider, external system, credential, or real data is used.",
+    "No latency, cost, savings, or productivity outcome is claimed."
+  ],
+  "shared_case_count": 13,
+  "a2a_passed": 13,
+  "baseline_passed": 13,
+  "same_terminal_status_count": 13,
+  "same_failure_semantics_count": 13,
+  "exact_error_code_match_count": 10,
+  "rows": [
+    {
+      "variant_id": "L2-01a",
+      "family": "Default clean request with C-009, C-006, and C-014.",
+      "a2a": {
+        "status": "complete",
+        "error_code": null,
+        "cause_code": null,
+        "dimensions": {
+          "metrics_exact_match": true,
+          "exceptions_exact_match": true,
+          "requested_cases_exact_match": true,
+          "options_exact_match": true,
+          "traceability": true,
+          "completeness": true,
+          "contract_valid": true,
+          "safety": true,
+          "status_matches": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "complete",
+        "error_code": null,
+        "cause_code": null,
+        "dimensions": {
+          "metrics_exact_match": true,
+          "exceptions_exact_match": true,
+          "requested_cases_exact_match": true,
+          "options_exact_match": true,
+          "traceability": true,
+          "completeness": true,
+          "contract_valid": true,
+          "safety": true,
+          "status_matches": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-02a",
+      "family": "The MCP process-context resource is not listed.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "task_failure",
+        "cause_code": "mcp_resource_unavailable",
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "mcp_resource_unavailable",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": false,
+      "code_note": "The A2A path wraps the evidence failure as task_failure with cause mcp_resource_unavailable; the baseline returns mcp_resource_unavailable directly. Both fail closed."
+    },
+    {
+      "variant_id": "L2-02b",
+      "family": "The evidence pack and process context carry a stale snapshot.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "snapshot_mismatch",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "snapshot_mismatch",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-03a",
+      "family": "Requested case C-999 does not exist in the fixture.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "incomplete_evidence",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "incomplete_evidence",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-03b",
+      "family": "The calculate_baseline_metrics tool raises a bounded error.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "task_failure",
+        "cause_code": "mcp_tool_error",
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "mcp_tool_error",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": false,
+      "code_note": "The A2A path wraps the evidence failure as task_failure with cause mcp_tool_error; the baseline returns mcp_tool_error directly. Both fail closed."
+    },
+    {
+      "variant_id": "L2-04a",
+      "family": "Evidence reports input_rows=99 instead of the fixture value 15.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "metric_value_mismatch",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "metric_value_mismatch",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-04b",
+      "family": "Evidence carries a different request ID.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "task_failure",
+        "cause_code": "request_mismatch",
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "request_mismatch",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": false,
+      "code_note": "The A2A evidence specialist rejects the request_id before the coordinator sees the pack, so the coordinator reports task_failure with cause request_mismatch. The baseline returns request_mismatch directly. Both fail closed."
+    },
+    {
+      "variant_id": "L2-04c",
+      "family": "Evidence returns a different requested case set.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "case_set_mismatch",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "case_set_mismatch",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-05a",
+      "family": "Injected instruction text is appended to the process-context resource.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "context_mismatch",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "context_mismatch",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-06a",
+      "family": "A solution option claims $100,000 annual savings.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "unsupported_claim",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "unsupported_claim",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-06b",
+      "family": "A solution option claims a 50% cycle-time reduction.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "unsupported_claim",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "unsupported_claim",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-10c",
+      "family": "The evidence result omits a required field.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "invalid_evidence_pack",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "invalid_evidence_pack",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-10d",
+      "family": "A solution option references an unknown evidence ID.",
+      "a2a": {
+        "status": "failure",
+        "error_code": "unknown_evidence_reference",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "baseline": {
+        "status": "failure",
+        "error_code": "unknown_evidence_reference",
+        "cause_code": null,
+        "dimensions": {
+          "expected_error_code_seen": true,
+          "no_successful_result": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true
+      },
+      "same_terminal_status": true,
+      "same_failure_semantics": true,
+      "exact_error_code_match": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-05b",
+      "family": "not_applicable",
+      "reason": "Intake refusal occurs before either evidence path starts.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-07a",
+      "family": "not_applicable",
+      "reason": "Action-request safe limitation is a full report/approval behavior.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-07b",
+      "family": "not_applicable",
+      "reason": "Approval bypass is a workflow/approval behavior.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-07c",
+      "family": "not_applicable",
+      "reason": "Approved review state is a full report/approval behavior.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-08a",
+      "family": "not_applicable",
+      "reason": "Duplicate replay is an A2A coordinator cache behavior.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-08b",
+      "family": "not_applicable",
+      "reason": "Conflicting replay is an A2A coordinator cache behavior.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-08c",
+      "family": "not_applicable",
+      "reason": "Unavailable specialist is an A2A discovery/transport behavior.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-09a",
+      "family": "not_applicable",
+      "reason": "A2A timeout is a protocol-boundary behavior.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-09b",
+      "family": "not_applicable",
+      "reason": "A2A retry exhaustion is a protocol-boundary behavior.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-10a",
+      "family": "not_applicable",
+      "reason": "Malformed JSON artifact is an A2A artifact-boundary behavior.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-10b",
+      "family": "not_applicable",
+      "reason": "Wrong MIME type is an A2A artifact-boundary behavior.",
+      "a2a": null,
+      "baseline": null,
+      "same_terminal_status": null,
+      "same_failure_semantics": null,
+      "exact_error_code_match": null,
+      "code_note": null
+    }
+  ]
+}
