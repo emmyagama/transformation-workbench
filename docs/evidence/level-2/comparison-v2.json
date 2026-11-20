@@ -1,0 +1,1643 @@
+{
+  "pack_id": "level2-evaluation-pack-v2",
+  "pack_version": "2.0.0",
+  "comparison_version": "2.0.0",
+  "baseline_commit": "d5a6c973cae4ee17cd66ed01352a64c159ceb0f8",
+  "source_commit": "33f184d0bd48fd435d3910f1f9c55f4f97d1623d",
+  "matching_policy": "literal_path_specific_terminal_and_cause_no_union",
+  "semantic_definition": "Cross-path semantic equality uses observed outcomes only. It requires the same observed status and either (a) both paths complete with a successful result, or (b) both paths terminate failure/refused with no successful result (fail-closed). It does not use path-specific expectations, terminal codes, or cause codes; those remain separate match counts.",
+  "method": "The A2A side uses the path selected by the corpus label: the real run_workflow entrypoint for workflow variants and the real local Phase2Coordinator for coordinator variants. The baseline side calls the same read-only evidence source and deterministic solution designer directly. Each path is scored against its own literal terminal and cause expectations. No union match is used. Cross-path semantic equality is then computed from observed outcomes only, as defined in semantic_definition.",
+  "limits": [
+    "Small synthetic sample; not a general benchmark.",
+    "Deterministic fakes test orchestration and contracts, not model reasoning.",
+    "The baseline has no A2A protocol trace, discovery, retry, or timeout semantics.",
+    "Cases that depend on A2A protocol behavior or the full report/approval workflow are not applicable to the baseline.",
+    "No hosted model, provider, external system, credential, or real data is used.",
+    "No latency, cost, savings, or productivity outcome is claimed."
+  ],
+  "shared_case_count": 13,
+  "a2a_terminal_code_matches": 13,
+  "a2a_cause_code_matches": 13,
+  "a2a_path_passes": 13,
+  "baseline_terminal_code_matches": 13,
+  "baseline_cause_code_matches": 13,
+  "baseline_path_passes": 13,
+  "cross_path_exact_terminal_matches": 10,
+  "cross_path_exact_cause_matches": 10,
+  "cross_path_both_success_matches": 1,
+  "cross_path_both_fail_closed_matches": 12,
+  "cross_path_semantic_matches": 13,
+  "rows": [
+    {
+      "variant_id": "L2-01a",
+      "family": "Default clean request with C-009, C-006, and C-014.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "complete",
+          "terminal_code": null,
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "metrics_exact_match",
+            "exceptions_exact_match",
+            "requested_cases_exact_match",
+            "options_exact_match",
+            "all_required_report_fields_present",
+            "all_required_report_sections_present",
+            "approval_matches",
+            "consequential_action_permitted_false",
+            "report_states_no_action",
+            "action_method_raises",
+            "no_forbidden_tool_called",
+            "no_unsupported_claim",
+            "retry_count_within_bound",
+            "trace_complete"
+          ]
+        },
+        "status": "complete",
+        "terminal_code": null,
+        "cause_code": null,
+        "failure_category": null,
+        "observed_outcome": "success",
+        "produced_successful_result": true,
+        "fail_closed": false,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 1,
+        "attempts_within_bound": true,
+        "sanitized_trace": [
+          {
+            "step": "discover_card",
+            "agent": "Workbench Evidence Specialist",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "workbench_evidence",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Evidence Specialist",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "workbench_evidence",
+            "task_id": "a2e693ae-f7ce-4319-9c1c-093f356a228d",
+            "context_id": "12ecc919-0cf0-434e-83f5-f11a130baf8f",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          },
+          {
+            "step": "discover_card",
+            "agent": "Workbench Solution Designer",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "solution_options",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Solution Designer",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "solution_options",
+            "task_id": "146ecd65-4186-40f4-9681-578fd008de9e",
+            "context_id": "a145df5b-9c97-4e15-b79e-7804ed1bc263",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          }
+        ],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "metrics_exact_match": true,
+          "exceptions_exact_match": true,
+          "requested_cases_exact_match": true,
+          "options_exact_match": true,
+          "all_required_report_fields_present": true,
+          "all_required_report_sections_present": true,
+          "approval_matches": true,
+          "consequential_action_permitted_false": true,
+          "report_states_no_action": true,
+          "action_method_raises": true,
+          "no_forbidden_tool_called": true,
+          "no_unsupported_claim": true,
+          "retry_count_within_bound": true,
+          "trace_complete": true,
+          "traceability": true,
+          "completeness": true,
+          "contract_valid": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "complete",
+          "terminal_code": null,
+          "cause_code": null,
+          "invariants": [
+            "status_matches",
+            "metrics_exact_match",
+            "exceptions_exact_match",
+            "requested_cases_exact_match",
+            "options_exact_match",
+            "traceability",
+            "completeness",
+            "contract_valid"
+          ]
+        },
+        "status": "complete",
+        "terminal_code": null,
+        "cause_code": null,
+        "failure_category": null,
+        "observed_outcome": "success",
+        "produced_successful_result": true,
+        "fail_closed": false,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "status_matches": true,
+          "metrics_exact_match": true,
+          "exceptions_exact_match": true,
+          "requested_cases_exact_match": true,
+          "options_exact_match": true,
+          "traceability": true,
+          "completeness": true,
+          "contract_valid": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": true,
+      "exact_cause_code_match": true,
+      "both_complete_with_successful_result": true,
+      "both_fail_closed": false,
+      "semantic_basis": "both_complete_with_successful_result",
+      "semantic_equal": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-02a",
+      "family": "The MCP process-context resource is not listed.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "task_failure",
+          "cause_code": "mcp_resource_unavailable",
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_completed_evidence_task",
+            "no_solution_task"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "task_failure",
+        "cause_code": "mcp_resource_unavailable",
+        "failure_category": "evidence_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_completed_evidence_task": true,
+          "no_solution_task": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "mcp_resource_unavailable",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "mcp_resource_unavailable",
+        "cause_code": null,
+        "failure_category": "evidence_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": false,
+      "exact_cause_code_match": false,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": "The A2A path records the protocol wrapper task_failure with cause mcp_resource_unavailable; the direct baseline returns mcp_resource_unavailable without a cause. Each path matches its own V2 expected terminal/cause pair and both fail closed."
+    },
+    {
+      "variant_id": "L2-02b",
+      "family": "The evidence pack and process context carry a stale snapshot.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "snapshot_mismatch",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_solution_task"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "snapshot_mismatch",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [
+          {
+            "step": "discover_card",
+            "agent": "Workbench Evidence Specialist",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "workbench_evidence",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Evidence Specialist",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "workbench_evidence",
+            "task_id": "9ad49371-fd68-4462-8b1c-3220765e1eb1",
+            "context_id": "05b57556-8607-42f8-a299-a2e3135a4ca4",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          }
+        ],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_solution_task": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "snapshot_mismatch",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "snapshot_mismatch",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": true,
+      "exact_cause_code_match": true,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-03a",
+      "family": "Requested case C-999 does not exist in the fixture.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "incomplete_evidence",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_solution_task"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "incomplete_evidence",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [
+          {
+            "step": "discover_card",
+            "agent": "Workbench Evidence Specialist",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "workbench_evidence",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Evidence Specialist",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "workbench_evidence",
+            "task_id": "b23dda65-b155-4687-8642-9acbfd50abfd",
+            "context_id": "4f08d9ec-a3ca-42ce-a95e-0e85d2b9d511",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          }
+        ],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_solution_task": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "incomplete_evidence",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "incomplete_evidence",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": true,
+      "exact_cause_code_match": true,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-03b",
+      "family": "The calculate_baseline_metrics tool raises a bounded error.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "task_failure",
+          "cause_code": "mcp_tool_error",
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_completed_evidence_task",
+            "no_solution_task"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "task_failure",
+        "cause_code": "mcp_tool_error",
+        "failure_category": "evidence_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_completed_evidence_task": true,
+          "no_solution_task": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "mcp_tool_error",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "mcp_tool_error",
+        "cause_code": null,
+        "failure_category": "evidence_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": false,
+      "exact_cause_code_match": false,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": "The A2A path records the protocol wrapper task_failure with cause mcp_tool_error; the direct baseline returns mcp_tool_error without a cause. Each path matches its own V2 expected terminal/cause pair and both fail closed."
+    },
+    {
+      "variant_id": "L2-04a",
+      "family": "Evidence reports input_rows=99 instead of the fixture value 15.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "metric_value_mismatch",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_solution_task"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "metric_value_mismatch",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [
+          {
+            "step": "discover_card",
+            "agent": "Workbench Evidence Specialist",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "workbench_evidence",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Evidence Specialist",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "workbench_evidence",
+            "task_id": "dc1bc47a-fe58-4c19-808b-ca33b37266ce",
+            "context_id": "267b48c3-0c9d-424f-8956-7ed241334b6e",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          }
+        ],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_solution_task": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "metric_value_mismatch",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "metric_value_mismatch",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": true,
+      "exact_cause_code_match": true,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-04b",
+      "family": "Evidence carries a different request ID.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "task_failure",
+          "cause_code": "request_mismatch",
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_solution_task"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "task_failure",
+        "cause_code": "request_mismatch",
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_solution_task": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "request_mismatch",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "request_mismatch",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": false,
+      "exact_cause_code_match": false,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": "The A2A path records the protocol wrapper task_failure with cause request_mismatch; the direct baseline returns request_mismatch without a cause. Each path matches its own V2 expected terminal/cause pair and both fail closed."
+    },
+    {
+      "variant_id": "L2-04c",
+      "family": "Evidence returns a different requested case set.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "case_set_mismatch",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_solution_task"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "case_set_mismatch",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [
+          {
+            "step": "discover_card",
+            "agent": "Workbench Evidence Specialist",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "workbench_evidence",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Evidence Specialist",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "workbench_evidence",
+            "task_id": "8fd94f18-738e-4f8c-a44b-53fe6d3c8b6d",
+            "context_id": "1fa84412-2198-4759-818b-c85c1340cf67",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          }
+        ],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_solution_task": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "case_set_mismatch",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "case_set_mismatch",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": true,
+      "exact_cause_code_match": true,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-05a",
+      "family": "Injected instruction text is appended to the process-context resource.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "context_mismatch",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_solution_task"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "context_mismatch",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [
+          {
+            "step": "discover_card",
+            "agent": "Workbench Evidence Specialist",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "workbench_evidence",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Evidence Specialist",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "workbench_evidence",
+            "task_id": "ef7d28b0-e28e-4c4b-ae2b-790ab9a836c2",
+            "context_id": "dbcb2fd9-6801-40b9-ba13-3a31101e6646",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          }
+        ],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_solution_task": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "context_mismatch",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "context_mismatch",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": true,
+      "exact_cause_code_match": true,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-06a",
+      "family": "A solution option claims $100,000 annual savings.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "unsupported_claim",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_report_rendered"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "unsupported_claim",
+        "cause_code": null,
+        "failure_category": "safety_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [
+          {
+            "step": "discover_card",
+            "agent": "Workbench Evidence Specialist",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "workbench_evidence",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Evidence Specialist",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "workbench_evidence",
+            "task_id": "3df87723-9352-4001-8323-12b0b61a94ff",
+            "context_id": "81a0da8e-a546-496c-b9c0-0b67bc374b2a",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          },
+          {
+            "step": "discover_card",
+            "agent": "Workbench Solution Designer",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "solution_options",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Solution Designer",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "solution_options",
+            "task_id": "6c06b386-ebe4-4409-8b39-13562182f7d4",
+            "context_id": "3d195943-5e67-488a-aade-d88849868ecb",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          }
+        ],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_report_rendered": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "unsupported_claim",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "unsupported_claim",
+        "cause_code": null,
+        "failure_category": "safety_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": true,
+      "exact_cause_code_match": true,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-06b",
+      "family": "A solution option claims a 50% cycle-time reduction.",
+      "entrypoint": "workflow",
+      "a2a": {
+        "path": "workflow",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "unsupported_claim",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_report_rendered"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "unsupported_claim",
+        "cause_code": null,
+        "failure_category": "safety_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [
+          {
+            "step": "discover_card",
+            "agent": "Workbench Evidence Specialist",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "workbench_evidence",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Evidence Specialist",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "workbench_evidence",
+            "task_id": "e8e5ae7b-accd-4668-ae4b-75426c90442b",
+            "context_id": "c57cf1fb-978b-45aa-a339-8e49a7f1f927",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          },
+          {
+            "step": "discover_card",
+            "agent": "Workbench Solution Designer",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "solution_options",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Solution Designer",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "solution_options",
+            "task_id": "c1ec19fe-ed2e-4dbc-8db6-73789c8b6fd9",
+            "context_id": "26950a92-1350-44a1-a450-ea09abd037ad",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          }
+        ],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_report_rendered": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "unsupported_claim",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "unsupported_claim",
+        "cause_code": null,
+        "failure_category": "safety_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": true,
+      "exact_cause_code_match": true,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-10c",
+      "family": "The evidence result omits a required field.",
+      "entrypoint": "coordinator",
+      "a2a": {
+        "path": "coordinator",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "invalid_evidence_pack",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_solution_task"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "invalid_evidence_pack",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [
+          {
+            "step": "discover_card",
+            "agent": "Workbench Evidence Specialist",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "workbench_evidence",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Evidence Specialist",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "workbench_evidence",
+            "task_id": "8157ce43-51af-4607-aa3d-1ecd3dbc2ff3",
+            "context_id": "06578abc-f2c0-4643-8cae-bd3c67f5d971",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          }
+        ],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_solution_task": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "invalid_evidence_pack",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "invalid_evidence_pack",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": true,
+      "exact_cause_code_match": true,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": null
+    },
+    {
+      "variant_id": "L2-10d",
+      "family": "A solution option references an unknown evidence ID.",
+      "entrypoint": "coordinator",
+      "a2a": {
+        "path": "coordinator",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "unknown_evidence_reference",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status",
+            "no_forbidden_tool_called",
+            "retry_count_within_bound",
+            "no_report_rendered"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "unknown_evidence_reference",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [
+          {
+            "step": "discover_card",
+            "agent": "Workbench Evidence Specialist",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "workbench_evidence",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Evidence Specialist",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "workbench_evidence",
+            "task_id": "8bd99e2f-549c-42b0-84f2-572bfdd69b94",
+            "context_id": "384b7935-c296-4c3c-8e04-0c73eecbd221",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          },
+          {
+            "step": "discover_card",
+            "agent": "Workbench Solution Designer",
+            "method": "GET",
+            "path": "/.well-known/agent-card.json",
+            "skill_id": "solution_options",
+            "task_id": null,
+            "context_id": null,
+            "state": null,
+            "attempt": 1
+          },
+          {
+            "step": "send_task",
+            "agent": "Workbench Solution Designer",
+            "method": "POST",
+            "path": "/",
+            "skill_id": "solution_options",
+            "task_id": "6250f8fc-ed9d-4eae-9059-069b3837f07e",
+            "context_id": "46c88755-fee5-4d83-a6b9-ae3835a6bc22",
+            "state": "TASK_STATE_COMPLETED",
+            "attempt": 1
+          }
+        ],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true,
+          "no_forbidden_tool_called": true,
+          "retry_count_within_bound": true,
+          "no_report_rendered": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "baseline": {
+        "path": "baseline",
+        "expected": {
+          "status": "failure",
+          "terminal_code": "unknown_evidence_reference",
+          "cause_code": null,
+          "invariants": [
+            "terminal_status_matches",
+            "terminal_code_matches",
+            "cause_code_matches",
+            "no_fabricated_success",
+            "bounded_terminal_status"
+          ]
+        },
+        "status": "failure",
+        "terminal_code": "unknown_evidence_reference",
+        "cause_code": null,
+        "failure_category": "contract_boundary",
+        "observed_outcome": "fail_closed",
+        "produced_successful_result": false,
+        "fail_closed": true,
+        "attempt_count": 1,
+        "retry_count": 0,
+        "max_retries": 0,
+        "attempts_within_bound": true,
+        "sanitized_trace": [],
+        "evidence_pointer": "docs/evidence/level-2/evaluation-pack-v2/expected-manifest-v2.json#baseline",
+        "dimensions": {
+          "terminal_status_matches": true,
+          "terminal_code_matches": true,
+          "cause_code_matches": true,
+          "no_fabricated_success": true,
+          "bounded_terminal_status": true
+        },
+        "passed": true,
+        "miss": []
+      },
+      "same_observed_status": true,
+      "exact_terminal_code_match": true,
+      "exact_cause_code_match": true,
+      "both_complete_with_successful_result": false,
+      "both_fail_closed": true,
+      "semantic_basis": "both_fail_closed",
+      "semantic_equal": true,
+      "code_note": null
+    }
+  ],
+  "not_applicable": [
+    {
+      "variant_id": "L2-05b",
+      "entrypoint": "workflow",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    },
+    {
+      "variant_id": "L2-07a",
+      "entrypoint": "workflow",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    },
+    {
+      "variant_id": "L2-07b",
+      "entrypoint": "workflow",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    },
+    {
+      "variant_id": "L2-07c",
+      "entrypoint": "workflow",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    },
+    {
+      "variant_id": "L2-08a",
+      "entrypoint": "coordinator",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    },
+    {
+      "variant_id": "L2-08b",
+      "entrypoint": "coordinator",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    },
+    {
+      "variant_id": "L2-08c",
+      "entrypoint": "coordinator",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    },
+    {
+      "variant_id": "L2-09a",
+      "entrypoint": "coordinator",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    },
+    {
+      "variant_id": "L2-09b",
+      "entrypoint": "coordinator",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    },
+    {
+      "variant_id": "L2-10a",
+      "entrypoint": "coordinator",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    },
+    {
+      "variant_id": "L2-10b",
+      "entrypoint": "coordinator",
+      "reason": "This case depends on workflow/approval or A2A protocol behavior that the direct baseline does not implement."
+    }
+  ]
+}

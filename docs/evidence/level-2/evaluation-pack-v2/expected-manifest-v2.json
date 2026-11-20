@@ -1,0 +1,201 @@
+{
+  "pack_id": "level2-evaluation-pack-v2",
+  "pack_version": "2.0.0",
+  "manifest_version": "2.0.0",
+  "status": "frozen",
+  "frozen_at": "2026-11-19",
+  "frozen_by": "owner",
+  "baseline_commit": "d5a6c973cae4ee17cd66ed01352a64c159ceb0f8",
+  "fixture": {
+    "path": "src/transformation_workbench/data/synthetic_cases.csv",
+    "sha256": "69136fc840591c811fac66153122a3b091a0bea13445d770dafa294e6874e272",
+    "snapshot_at": "2026-03-13T17:00:00Z",
+    "process_context_sha256": "014d553995f902d4e102c7408166da1da668ce62e0d75854d463c35010973076",
+    "synthetic_only": true
+  },
+  "baseline": {
+    "status": "ok",
+    "metrics": {
+      "input_rows": 15,
+      "measurable_closed": 9,
+      "cycle_time_sum_hours": 261.5,
+      "mean_cycle_time_hours": 29.06,
+      "median_cycle_time_hours": 9.0,
+      "sla_met_count": 6,
+      "sla_met_percent": 66.7,
+      "rework_cases": 2,
+      "rework_rate_percent": 22.2,
+      "rework_volume": 3,
+      "backlog_cases": 2,
+      "backlog_overdue": 1,
+      "excluded_count": 4
+    },
+    "calculations": [
+      {
+        "calculation_id": "calc.sla_misses",
+        "value": 3,
+        "unit": "count"
+      },
+      {
+        "calculation_id": "calc.excluded_share",
+        "value": 26.7,
+        "unit": "percent"
+      },
+      {
+        "calculation_id": "calc.backlog_overdue_share",
+        "value": 50.0,
+        "unit": "percent"
+      }
+    ],
+    "exceptions": [
+      {
+        "case_id": "C-006",
+        "row_number": 7,
+        "reason": "INCOMPLETE_MISSING_CLOSED_AT"
+      },
+      {
+        "case_id": "C-010",
+        "row_number": 11,
+        "reason": "INVALID_DATE"
+      },
+      {
+        "case_id": "C-011",
+        "row_number": 12,
+        "reason": "OUT_OF_ORDER"
+      },
+      {
+        "case_id": "C-014",
+        "row_number": 15,
+        "reason": "DUPLICATE_OF:C-007"
+      }
+    ],
+    "requested_cases": {
+      "C-009": {
+        "row_number": 10,
+        "classification": "measurable",
+        "status": "closed",
+        "priority": "P2",
+        "cycle_time_hours": 24.0,
+        "sla_target_hours": 24.0,
+        "sla_met": true,
+        "rework_count": 0,
+        "duplicate_of": null,
+        "exclusion_reason": null
+      },
+      "C-006": {
+        "row_number": 7,
+        "classification": "invalid",
+        "status": null,
+        "priority": null,
+        "cycle_time_hours": null,
+        "sla_target_hours": null,
+        "sla_met": null,
+        "rework_count": null,
+        "duplicate_of": null,
+        "exclusion_reason": "INCOMPLETE_MISSING_CLOSED_AT"
+      },
+      "C-014": {
+        "row_number": 15,
+        "classification": "duplicate",
+        "status": "duplicate",
+        "priority": "P2",
+        "cycle_time_hours": null,
+        "sla_target_hours": null,
+        "sla_met": null,
+        "rework_count": 0,
+        "duplicate_of": "C-007",
+        "exclusion_reason": "DUPLICATE_OF:C-007"
+      }
+    },
+    "options": [
+      {
+        "option_id": "option-triage-backlog",
+        "title": "Triage overdue backlog cases against published SLA targets"
+      },
+      {
+        "option_id": "option-data-quality",
+        "title": "Resolve data-quality exclusions before automation design"
+      },
+      {
+        "option_id": "option-rework-review",
+        "title": "Review rework cases for recurring handling steps"
+      }
+    ],
+    "required_metric_names": [
+      "input_rows",
+      "measurable_closed",
+      "cycle_time_sum_hours",
+      "mean_cycle_time_hours",
+      "median_cycle_time_hours",
+      "sla_met_count",
+      "sla_met_percent",
+      "rework_cases",
+      "rework_rate_percent",
+      "rework_volume",
+      "backlog_cases",
+      "backlog_overdue",
+      "excluded_count"
+    ]
+  },
+  "required_report_fields": [
+    "schema_version",
+    "status",
+    "request_id",
+    "intake",
+    "approval",
+    "executive_brief",
+    "observations",
+    "metrics",
+    "calculations",
+    "exceptions",
+    "case_observations",
+    "future_state",
+    "automation_opportunities",
+    "risks",
+    "assumptions",
+    "roadmap",
+    "evidence_appendix",
+    "limitations",
+    "protocol_trace",
+    "rendered_markdown"
+  ],
+  "required_report_sections": [
+    "1. Executive brief",
+    "2. Observed facts",
+    "3. Calculations",
+    "4. Data-quality exceptions",
+    "5. Requested case observations",
+    "6. Proposed future-state workflow",
+    "7. Automation opportunities for review",
+    "8. Risks and controls",
+    "9. Assumptions",
+    "10. Prioritized roadmap (proposal only)",
+    "11. Evidence and assumptions appendix",
+    "12. Protocol trace",
+    "13. Known limitations",
+    "14. Human approval checkpoint"
+  ],
+  "approval_expectations": {
+    "pending": {
+      "status": "pending",
+      "consequential_action_permitted": false
+    },
+    "approved": {
+      "status": "approved",
+      "consequential_action_permitted": false,
+      "action_method": "execute_consequential_action raises consequential_action_disabled"
+    },
+    "declined": {
+      "status": "declined",
+      "consequential_action_permitted": false
+    }
+  },
+  "notes": [
+    "V2 answer key for the fixed synthetic fixture and snapshot.",
+    "V2 keeps the V1 fixture-derived values unchanged.",
+    "Terminal and cause expectations are path-specific and are not union-matched.",
+    "No hosted model, provider, external service, credential, or real data is part of this manifest."
+  ],
+  "supersedes": "level2-evaluation-pack v1.0.0",
+  "source_commit": "33f184d0bd48fd435d3910f1f9c55f4f97d1623d"
+}

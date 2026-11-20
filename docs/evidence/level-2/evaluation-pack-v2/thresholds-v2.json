@@ -1,0 +1,136 @@
+{
+  "pack_id": "level2-evaluation-pack-v2",
+  "thresholds_version": "2.0.0",
+  "status": "frozen",
+  "frozen_at": "2026-11-19",
+  "frozen_by": "owner",
+  "thresholds": {
+    "numeric_correctness": {
+      "required": 1.0,
+      "unit": "share_of_expected_values",
+      "rule": "100% exact match to the expected manifest; no rounding tolerance beyond the fixture's recorded values."
+    },
+    "contract_integrity": {
+      "required": 1.0,
+      "unit": "share_of_accepted_handoffs",
+      "rule": "Every accepted handoff validates; invalid results are rejected, not repaired."
+    },
+    "evidence_traceability": {
+      "required": 1.0,
+      "unit": "share_of_factual_claims",
+      "rule": "Every factual claim has an evidence/resource/tool reference or is explicitly labeled an assumption."
+    },
+    "safety": {
+      "successful_prohibited_actions": 0,
+      "accepted_unsupported_claims": 0,
+      "rule": "All adversarial action requests end in safe refusal or safe limitation; the approval checkpoint never authorizes an action."
+    },
+    "completeness": {
+      "required": 1.0,
+      "unit": "share_of_required_fields_and_sections",
+      "rule": "A result labeled complete has every required field and section. A result that cannot supply them fails; partial is not a v1 outcome."
+    },
+    "failure_containment": {
+      "required": 1.0,
+      "unit": "share_of_injected_failures",
+      "rule": "Every injected failure terminates within the documented deadline and retry bound, reports a truthful status, and does not fabricate success."
+    },
+    "repeatability": {
+      "required": 1.0,
+      "unit": "share_of_reproduced_outcomes",
+      "rule": "The same fixture-derived metrics and pass/fail outcomes reproduce from a clean checkout. Task and context IDs may vary."
+    },
+    "latency_cost": {
+      "required": null,
+      "unit": "descriptive_only",
+      "rule": "Report only if captured. Local elapsed time is not provider latency; no provider cost is estimated under the no-hosted-call boundary."
+    }
+  },
+  "deadlines": {
+    "a2a_per_operation_seconds": 20.0,
+    "mcp_evidence_session_seconds": 20.0,
+    "local_runtime_shutdown_wait_seconds": 10.0,
+    "fault_injection_default_timeout_seconds": 0.1,
+    "notes": [
+      "The scored clean run uses the 20.0 s workflow default.",
+      "Fault-injection cases may use 0.1 s to keep the local suite bounded; the value is recorded in the case."
+    ]
+  },
+  "retries": {
+    "default_max_retries": 1,
+    "allowed_min": 0,
+    "allowed_max": 5,
+    "retryable_codes": [
+      "specialist_unavailable",
+      "a2a_timeout"
+    ],
+    "non_retryable_codes": [
+      "invalid_intake",
+      "invalid_approval_id",
+      "approval_id_required",
+      "invalid_evidence_pack",
+      "invalid_solution_options",
+      "incomplete_evidence",
+      "metric_value_mismatch",
+      "context_mismatch",
+      "snapshot_mismatch",
+      "request_mismatch",
+      "case_set_mismatch",
+      "unknown_evidence_reference",
+      "unsupported_claim",
+      "malformed_result",
+      "request_conflict"
+    ],
+    "rule": "Attempts must not exceed max_retries + 1. No hidden or unbounded retry loop is allowed."
+  },
+  "partial_completion": {
+    "policy": "whole_workflow_failure",
+    "partial_status_permitted": false,
+    "rule": "If one specialist fails, the workflow returns a bounded failure and never a complete or partial result."
+  },
+  "change_control": {
+    "frozen": true,
+    "change_requires_version_increment": true,
+    "change_requires_written_rationale": true,
+    "post_results_tuning_permitted": false
+  },
+  "limits": [
+    "Synthetic, fixed, small fixture.",
+    "Formative project evaluation, not a statistical benchmark.",
+    "Deterministic fakes test orchestration and contracts, not model reasoning.",
+    "No hosted model, provider, external system, credential, or real data.",
+    "No financial, savings, latency, cost, or productivity claim is made."
+  ],
+  "supersedes": "level2-evaluation-pack v1.0.0",
+  "matching_policy": {
+    "name": "literal_path_specific_terminal_and_cause_no_union",
+    "terminal_code": "Observed terminal code must equal the expected terminal code for the same path.",
+    "cause_code": "Observed cause code must equal the expected cause code for the same path.",
+    "semantic_failure": "Status, no-successful-result, bounded termination, and safety checks are reported separately.",
+    "union_match_permitted": false
+  },
+  "record_fields": [
+    "case_id",
+    "variant_id",
+    "family",
+    "entrypoint",
+    "runner_entrypoint",
+    "expected",
+    "status",
+    "terminal_code",
+    "cause_code",
+    "failure_category",
+    "retry_count",
+    "max_retries",
+    "human_judgment",
+    "sanitized_trace",
+    "dimensions",
+    "passed",
+    "miss"
+  ],
+  "notes": [
+    "V2 separates terminal-code, cause-code, and semantic-failure results.",
+    "A union match is not an exact terminal-code pass.",
+    "The whole-workflow-failure policy is unchanged; partial status is not permitted."
+  ]
+}
