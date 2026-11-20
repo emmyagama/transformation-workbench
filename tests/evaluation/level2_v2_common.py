@@ -124,9 +124,17 @@ KNOWN_CODES = (
 FAILURE_CATEGORY = {
     "invalid_intake": "intake_validation",
     "invalid_case_id": "intake_validation",
+    "instruction_override": "intake_validation",
+    "system_prompt_exfiltration": "intake_validation",
+    "role_override": "intake_validation",
+    "tool_action_request": "intake_validation",
+    "path_traversal": "intake_validation",
+    "credential_material": "intake_validation",
+    "unsafe_display_text": "intake_validation",
     "approval_id_required": "approval_boundary",
     "unexpected_approval_id": "approval_boundary",
     "unexpected_approval_note": "approval_boundary",
+    "approval_already_decided": "approval_boundary",
     "consequential_action_disabled": "approval_boundary",
     "mcp_resource_unavailable": "evidence_boundary",
     "mcp_resource_invalid": "evidence_boundary",
@@ -145,12 +153,18 @@ FAILURE_CATEGORY = {
     "invalid_evidence_pack": "contract_boundary",
     "invalid_solution_options": "contract_boundary",
     "unknown_evidence_reference": "contract_boundary",
+    "missing_metric": "contract_boundary",
+    "invalid_provenance": "contract_boundary",
     "unsupported_claim": "safety_boundary",
+    "claim_rejected": "safety_boundary",
     "malformed_result": "protocol_boundary",
+    "invalid_agent_card": "protocol_boundary",
+    "non_task_response": "protocol_boundary",
     "task_failure": "protocol_boundary",
     "specialist_unavailable": "protocol_boundary",
     "a2a_timeout": "protocol_boundary",
     "request_conflict": "duplicate_replay",
+    "internal_error": "internal",
 }
 
 ALLOWED_STEPS = {"discover_card", "send_task", "duplicate_replay"}
@@ -330,6 +344,26 @@ def _failure_category(code: str | None, cause: str | None) -> str | None:
     if code is None:
         return None
     return FAILURE_CATEGORY.get(cause or code or "", "unclassified")
+
+
+def _produced_successful_result(outcome: PathOutcome) -> bool:
+    if outcome.path == "workflow":
+        return outcome.report is not None
+    if outcome.path == "coordinator":
+        return outcome.result is not None and outcome.result.status == "complete"
+    if outcome.path == "baseline":
+        return outcome.pack is not None and outcome.options is not None
+    return False
+
+
+def _observed_outcome(outcome: PathOutcome) -> tuple[str, bool, bool]:
+    """Return (class, successful_result, fail_closed) from observed behavior."""
+    successful_result = _produced_successful_result(outcome)
+    if outcome.status == "complete" and successful_result:
+        return "success", True, False
+    if outcome.status in {"failure", "refused"} and not successful_result:
+        return "fail_closed", False, True
+    return "indeterminate", successful_result, False
 
 
 def _sanitized_trace(trace: Sequence[Any]) -> list[dict[str, Any]]:
@@ -1414,6 +1448,7 @@ def score_path(
             f"{variant['variant_id']} did not score invariants: {missing}"
         )
     passed = all(dimensions.values())
+    observed_outcome, successful_result, fail_closed = _observed_outcome(outcome)
     return {
         "path": outcome.path,
         "expected": {
@@ -1428,7 +1463,11 @@ def score_path(
         "failure_category": _failure_category(
             outcome.error_code, outcome.cause_code
         ),
-        "retry_count": outcome.attempts,
+        "observed_outcome": observed_outcome,
+        "produced_successful_result": successful_result,
+        "fail_closed": fail_closed,
+        "attempt_count": outcome.attempts,
+        "retry_count": max(outcome.attempts - 1, 0),
         "max_retries": outcome.max_retries,
         "attempts_within_bound": outcome.attempts
         <= outcome.max_retries + 1,
@@ -1485,6 +1524,10 @@ def make_row(
         "terminal_code": observed["terminal_code"],
         "cause_code": observed["cause_code"],
         "failure_category": observed["failure_category"],
+        "observed_outcome": observed["observed_outcome"],
+        "produced_successful_result": observed["produced_successful_result"],
+        "fail_closed": observed["fail_closed"],
+        "attempt_count": observed["attempt_count"],
         "retry_count": observed["retry_count"],
         "max_retries": observed["max_retries"],
         "attempts_within_bound": observed["attempts_within_bound"],

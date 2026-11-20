@@ -80,14 +80,32 @@ async def main() -> None:
                 manifest,
                 expected_key="baseline_expected",
             )
-            same_terminal_status = a2a["status"] == baseline["status"]
+            same_observed_status = a2a["status"] == baseline["status"]
             exact_terminal_code_match = (
                 a2a["terminal_code"] == baseline["terminal_code"]
             )
             exact_cause_code_match = (
                 a2a["cause_code"] == baseline["cause_code"]
             )
-            semantic_equal = a2a["passed"] and baseline["passed"]
+            both_successful = (
+                a2a["observed_outcome"] == "success"
+                and baseline["observed_outcome"] == "success"
+            )
+            both_fail_closed = (
+                a2a["observed_outcome"] == "fail_closed"
+                and baseline["observed_outcome"] == "fail_closed"
+            )
+            semantic_equal = same_observed_status and (
+                both_successful or both_fail_closed
+            )
+            if both_successful:
+                semantic_basis = "both_complete_with_successful_result"
+            elif both_fail_closed:
+                semantic_basis = "both_fail_closed"
+            elif a2a["observed_outcome"] != baseline["observed_outcome"]:
+                semantic_basis = "observed_outcome_mismatch"
+            else:
+                semantic_basis = "observed_status_mismatch"
             rows.append(
                 {
                     "variant_id": variant["variant_id"],
@@ -95,9 +113,12 @@ async def main() -> None:
                     "entrypoint": case["entrypoint"],
                     "a2a": a2a,
                     "baseline": baseline,
-                    "same_terminal_status": same_terminal_status,
+                    "same_observed_status": same_observed_status,
                     "exact_terminal_code_match": exact_terminal_code_match,
                     "exact_cause_code_match": exact_cause_code_match,
+                    "both_complete_with_successful_result": both_successful,
+                    "both_fail_closed": both_fail_closed,
+                    "semantic_basis": semantic_basis,
                     "semantic_equal": semantic_equal,
                     "code_note": _code_note(
                         variant["variant_id"], a2a, baseline
@@ -112,13 +133,23 @@ async def main() -> None:
         "baseline_commit": corpus["baseline_commit"],
         "source_commit": corpus["source_commit"],
         "matching_policy": corpus["matching_policy"],
+        "semantic_definition": (
+            "Cross-path semantic equality uses observed outcomes only. It "
+            "requires the same observed status and either (a) both paths "
+            "complete with a successful result, or (b) both paths terminate "
+            "failure/refused with no successful result (fail-closed). It does "
+            "not use path-specific expectations, terminal codes, or cause codes; "
+            "those remain separate match counts."
+        ),
         "method": (
             "The A2A side uses the path selected by the corpus label: the real "
             "run_workflow entrypoint for workflow variants and the real local "
             "Phase2Coordinator for coordinator variants. The baseline side calls "
             "the same read-only evidence source and deterministic solution "
             "designer directly. Each path is scored against its own literal "
-            "terminal and cause expectations. No union match is used."
+            "terminal and cause expectations. No union match is used. Cross-path "
+            "semantic equality is then computed from observed outcomes only, as "
+            "defined in semantic_definition."
         ),
         "limits": [
             "Small synthetic sample; not a general benchmark.",
@@ -141,7 +172,7 @@ async def main() -> None:
             if row["a2a"]["cause_code"]
             == row["a2a"]["expected"]["cause_code"]
         ),
-        "a2a_semantic_matches": sum(
+        "a2a_path_passes": sum(
             1 for row in rows if row["a2a"]["passed"]
         ),
         "baseline_terminal_code_matches": sum(
@@ -156,7 +187,7 @@ async def main() -> None:
             if row["baseline"]["cause_code"]
             == row["baseline"]["expected"]["cause_code"]
         ),
-        "baseline_semantic_matches": sum(
+        "baseline_path_passes": sum(
             1 for row in rows if row["baseline"]["passed"]
         ),
         "cross_path_exact_terminal_matches": sum(
@@ -164,6 +195,12 @@ async def main() -> None:
         ),
         "cross_path_exact_cause_matches": sum(
             1 for row in rows if row["exact_cause_code_match"]
+        ),
+        "cross_path_both_success_matches": sum(
+            1 for row in rows if row["both_complete_with_successful_result"]
+        ),
+        "cross_path_both_fail_closed_matches": sum(
+            1 for row in rows if row["both_fail_closed"]
         ),
         "cross_path_semantic_matches": sum(
             1 for row in rows if row["semantic_equal"]
@@ -174,7 +211,7 @@ async def main() -> None:
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUTPUT_DIR / "comparison-v2.json").write_text(
-        json.dumps(report, indent=2) + "\n", encoding="utf-8"
+        json.dumps(report, indent=2) + "\n", encoding="utf-8", newline="\n"
     )
 
     lines = [
@@ -188,21 +225,27 @@ async def main() -> None:
         "",
         report["method"],
         "",
+        "### Cross-path semantic definition",
+        "",
+        report["semantic_definition"],
+        "",
         "## Result",
         "",
         f"- Shared cases: **{report['shared_case_count']}**",
+        f"- A2A path-specific passes: **{report['a2a_path_passes']}/{report['shared_case_count']}**",
         f"- A2A literal terminal-code matches: **{report['a2a_terminal_code_matches']}/{report['shared_case_count']}**",
         f"- A2A literal cause-code matches: **{report['a2a_cause_code_matches']}/{report['shared_case_count']}**",
-        f"- A2A semantic matches: **{report['a2a_semantic_matches']}/{report['shared_case_count']}**",
+        f"- Baseline path-specific passes: **{report['baseline_path_passes']}/{report['shared_case_count']}**",
         f"- Baseline literal terminal-code matches: **{report['baseline_terminal_code_matches']}/{report['shared_case_count']}**",
         f"- Baseline literal cause-code matches: **{report['baseline_cause_code_matches']}/{report['shared_case_count']}**",
-        f"- Baseline semantic matches: **{report['baseline_semantic_matches']}/{report['shared_case_count']}**",
         f"- Cross-path exact terminal-code matches: **{report['cross_path_exact_terminal_matches']}/{report['shared_case_count']}**",
         f"- Cross-path exact cause-code matches: **{report['cross_path_exact_cause_matches']}/{report['shared_case_count']}**",
+        f"- Cross-path both-success semantic matches: **{report['cross_path_both_success_matches']}/{report['shared_case_count']}**",
+        f"- Cross-path both-fail-closed semantic matches: **{report['cross_path_both_fail_closed_matches']}/{report['shared_case_count']}**",
         f"- Cross-path semantic matches: **{report['cross_path_semantic_matches']}/{report['shared_case_count']}**",
         "",
-        "| Variant | Entrypoint | A2A status | A2A terminal / cause | A2A path pass | Baseline status | Baseline terminal / cause | Baseline path pass | Same status | Exact terminal | Exact cause | Semantic equal |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Variant | Entrypoint | A2A status | A2A terminal / cause | A2A outcome | A2A path pass | Baseline status | Baseline terminal / cause | Baseline outcome | Baseline path pass | Same observed status | Exact terminal | Exact cause | Semantic basis | Semantic equal |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for row in rows:
         a2a_terminal = row["a2a"]["terminal_code"] or "-"
@@ -212,11 +255,13 @@ async def main() -> None:
         lines.append(
             f"| {row['variant_id']} | {row['entrypoint']} | "
             f"{row['a2a']['status']} | {a2a_terminal} / {a2a_cause} | "
-            f"{row['a2a']['passed']} | {row['baseline']['status']} | "
-            f"{baseline_terminal} / {baseline_cause} | "
-            f"{row['baseline']['passed']} | {row['same_terminal_status']} | "
+            f"{row['a2a']['observed_outcome']} | {row['a2a']['passed']} | "
+            f"{row['baseline']['status']} | {baseline_terminal} / "
+            f"{baseline_cause} | {row['baseline']['observed_outcome']} | "
+            f"{row['baseline']['passed']} | {row['same_observed_status']} | "
             f"{row['exact_terminal_code_match']} | "
-            f"{row['exact_cause_code_match']} | {row['semantic_equal']} |"
+            f"{row['exact_cause_code_match']} | {row['semantic_basis']} | "
+            f"{row['semantic_equal']} |"
         )
     notes = [row for row in rows if row["code_note"]]
     if notes:
@@ -251,11 +296,15 @@ async def main() -> None:
             "## Bounded conclusion",
             "",
             "On the shared synthetic cases, each path matched its own literal "
-            "terminal code, cause code, and semantic failure checks. Cross-path "
-            "terminal codes matched on "
+            "terminal code and cause code. Cross-path terminal codes matched on "
             f"{report['cross_path_exact_terminal_matches']} of "
             f"{report['shared_case_count']} cases because the A2A protocol "
             "wraps evidence-side failures as `task_failure` with a cause code. "
+            "Observed semantic outcomes matched on "
+            f"{report['cross_path_semantic_matches']} of "
+            f"{report['shared_case_count']} cases: "
+            f"{report['cross_path_both_success_matches']} both-success and "
+            f"{report['cross_path_both_fail_closed_matches']} both-fail-closed. "
             "The A2A path added protocol discovery and task evidence but did not "
             "improve correctness or safety on this sample. The sample is small "
             "and the baseline has no A2A protocol semantics, so this is not a "
@@ -268,7 +317,7 @@ async def main() -> None:
     for limit in report["limits"]:
         lines.append(f"- {limit}")
     (OUTPUT_DIR / "comparison-v2.md").write_text(
-        "\n".join(lines) + "\n", encoding="utf-8"
+        "\n".join(lines) + "\n", encoding="utf-8", newline="\n"
     )
     print(
         json.dumps(
@@ -276,19 +325,25 @@ async def main() -> None:
                 "shared_case_count": report["shared_case_count"],
                 "a2a_terminal_code_matches": report["a2a_terminal_code_matches"],
                 "a2a_cause_code_matches": report["a2a_cause_code_matches"],
-                "a2a_semantic_matches": report["a2a_semantic_matches"],
+                "a2a_path_passes": report["a2a_path_passes"],
                 "baseline_terminal_code_matches": report[
                     "baseline_terminal_code_matches"
                 ],
                 "baseline_cause_code_matches": report[
                     "baseline_cause_code_matches"
                 ],
-                "baseline_semantic_matches": report["baseline_semantic_matches"],
+                "baseline_path_passes": report["baseline_path_passes"],
                 "cross_path_exact_terminal_matches": report[
                     "cross_path_exact_terminal_matches"
                 ],
                 "cross_path_exact_cause_matches": report[
                     "cross_path_exact_cause_matches"
+                ],
+                "cross_path_both_success_matches": report[
+                    "cross_path_both_success_matches"
+                ],
+                "cross_path_both_fail_closed_matches": report[
+                    "cross_path_both_fail_closed_matches"
                 ],
                 "cross_path_semantic_matches": report[
                     "cross_path_semantic_matches"

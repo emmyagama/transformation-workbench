@@ -7,7 +7,8 @@ All cases are local and synthetic. Faults are injected through fixed fixtures,
 static A2A artifacts, bounded fake MCP sources, or deterministic executors. Every
 workflow-labeled variant is executed through the real `run_workflow` entrypoint;
 fault injection replaces the evidence source or solution executor inside that
-entrypoint. No hosted model or external system is used.
+entrypoint. No hosted model or external system is used. "Attempts" is the total
+number of tries; retry count is attempts minus one.
 
 ## Injected faults and observed results
 

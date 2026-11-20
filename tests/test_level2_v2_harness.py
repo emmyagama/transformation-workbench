@@ -70,8 +70,26 @@ def test_v2_scorecard_scored_every_declared_invariant() -> None:
     for row in report["rows"]:
         for field in thresholds["record_fields"]:
             assert field in row, (row["variant_id"], field)
+        assert row["entrypoint"] == row["runner_entrypoint"]
+        assert row["expected"]["status"] in {"complete", "failure", "refused"}
+        assert row["observed_outcome"] in {
+            "success",
+            "fail_closed",
+            "indeterminate",
+        }
+        assert row["attempt_count"] == row["retry_count"] + 1 or (
+            row["attempt_count"] == 0 and row["retry_count"] == 0
+        )
+        assert row["retry_count"] <= row["max_retries"]
+        assert row["attempt_count"] <= row["max_retries"] + 1
         assert set(row["expected"]["invariants"]) <= set(row["dimensions"])
         assert row["passed"] is all(row["dimensions"].values())
+        assert row["sanitized_trace"] or row["evidence_pointer"]
+    by_id = {row["variant_id"]: row for row in report["rows"]}
+    assert by_id["L2-05b"]["failure_category"] == "intake_validation"
+    assert by_id["L2-08c"]["attempt_count"] == 2
+    assert by_id["L2-08c"]["retry_count"] == 1
+    assert by_id["L2-08c"]["max_retries"] == 1
 
 
 def test_v2_comparison_separates_codes_and_semantics() -> None:
@@ -81,13 +99,33 @@ def test_v2_comparison_separates_codes_and_semantics() -> None:
     assert report["shared_case_count"] == 13
     assert report["a2a_terminal_code_matches"] == 13
     assert report["a2a_cause_code_matches"] == 13
-    assert report["a2a_semantic_matches"] == 13
+    assert report["a2a_path_passes"] == 13
     assert report["baseline_terminal_code_matches"] == 13
     assert report["baseline_cause_code_matches"] == 13
-    assert report["baseline_semantic_matches"] == 13
+    assert report["baseline_path_passes"] == 13
     assert report["cross_path_exact_terminal_matches"] == 10
     assert report["cross_path_exact_cause_matches"] == 10
+    assert report["cross_path_both_success_matches"] == 1
+    assert report["cross_path_both_fail_closed_matches"] == 12
     assert report["cross_path_semantic_matches"] == 13
+    assert "observed outcomes only" in report["semantic_definition"]
     assert report["matching_policy"] == (
         "literal_path_specific_terminal_and_cause_no_union"
     )
+    for row in report["rows"]:
+        assert row["same_observed_status"] in {True, False}
+        assert row["both_complete_with_successful_result"] is (
+            row["a2a"]["observed_outcome"] == "success"
+            and row["baseline"]["observed_outcome"] == "success"
+        )
+        assert row["both_fail_closed"] is (
+            row["a2a"]["observed_outcome"] == "fail_closed"
+            and row["baseline"]["observed_outcome"] == "fail_closed"
+        )
+        assert row["semantic_equal"] is (
+            row["same_observed_status"]
+            and (
+                row["both_complete_with_successful_result"]
+                or row["both_fail_closed"]
+            )
+        )

@@ -89,7 +89,9 @@ async def main() -> None:
             "Every workflow-labeled variant uses the real run_workflow entrypoint.",
             "Every coordinator-labeled variant uses the real local Phase2Coordinator.",
             "Terminal and cause expectations are literal and path-specific; union matching is not used.",
-            "Each row records terminal code, cause code, failure category, retry count, human-judgment flag, and a sanitized trace.",
+            "Each row records expected and observed status/codes, failure category, attempt count, retry count, max retries, human-judgment flag, every invariant result, and a sanitized trace.",
+            "Retry count is attempt_count minus one; max_retries is the permitted retry limit.",
+            "The Markdown table separates expected and observed fields and counts declared invariants only; the JSON also carries supplementary dimensions, sanitized trace, and evidence pointer.",
             "The L2-04b workflow expectation is task_failure / request_mismatch; the direct baseline expectation is request_mismatch / no cause.",
             "Whole-workflow failure remains the policy; no partial-result status exists.",
             "No hosted model, provider, external system, credential, or real data is used.",
@@ -98,7 +100,7 @@ async def main() -> None:
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUTPUT_DIR / "scorecard-v2.json").write_text(
-        json.dumps(report, indent=2) + "\n", encoding="utf-8"
+        json.dumps(report, indent=2) + "\n", encoding="utf-8", newline="\n"
     )
 
     lines = [
@@ -121,18 +123,29 @@ async def main() -> None:
         "",
         "## Per-case results",
         "",
-        "| Case | Variant | Entrypoint | Status | Terminal / cause | Category | Attempts | Human judgment | Pass | Failed invariants |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Case | Variant | Entrypoint (declared / actual) | Expected status | Expected terminal / cause | Observed status | Observed terminal / cause | Category | Retry count / limit | Attempts | Human judgment | Invariants passed / declared | Pass | Misses |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for row in rows:
         failed = row["miss"]
+        expected_terminal = row["expected"]["terminal_code"] or "-"
+        expected_cause = row["expected"]["cause_code"] or "-"
         terminal = row["terminal_code"] or "-"
         cause = row["cause_code"] or "-"
+        declared = row["expected"]["invariants"]
+        invariants_passed = sum(
+            1 for name in declared if row["dimensions"].get(name) is True
+        )
+        invariants_declared = len(declared)
         lines.append(
-            f"| {row['case_id']} | {row['variant_id']} | {row['runner_entrypoint']} | "
-            f"{row['status']} | {terminal} / {cause} | "
-            f"{row['failure_category'] or '-'} | {row['retry_count']} | "
-            f"{row['human_judgment']} | {row['passed']} | "
+            f"| {row['case_id']} | {row['variant_id']} | "
+            f"{row['entrypoint']} / {row['runner_entrypoint']} | "
+            f"{row['expected']['status']} | {expected_terminal} / "
+            f"{expected_cause} | {row['status']} | {terminal} / {cause} | "
+            f"{row['failure_category'] or '-'} | "
+            f"{row['retry_count']} / {row['max_retries']} | "
+            f"{row['attempt_count']} | {row['human_judgment']} | "
+            f"{invariants_passed} / {invariants_declared} | {row['passed']} | "
             f"{', '.join(failed) if failed else '-'} |"
         )
     lines.extend(["", "## Misses", ""])
@@ -145,7 +158,7 @@ async def main() -> None:
     for note in report["notes"]:
         lines.append(f"- {note}")
     (OUTPUT_DIR / "scorecard-v2.md").write_text(
-        "\n".join(lines) + "\n", encoding="utf-8"
+        "\n".join(lines) + "\n", encoding="utf-8", newline="\n"
     )
     print(
         json.dumps(

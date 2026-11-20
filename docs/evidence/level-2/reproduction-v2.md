@@ -1,9 +1,12 @@
 # Level 2 reproduction and versions v2
 
 **Pack:** `level2-evaluation-pack-v2` v2.0.0
-**Source commit:** `33f184d`
+**Pushed V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
+**V2 source commit:** `33f184d`
 **Evaluation date:** 2026-11-20
-**Clean-clone status:** pending owner-approved commit
+**Clean-clone status:** `f9ccce7` verified at that commit; current reconciliation
+is uncommitted and clean-clone verification is pending a new owner-approved
+commit.
 
 ## Environment
 
@@ -31,19 +34,23 @@ installed for this evaluation.
 | Snapshot | `2026-03-13T17:00:00Z` |
 | Process-context SHA-256 | `014d553995f902d4e102c7408166da1da668ce62e0d75854d463c35010973076` |
 
+The fixture hash assumes LF line endings. On Windows, a default checkout with
+`core.autocrlf=true` changes the file hash without changing the synthetic data.
+Use `-c core.autocrlf=false` for byte-identical fixture verification.
+
 ## Full local suite
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-Result: **258 passed in 184.59s**.
+Current uncommitted reconciliation result: **258 passed in 81.89s**, exit `0`.
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip check
 ```
 
-Result: **No broken requirements found.**
+Result: **No broken requirements found.** Exit `0`.
 
 ## V2 scorecard
 
@@ -51,7 +58,7 @@ Result: **No broken requirements found.**
 .\.venv\Scripts\python.exe -m tests.evaluation.run_level2_scorecard_v2
 ```
 
-Result:
+Current reconciliation result, exit `0`:
 
 ```json
 {
@@ -70,7 +77,10 @@ Artifacts:
 - `docs/evidence/level-2/scorecard-v2.md`
 
 The scorecard routes all 15 workflow variants through `run_workflow` and all 9
-coordinator variants through the real local `Phase2Coordinator`.
+coordinator variants through the real local `Phase2Coordinator`. It records
+expected and observed fields, declared-invariant results, attempt count, retry
+count, and retry limit. `L2-08c` records **2 attempts**, **1 retry**, and
+**max_retries=1**. `L2-05b` records failure category **`intake_validation`**.
 
 ## V2 baseline-versus-A2A comparison
 
@@ -78,25 +88,32 @@ coordinator variants through the real local `Phase2Coordinator`.
 .\.venv\Scripts\python.exe -m tests.evaluation.run_level2_comparison_v2
 ```
 
-Result:
+Current reconciliation result, exit `0`:
 
 - Shared variants: **13**
+- A2A path-specific passes: **13 / 13**
 - A2A literal terminal-code matches: **13 / 13**
 - A2A literal cause-code matches: **13 / 13**
-- A2A semantic matches: **13 / 13**
+- Baseline path-specific passes: **13 / 13**
 - Baseline literal terminal-code matches: **13 / 13**
 - Baseline literal cause-code matches: **13 / 13**
-- Baseline semantic matches: **13 / 13**
 - Cross-path exact terminal-code matches: **10 / 13**
 - Cross-path exact cause-code matches: **10 / 13**
+- Cross-path both-success matches: **1 / 13**
+- Cross-path both-fail-closed matches: **12 / 13**
 - Cross-path semantic matches: **13 / 13**
+
+Semantic equality is defined from observed outcomes only. Both paths must have
+the same observed status and either both complete with a successful result or
+both terminate failure/refused with no successful result. It does not use
+path-specific expectations, terminal codes, or cause codes.
 
 Artifacts:
 
 - `docs/evidence/level-2/comparison-v2.json`
 - `docs/evidence/level-2/comparison-v2.md`
 
-The three cross-path differences are A2A protocol wrapping of evidence-side
+The three exact-code differences are A2A protocol wrapping of evidence-side
 failures as `task_failure` with a cause code. Each path still matches its own V2
 expectation and both fail closed.
 
@@ -115,21 +132,51 @@ historical banners:
 The strict V1 reading and the `L2-04b` expectation defect are documented in
 `erratum-v1.md`.
 
-## Clean-clone check
+## Clean-clone check at pushed commit `f9ccce7`
 
-A clean-clone check of the V2 state has **not** been run because V2 has not been
-committed. The historical V1 clean clone contained the baseline commit only.
-After an owner-approved commit, rerun:
+The pushed evidence commit was checked from an isolated clone, without resetting
+or modifying the working tree:
 
 ```powershell
-$dest = Join-Path $env:TEMP "aaif-level2-v2-clean"
-git clone --quiet <repository> $dest
+$dest = Join-Path $env:TEMP "aaif-level2-v2-f9ccce7"
+git -c core.autocrlf=false clone --quiet <repository> $dest
+git -C $dest -c core.autocrlf=false checkout --quiet f9ccce75262b72651887c6b7e7872b71d217669e
 $env:PYTHONPATH = Join-Path $dest "src"
 & <repository>\.venv\Scripts\python.exe -m pytest -q
 ```
 
-Then run both V2 runners with `PYTHONPATH` pointed at the clone's `src`
-directory, and confirm the fixture hash and V2 counts above.
+Result at exact HEAD `f9ccce7`: **258 passed in 104.62s**, exit `0`; fixture
+SHA-256 `69136fc840591c811fac66153122a3b091a0bea13445d770dafa294e6874e272`.
+Both V2 runners exited `0` and reproduced scorecard **24/24**, terminal/cause
+**24/24**, and comparison path passes **13/13** per path, exact cross-path
+terminal/cause **10/13**. This clean clone contains the pre-reconciliation
+comparison definition; it is not evidence that the current uncommitted
+reconciliation was clean-clone verified.
+
+## Clean-copy check of the uncommitted reconciliation
+
+The current reconciliation was checked from an isolated `git archive` copy with
+the current Level 2 evidence and evaluation tests overlaid. The copy contains no
+`.git` directory and was not a commit or push. The copy was built from `HEAD`
+with `git archive`, then the current `docs/evidence/level-2`,
+`tests/evaluation`, and `tests/test_level2_v2_harness.py` were copied over it;
+tests used `PYTHONPATH` pointed at the copy's `src` directory.
+
+Result: **258 passed in 102.53s**, exit `0`; both V2 runners exited `0` with
+scorecard **24/24**, terminal/cause **24/24**, comparison path passes **13/13**
+per path, both-success **1/13**, both-fail-closed **12/13**, semantic **13/13**,
+and exact cross-path terminal/cause **10/13**.
+
+Generated artifacts matched the working-tree Markdown byte-for-byte. JSON
+matched after removing runtime `task_id` and `context_id` values; those IDs vary
+per run and are not evidence of a result change. Representative SHA-256 values:
+
+| Artifact | Working tree | Clean copy |
+| --- | --- | --- |
+| `scorecard-v2.json` | `64e302e21e365bbcc93b6ab9be7af76c5150b8388f8dab97b38824d979cff02c` | `ff99d8d7b5b2b8411df8cee9524bc521206e5d526c2417b93ce3a8cbe8da8e41` |
+| `scorecard-v2.md` | `0a1bc2ff34b69e2349816c11ca21c130cae5330615119f23eaa103e35f3cd525` | `0a1bc2ff34b69e2349816c11ca21c130cae5330615119f23eaa103e35f3cd525` |
+| `comparison-v2.json` | `13a777b7631c51c58a5a0f2907ec07ab5f1008ccea73925c230a7d518e5bc721` | `4f182e6740bba99661867e2d53a63a066791b83504f6a73f6a4c4ad40a785196` |
+| `comparison-v2.md` | `99cb6dba4691a3ae859b377298a699a498a48f3f5bda4e03738300e633a81c4c` | `99cb6dba4691a3ae859b377298a699a498a48f3f5bda4e03738300e633a81c4c` |
 
 ## Reproducibility notes
 
@@ -141,3 +188,5 @@ directory, and confirm the fixture hash and V2 counts above.
 - No latency, cost, savings, or productivity outcome is measured or claimed.
 - V1 scorecard/comparison JSON and Markdown were preserved; V2 writes new
   `-v2` artifacts.
+- The reconciliation is uncommitted. Do not describe it as clean-clone verified
+  until a new owner-approved commit is cloned and rerun at that commit.
