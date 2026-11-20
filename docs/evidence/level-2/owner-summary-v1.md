@@ -1,5 +1,11 @@
 # Level 2 owner summary v1
 
+> **Historical artifact.** V1 is superseded for scoring by
+> `level2-evaluation-pack-v2` v2.0.0 and `owner-summary-v2.md`. V1 used union
+> matching; the strict terminal-code reading is `23/24` on the scorecard and
+> `12/13` on the A2A comparison. See `erratum-v1.md`. The text below is
+> preserved as published.
+
 **Status:** deferred/conditional. The local evidence is complete, but the final
 gate is not declared passed because the Level 2 harness and evidence were
 uncommitted at evaluation time and the clean-clone check covers only the

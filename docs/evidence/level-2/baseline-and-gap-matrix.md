@@ -1,5 +1,11 @@
 # Level 2 baseline and requirement-to-evidence matrix
 
+> **Historical Package 0 snapshot.** This note records the pre-implementation
+> baseline at `d5a6c97`. It is superseded for current evaluation status by the
+> V2 artifacts in this directory, beginning with `README.md`,
+> `evaluation-pack-v2/`, and `erratum-v1.md`. Do not read the "no implementation
+> or scored evaluation has started" status below as current.
+
 **Package:** 0 — Baseline and evidence crosswalk.
 
 **Snapshot:** 2026-11-19 local check at `d5a6c97` on branch `main`.

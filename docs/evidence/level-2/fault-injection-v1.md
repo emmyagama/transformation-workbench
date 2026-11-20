@@ -1,5 +1,10 @@
 # Level 2 fault-injection evidence v1
 
+> **Historical artifact.** V1 is superseded by `fault-injection-v2.md` for the
+> remediated evaluation. V1 used union matching and did not route all
+> workflow-labeled variants through `run_workflow`. See `erratum-v1.md`. The
+> table below is preserved as published.
+
 **Pack:** `level2-evaluation-pack` v1.0.0
 **Baseline commit:** `d5a6c973cae4ee17cd66ed01352a64c159ceb0f8`
 

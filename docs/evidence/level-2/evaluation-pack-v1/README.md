@@ -1,5 +1,9 @@
 # Level 2 evaluation pack v1
 
+> **Historical pack.** V1 is superseded for scoring by
+> `level2-evaluation-pack-v2` v2.0.0. V1 used union matching; see
+> `../erratum-v1.md`. The pack contents below are preserved as frozen.
+
 **Pack ID:** `level2-evaluation-pack`
 **Version:** `1.0.0`
 **Status:** frozen for the Level 2 scored run

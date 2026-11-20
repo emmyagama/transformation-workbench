@@ -1,5 +1,9 @@
 # Level 2 reproduction and versions v1
 
+> **Historical artifact.** V1 is superseded by `reproduction-v2.md` for the
+> remediated evaluation. V1 used union matching and its clean clone covers only
+> the baseline commit. The text below is preserved as published.
+
 **Baseline commit:** `d5a6c973cae4ee17cd66ed01352a64c159ceb0f8`
 **Evaluation date:** 2026-11-19
 
