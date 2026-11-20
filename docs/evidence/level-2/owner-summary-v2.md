@@ -1,49 +1,47 @@
 # Level 2 owner summary v2
 
-**Status:** V2 evidence commit `f9ccce7` is pushed and clean-clone verified at
-that commit. The current reconciliation changes are uncommitted. Owner final
-review and sign-off remain pending. Level 2 is not passed.
+**Status:** V2 reconciliation evidence commit `cd4a314` is pushed and
+clean-clone verified at that commit. Owner final review and the Level 2 decision
+remain pending. Level 2 is not declared passed.
 
 **Pack:** `level2-evaluation-pack-v2` v2.0.0
-**Pushed V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
+**Pushed V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
+**Prior V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
 **V2 source commit:** `33f184d`
 **Evaluation date:** 2026-11-20
 
 ## Measured facts
 
-### Pushed commit `f9ccce7`
+### Pushed reconciliation commit `cd4a314`
 
-- Clean clone at the exact pushed commit: **258 passed in 104.62s** using
-  Python 3.11.9 and the existing environment.
-- V2 scorecard: **24 of 24 variants passed** under path-specific expectations.
-- V2 literal terminal-code matches: **24 of 24**; cause-code matches:
-  **24 of 24**; all declared invariants scored.
+- Clean clone at the exact pushed commit: **258 passed in 99.54s** using Python
+  3.11.9 and the existing environment.
+- V2 scorecard: **24 of 24 variants passed** under path-specific expectations;
+  terminal and cause matches **24 of 24**; all declared invariants scored.
 - Workflow variants routed through the real `run_workflow` entrypoint: **15 of
   15**.
 - Coordinator variants routed through the real local coordinator: **9 of 9**.
 - Shared comparison: **13 of 13** A2A and **13 of 13** baseline path-specific
   passes; cross-path exact terminal-code and cause-code matches **10 of 13**.
-- The pushed commit's comparison harness uses the pre-reconciliation semantic
-  definition; its `13 of 13` semantic result is historical for this commit, not
-  the corrected definition.
-
-### Current uncommitted reconciliation
-
-- Full local suite: **258 passed in 81.89s**.
-- Clean-copy of the uncommitted reconciliation: **258 passed in 102.53s**; both
-  V2 runners exited `0` and reproduced the counts below.
-- V2 scorecard: **24 of 24**, no misses; terminal and cause matches **24 of 24**.
 - Cross-path semantic matches under the corrected observed-outcome definition:
   **13 of 13** (**1** both-success, **12** both-fail-closed).
-- Cross-path exact terminal-code and cause-code matches remain **10 of 13**.
-- Retry records now distinguish attempts from retries: `L2-08c` records
-  **2 attempts**, **1 retry**, **max_retries=1**.
-- `L2-05b` failure category is now **`intake_validation`**, not
-  `unclassified`.
+- `pip check`: no broken requirements.
+- Regenerated artifacts matched the committed artifacts after runtime ID
+  normalization; Markdown matched byte-for-byte.
+- Retry records distinguish attempts from retries: `L2-08c` records **2
+  attempts**, **1 retry**, **max_retries=1**.
+- `L2-05b` failure category is **`intake_validation`**, not `unclassified`.
 - V1 erratum under strict terminal-code reading: scorecard **23 of 24**, A2A
   comparison **12 of 13**, exact top-level comparison codes **10 of 13**.
 - V1 scorecard and comparison result artifacts were not overwritten or
   relabeled; V1 status docs carry historical banners.
+
+### Prior evidence commit `f9ccce7`
+
+- Clean clone at `f9ccce7`: **258 passed in 104.62s**; scorecard and
+  path-specific comparison counts match the current evidence.
+- Its comparison harness uses the pre-reconciliation semantic definition, so
+  its semantic result is historical for that commit.
 
 ## Calculations
 
@@ -96,21 +94,19 @@ review and sign-off remain pending. Level 2 is not passed.
 
 ## Recommendations
 
-1. Owner review the current reconciliation of the V2 pack, erratum, literal-code
-   scorecard, and observed-outcome comparison.
-2. If acceptable, authorize a new scoped commit of the reconciliation and then a
-   clean-clone run at that new commit. Do not describe the reconciliation as
-   clean-clone verified before that run.
-3. Decide whether the A2A `task_failure` wrapping of evidence-side failures is
+1. Owner review the committed V2 pack, erratum, literal-code scorecard, and
+   observed-outcome comparison, then record the Level 2 decision.
+2. Decide whether the A2A `task_failure` wrapping of evidence-side failures is
    accepted behavior or should be normalized in a later, separately scoped
    change. Do not change V2 expected values after seeing results without a
    version increment and written rationale.
-4. Keep Level 2 CLI-first. No UI, ODI feasibility, deployment, or production
+3. Keep Level 2 CLI-first. No UI, ODI feasibility, deployment, or production
    readiness work begins until the Level 2 decision is recorded.
 
 ## Future work
 
-- Commit and clean-clone verify the reconciliation after owner authorization.
+- Record the owner's Level 2 decision and update owner-authored status documents
+  if the decision changes their state.
 - Optionally add an error-taxonomy normalization proposal if exact cross-path
   terminal-code parity is required.
 - Prepare a separate bounded proposal only if hosted-model quality evidence is
@@ -118,9 +114,8 @@ review and sign-off remain pending. Level 2 is not passed.
 
 ## Unresolved findings
 
-- The reconciliation is uncommitted; its clean-clone verification is pending a
-  new owner-authorized commit. The pushed `f9ccce7` clean clone covers the
-  pre-reconciliation harness.
+- The technical reconciliation is committed and clean-clone verified at
+  `cd4a314`; the owner's Level 2 decision is still pending.
 - A2A wraps evidence-side failures as `task_failure` with a cause code in three
   shared cases; this is documented, not hidden.
 - No general A2A superiority, model-quality, cost, latency, savings, or

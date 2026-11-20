@@ -1,14 +1,13 @@
 # Level 2 requirement-to-evidence crosswalk v2
 
 **Pack:** `level2-evaluation-pack-v2` v2.0.0
-**Pushed V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
+**Pushed V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
+**Prior V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
 **V2 source commit:** `33f184d`
-**Current reconciliation:** uncommitted in the worktree
 
 V1 remains published as historical evidence. This crosswalk maps the current
 remediated V2 state. See `erratum-v1.md` for the V1 strict-code correction and
-`reproduction-v2.md` for the distinction between the pushed commit and the
-uncommitted reconciliation.
+`reproduction-v2.md` for the clean-clone results and the prior commit.
 
 ## Runbook and roadmap requirements
 
@@ -21,7 +20,7 @@ uncommitted reconciliation.
 | Failure taxonomy and fault-injection evidence | `fault-injection-v2.md`; real workflow/coordinator paths | Complete |
 | Sanitized protocol traces | Each row records step, agent/skill, method, path, task/context ID, state, and attempt only | Complete |
 | Baseline-versus-A2A comparison and limits | `comparison-v2.md` / `.json`; 13 shared variants with separate path expectations and explicit observed-outcome semantic definition | Complete |
-| Exact commands, versions, and reproducibility | `reproduction-v2.md`; 258-test full suite and both V2 runners | `f9ccce7` clean-clone verified; reconciliation clean-copy only; new commit pending |
+| Exact commands, versions, and reproducibility | `reproduction-v2.md`; 258-test full suite and both V2 runners | `cd4a314` pushed and clean-clone verified |
 | Requirement-to-evidence crosswalk | This document | Complete |
 | Owner-reviewed summary separating facts, calculations, assumptions, recommendations, and future work | `owner-summary-v2.md` | Prepared; owner review pending |
 | No secrets, private paths, or real data | Synthetic fixture only; evidence uses relative paths and synthetic case IDs | Satisfied |
@@ -72,9 +71,8 @@ exchange. On the 13 shared variants:
 
 ## Gaps and limitations
 
-- The pushed commit `f9ccce7` is clean-clone verified. The current
-  reconciliation changes are uncommitted; a clean-clone verification of those
-  changes is pending a new owner-approved commit.
+- The reconciliation commit `cd4a314` is pushed and clean-clone verified. The
+  remaining gate is the owner's Level 2 decision.
 - The sample is small and deterministic; it tests orchestration and contracts,
   not model reasoning or user-perceived answer quality.
 - The baseline has no A2A protocol trace, discovery, retry, or timeout

@@ -1,12 +1,12 @@
 # Level 2 reproduction and versions v2
 
 **Pack:** `level2-evaluation-pack-v2` v2.0.0
-**Pushed V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
+**Pushed V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
+**Prior V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
 **V2 source commit:** `33f184d`
 **Evaluation date:** 2026-11-20
-**Clean-clone status:** `f9ccce7` verified at that commit; current reconciliation
-is uncommitted and clean-clone verification is pending a new owner-approved
-commit.
+**Clean-clone status:** `cd4a314` pushed and verified at that commit; prior
+commit `f9ccce7` also verified at its commit.
 
 ## Environment
 
@@ -44,7 +44,8 @@ Use `-c core.autocrlf=false` for byte-identical fixture verification.
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-Current uncommitted reconciliation result: **258 passed in 81.89s**, exit `0`.
+Local result for the reconciliation content: **258 passed in 81.89s**, exit
+`0`.
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip check
@@ -58,7 +59,7 @@ Result: **No broken requirements found.** Exit `0`.
 .\.venv\Scripts\python.exe -m tests.evaluation.run_level2_scorecard_v2
 ```
 
-Current reconciliation result, exit `0`:
+Reconciliation result, exit `0`:
 
 ```json
 {
@@ -88,7 +89,7 @@ count, and retry limit. `L2-08c` records **2 attempts**, **1 retry**, and
 .\.venv\Scripts\python.exe -m tests.evaluation.run_level2_comparison_v2
 ```
 
-Current reconciliation result, exit `0`:
+Reconciliation result, exit `0`:
 
 - Shared variants: **13**
 - A2A path-specific passes: **13 / 13**
@@ -132,9 +133,36 @@ historical banners:
 The strict V1 reading and the `L2-04b` expectation defect are documented in
 `erratum-v1.md`.
 
-## Clean-clone check at pushed commit `f9ccce7`
+## Clean-clone check at reconciliation commit `cd4a314`
 
-The pushed evidence commit was checked from an isolated clone, without resetting
+The committed reconciliation was checked from an isolated clone of the local
+repository at the exact commit, without resetting or modifying the working tree:
+
+```powershell
+$dest = Join-Path $env:TEMP "aaif-level2-v2-cd4a314"
+git -c core.autocrlf=false clone --quiet <repository> $dest
+git -C $dest -c core.autocrlf=false checkout --quiet cd4a3147a840c191dce6992618dc424523537824
+$env:PYTHONPATH = Join-Path $dest "src"
+& <repository>\.venv\Scripts\python.exe -m pytest -q
+```
+
+Result at exact HEAD `cd4a314`: **258 passed in 99.54s**, exit `0`; fixture
+SHA-256 `69136fc840591c811fac66153122a3b091a0bea13445d770dafa294e6874e272`.
+Both V2 runners exited `0`; `pip check` exited `0`; scorecard **24/24**;
+terminal/cause **24/24**; comparison path passes **13/13** per path; exact
+cross-path terminal/cause **10/13**; both-success **1/13**; both-fail-closed
+**12/13**; semantic **13/13**. Regenerated artifacts matched the committed
+artifacts after runtime `task_id`/`context_id` normalization; Markdown matched
+byte-for-byte.
+
+The commit was pushed after this check, and `git ls-remote` confirmed the remote
+branch ref at `cd4a314`. A separate network clone was attempted but was blocked
+by repeated connection resets; the local clean clone and remote ref confirmation
+are the recorded evidence.
+
+## Prior clean-clone check at `f9ccce7`
+
+The prior evidence commit was checked from an isolated clone, without resetting
 or modifying the working tree:
 
 ```powershell
@@ -150,17 +178,17 @@ SHA-256 `69136fc840591c811fac66153122a3b091a0bea13445d770dafa294e6874e272`.
 Both V2 runners exited `0` and reproduced scorecard **24/24**, terminal/cause
 **24/24**, and comparison path passes **13/13** per path, exact cross-path
 terminal/cause **10/13**. This clean clone contains the pre-reconciliation
-comparison definition; it is not evidence that the current uncommitted
-reconciliation was clean-clone verified.
+comparison definition; its semantic result is historical for that commit.
 
-## Clean-copy check of the uncommitted reconciliation
+## Pre-commit clean-copy check
 
-The current reconciliation was checked from an isolated `git archive` copy with
-the current Level 2 evidence and evaluation tests overlaid. The copy contains no
-`.git` directory and was not a commit or push. The copy was built from `HEAD`
-with `git archive`, then the current `docs/evidence/level-2`,
-`tests/evaluation`, and `tests/test_level2_v2_harness.py` were copied over it;
-tests used `PYTHONPATH` pointed at the copy's `src` directory.
+Before the reconciliation commit, the content was checked from an isolated
+`git archive` copy with the current Level 2 evidence and evaluation tests
+overlaid. The copy contained no `.git` directory and was not a commit or push.
+The copy was built from the then-current `HEAD` with `git archive`, then the
+current `docs/evidence/level-2`, `tests/evaluation`, and
+`tests/test_level2_v2_harness.py` were copied over it; tests used `PYTHONPATH`
+pointed at the copy's `src` directory.
 
 Result: **258 passed in 102.53s**, exit `0`; both V2 runners exited `0` with
 scorecard **24/24**, terminal/cause **24/24**, comparison path passes **13/13**
@@ -188,5 +216,5 @@ per run and are not evidence of a result change. Representative SHA-256 values:
 - No latency, cost, savings, or productivity outcome is measured or claimed.
 - V1 scorecard/comparison JSON and Markdown were preserved; V2 writes new
   `-v2` artifacts.
-- The reconciliation is uncommitted. Do not describe it as clean-clone verified
-  until a new owner-approved commit is cloned and rerun at that commit.
+- The reconciliation is committed at `cd4a314` and clean-clone verified at that
+  commit. The remaining Level 2 gate is the owner's recorded decision.

@@ -1,12 +1,13 @@
 # Level 2 evidence bundle
 
-**Current status:** V2 evidence commit `f9ccce7` is pushed and was clean-clone
-verified at that commit. The current reconciliation changes in this worktree are
-uncommitted. Owner final review and sign-off remain pending. Level 2 is not
-passed.
+**Current status:** V2 reconciliation evidence commit `cd4a314` is pushed and
+was clean-clone verified at that commit. A follow-up docs commit records the
+verification result. Owner final review and the Level 2 decision remain pending.
+Level 2 is not declared passed.
 
 **V2 pack:** `level2-evaluation-pack-v2` v2.0.0
-**V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
+**V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
+**Prior V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
 **V2 source commit:** `33f184d`
 **V1 baseline commit:** `d5a6c973cae4ee17cd66ed01352a64c159ceb0f8`
 
@@ -29,9 +30,9 @@ ODI feasibility work is included.
 
 ## V2 verification summary
 
-### Pushed evidence commit `f9ccce7`
+### Pushed reconciliation commit `cd4a314`
 
-- Clean-clone at `f9ccce7`: **258 passed in 104.62s**, using Python 3.11.9 and
+- Clean-clone at `cd4a314`: **258 passed in 99.54s**, using Python 3.11.9 and
   the existing `.venv`.
 - V2 scorecard: **24 of 24 variants passed** under path-specific expectations.
 - V2 literal terminal-code matches: **24 of 24**.
@@ -39,25 +40,21 @@ ODI feasibility work is included.
 - All 15 workflow variants routed through the real `run_workflow` entrypoint.
 - All 9 coordinator variants routed through the real local coordinator.
 - Shared comparison: A2A **13/13** and baseline **13/13** path-specific passes.
-- Cross-path exact terminal-code matches: **10 of 13**.
-- The `f9ccce7` clean clone reproduces the pre-reconciliation comparison
-  definition; it is not evidence that the current uncommitted remediation was
-  clean-clone verified.
-
-### Current uncommitted reconciliation
-
-- Full local suite: **258 passed in 81.89s**.
-- V2 scorecard: **24 of 24**, literal terminal **24/24**, literal cause
-  **24/24**, all declared invariants scored.
+- Cross-path exact terminal-code and cause-code matches: **10 of 13**.
 - Cross-path semantic matches: **13/13** using observed outcomes only:
   **1** both-success and **12** both-fail-closed.
-- Cross-path exact terminal/cause matches remain **10/13**; terminal and cause
-  matches are not unioned.
 - `pip check`: **No broken requirements found.**
-- Clean-copy of the uncommitted reconciliation: **258 passed in 102.53s**; both
-  V2 runners exited `0` and reproduced the counts above.
-- Clean-clone of the reconciliation: **pending a new owner-authorized commit**.
-  The clean-copy run is recorded in `reproduction-v2.md`.
+- Regenerated artifacts matched the committed artifacts after runtime
+  `task_id`/`context_id` normalization; Markdown matched byte-for-byte.
+- The remote branch ref was confirmed at `cd4a314` after push. The detailed
+  commands and results are in `reproduction-v2.md`.
+
+### Prior evidence commit `f9ccce7`
+
+- Clean-clone at `f9ccce7`: **258 passed in 104.62s**.
+- Scorecard and path-specific comparison counts match the current evidence.
+- The `f9ccce7` comparison harness uses the pre-reconciliation semantic
+  definition; its semantic result is historical for that commit.
 
 ## V1 historical status
 
@@ -101,8 +98,7 @@ baseline has no A2A protocol semantics.
 ## Decision boundary
 
 Level 2 is not declared passed here. The runbook's final gate requires owner
-review of the V2 evidence and a recorded decision. The pushed commit `f9ccce7`
-was clean-clone verified at that commit. The current reconciliation changes are
-uncommitted; after a new owner-approved commit, rerun the full suite, both V2
-runners, and the clean-clone commands in `reproduction-v2.md` against the new
-remediation commit.
+review of the V2 evidence and a recorded decision. The reconciliation is now
+committed at `cd4a314`, pushed, and clean-clone verified. Remaining work is the
+owner's Level 2 decision; the owner-authored runbook and roadmap status have not
+been edited in this change.
