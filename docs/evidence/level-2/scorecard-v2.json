@@ -74,8 +74,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "ac3df5bd-554d-4eb7-8a3d-0a6b87aca3aa",
-          "context_id": "fb5914e4-0459-42a1-98f8-e03ce238bb9b",
+          "task_id": "81d670c7-98d4-415d-bd66-d00c6d3127e4",
+          "context_id": "1d1af98a-1e5c-4a0c-b6f6-11899a58c33e",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         },
@@ -96,8 +96,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "solution_options",
-          "task_id": "51633069-a4e9-4604-9a46-2484c0870e8f",
-          "context_id": "a2b9d59f-4423-47b6-879f-a056cb621e72",
+          "task_id": "27bf5d7d-b936-4f01-9084-a381981825bb",
+          "context_id": "2b29ec8a-2f47-4bbf-9984-7128bf0ec79b",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -311,8 +311,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "19e59671-179e-472a-a9df-4caedbf1ae7b",
-          "context_id": "48ce170a-942a-460e-8d8b-9167e1f2f66c",
+          "task_id": "29ad3864-0715-43bb-a611-715b3f1305e3",
+          "context_id": "6e3e771d-ae8a-46b2-839a-f8a699384af5",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -421,8 +421,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "463845e2-cfa4-4684-a3b6-9c0e2f0e3ff3",
-          "context_id": "c80c199a-cd8e-488c-ada3-cb33ee87a928",
+          "task_id": "df68d031-e784-4562-8179-7e6115156336",
+          "context_id": "3535a274-233f-4e22-8cef-3a40e04c712e",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -620,8 +620,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "1397836e-80da-489a-a3a4-712ec99c65da",
-          "context_id": "17178260-61a8-4c24-9325-55e38f3da3e8",
+          "task_id": "7b5f0974-baef-4432-9916-4fa9f54aa4d2",
+          "context_id": "6c887854-ace3-49e9-8779-8a82c2070e02",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -817,8 +817,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "dc4e1f79-63fe-4236-b939-74fd2a7579c4",
-          "context_id": "4a00ceda-2647-4867-908b-c8687684b3af",
+          "task_id": "d1ced103-9c31-4acf-b4cf-089622ae6827",
+          "context_id": "461b2906-4a5b-43fd-8542-316067c019ac",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -927,8 +927,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "e47b2a70-a9d9-462f-926a-84ed651d6ae5",
-          "context_id": "eb04b6ff-41e9-4c7f-9aaa-8ccdf6cfe01f",
+          "task_id": "f7627bc7-31ff-405e-9f82-c7008c924cc3",
+          "context_id": "0a26d43e-477e-47f4-91ad-9201bf36506f",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -1090,8 +1090,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "389926b1-7ae1-41bb-b944-37a7b96d70cb",
-          "context_id": "bcef704d-1f0b-4c28-8f82-b7711a0662f8",
+          "task_id": "a59866d3-9fb0-4c55-8cd5-7019359e020e",
+          "context_id": "cc72dee2-83ab-4ae4-9252-a7d9e8f56641",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         },
@@ -1112,8 +1112,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "solution_options",
-          "task_id": "014082dd-df57-4bd3-831c-f9e9cfae2c10",
-          "context_id": "899080b4-b197-4364-8787-742ea77e25fe",
+          "task_id": "ed2c8ff0-64c7-4fdd-80ed-350a00b1ab5c",
+          "context_id": "34f0ddb7-e398-47f0-82e4-869244db50ff",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -1222,8 +1222,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "e00de44a-0991-4ee7-8016-382d4a14ccfc",
-          "context_id": "e3145ef8-33a5-4e99-a02d-efa3f6be08e2",
+          "task_id": "69ddbc50-ec4a-450f-aca2-1f19096839c2",
+          "context_id": "b09d3b02-a1fc-44d6-bca7-1370ad9550b1",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         },
@@ -1244,8 +1244,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "solution_options",
-          "task_id": "ec27504a-29c1-4b27-8e71-953ddcf44356",
-          "context_id": "02749922-c3f7-4790-9a32-7753ea44a213",
+          "task_id": "06d07603-b951-4400-8f65-cd074f96be3d",
+          "context_id": "3cf165e0-d545-47ca-8971-33acece39fd6",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -1361,8 +1361,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "be17cbc5-9b2b-403d-995a-1d55be7a3c7c",
-          "context_id": "017141c0-4dcd-4e3b-a956-00cb32564968",
+          "task_id": "b2bfe8d1-61a6-4471-87c8-3a6cc4197560",
+          "context_id": "7a30aa99-24c5-45a8-b673-aaa30369385c",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         },
@@ -1383,8 +1383,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "solution_options",
-          "task_id": "f3328165-7843-48e7-af96-effcfa445c42",
-          "context_id": "f8059bb3-263a-4a2f-a53d-a398256f5f53",
+          "task_id": "4a323105-317e-4d0c-8957-0e0042f7670e",
+          "context_id": "f448b83d-4388-4eae-ae82-be739a020e89",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -1523,8 +1523,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "1420852e-b624-4766-8706-36bd4c7f1b95",
-          "context_id": "5390a14b-df71-4ed9-89a1-de26ae5f74ea",
+          "task_id": "e1d3e818-64cc-4f20-978c-9ef09f2b670b",
+          "context_id": "915bdb7b-fe2c-463a-a67c-f2051d041e9e",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         },
@@ -1545,8 +1545,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "solution_options",
-          "task_id": "27a0fcbc-184d-4b1c-8597-1dd94085930a",
-          "context_id": "715f101a-9953-4fba-beb2-ca21c2ba0fb0",
+          "task_id": "107334fc-4253-4fd9-a558-c1816b2b19d9",
+          "context_id": "fd3c56f1-ccfe-4afb-9a8c-703195aeb479",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -1635,8 +1635,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "7bdf6982-c123-401d-84b8-c6e7b4328784",
-          "context_id": "2f16ab79-34a6-4c00-b423-6c229cf454fe",
+          "task_id": "f699e49e-eb21-4913-b917-9033d39ccf66",
+          "context_id": "95c999a1-3deb-4b90-95d5-a2ea4d28df63",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         },
@@ -1657,8 +1657,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "solution_options",
-          "task_id": "218f26b0-39b7-4221-a9e9-c8cf0d09c604",
-          "context_id": "2cfa7414-d02d-4a85-839b-41406c105a94",
+          "task_id": "0ebcda11-d54c-4cc8-8516-b5037ef5dc5f",
+          "context_id": "96d6fc6f-087b-4e13-8033-8e9a3456389c",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         },
@@ -1750,8 +1750,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "72ed01cd-e525-4ae8-924d-c6dd54c08e62",
-          "context_id": "38c2af3d-1be8-495d-9782-8f2963b8cc22",
+          "task_id": "b654be0c-5fc7-45b7-b0c3-11bb35770910",
+          "context_id": "4b3ffaad-2a61-43f1-a0fc-26af23c022f6",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         },
@@ -1772,8 +1772,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "solution_options",
-          "task_id": "62159d68-33fd-423d-b700-71572bc735c8",
-          "context_id": "26138f51-95d0-491d-aa36-79783874e59c",
+          "task_id": "72dde5c8-7c10-4955-9710-7d9e22a24660",
+          "context_id": "31f1d32a-a196-4266-aec4-cf219a1574b2",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -1895,7 +1895,8 @@
       },
       "passed": true,
       "miss": [],
-      "baseline": null
+      "baseline": null,
+      "trace_reproducibility": "timing_dependent"
     },
     {
       "case_id": "L2-09",
@@ -1946,7 +1947,8 @@
       },
       "passed": true,
       "miss": [],
-      "baseline": null
+      "baseline": null,
+      "trace_reproducibility": "timing_dependent"
     },
     {
       "case_id": "L2-10",
@@ -2103,8 +2105,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "beaaa8fc-2a40-471e-a7cf-478746713bb2",
-          "context_id": "6e1f3d89-8bc0-4251-9f50-319765bcbd8b",
+          "task_id": "45a1b0e5-fedd-4208-8e39-775b26e51018",
+          "context_id": "3fd63cbe-bccd-42e5-b5f2-bc526ee3a1f6",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -2213,8 +2215,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "workbench_evidence",
-          "task_id": "e3b6e1d6-2b73-4f0a-bda1-1af9b4cda606",
-          "context_id": "1b6c20f7-6f00-4278-81d6-eae1562bfbc2",
+          "task_id": "b5325da7-01a4-4399-9569-3a176412e031",
+          "context_id": "460ce49d-ec29-4429-865a-09910f190109",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         },
@@ -2235,8 +2237,8 @@
           "method": "POST",
           "path": "/",
           "skill_id": "solution_options",
-          "task_id": "29d2f9ff-12a4-4d9d-bdad-2de387e78812",
-          "context_id": "14e862fa-85e5-45e4-ab4f-abedfc75104e",
+          "task_id": "5ad577bc-7c0c-49d7-beca-c926ecf90d6c",
+          "context_id": "a5049003-5725-4402-ba45-4168b7d7cd6b",
           "state": "TASK_STATE_COMPLETED",
           "attempt": 1
         }
@@ -2301,6 +2303,7 @@
     "Each row records expected and observed status/codes, failure category, attempt count, retry count, max retries, human-judgment flag, every invariant result, and a sanitized trace.",
     "Retry count is attempt_count minus one; max_retries is the permitted retry limit.",
     "The Markdown table separates expected and observed fields and counts declared invariants only; the JSON also carries supplementary dimensions, sanitized trace, and evidence pointer.",
+    "L2-09a and L2-09b timeout-path traces are timing-dependent under the 0.1 s injected timeout: the discovery event may be absent or present and is not cited as reproducible evidence. Verdicts, codes, retries, and invariants are stable.",
     "The L2-04b workflow expectation is task_failure / request_mismatch; the direct baseline expectation is request_mismatch / no cause.",
     "Whole-workflow failure remains the policy; no partial-result status exists.",
     "No hosted model, provider, external system, credential, or real data is used."

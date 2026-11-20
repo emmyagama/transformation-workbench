@@ -168,6 +168,7 @@ FAILURE_CATEGORY = {
 }
 
 ALLOWED_STEPS = {"discover_card", "send_task", "duplicate_replay"}
+TIMING_DEPENDENT_TRACE_VARIANTS = {"L2-09a", "L2-09b"}
 ALLOWED_METHODS = {"GET", "POST", "NONE"}
 ALLOWED_PATHS = {"/.well-known/agent-card.json", "/", "(cached result)"}
 
@@ -1505,7 +1506,7 @@ def make_row(
             f"{variant['variant_id']} runner path {observed['path']!r} "
             f"does not match expected path {expected['path']!r}"
         )
-    return {
+    row = {
         "case_id": case["case_id"],
         "family": case["family"],
         "variant_id": variant["variant_id"],
@@ -1538,3 +1539,6 @@ def make_row(
         "miss": observed["miss"],
         "baseline": baseline,
     }
+    if variant["variant_id"] in TIMING_DEPENDENT_TRACE_VARIANTS:
+        row["trace_reproducibility"] = "timing_dependent"
+    return row

@@ -151,9 +151,14 @@ SHA-256 `69136fc840591c811fac66153122a3b091a0bea13445d770dafa294e6874e272`.
 Both V2 runners exited `0`; `pip check` exited `0`; scorecard **24/24**;
 terminal/cause **24/24**; comparison path passes **13/13** per path; exact
 cross-path terminal/cause **10/13**; both-success **1/13**; both-fail-closed
-**12/13**; semantic **13/13**. Regenerated artifacts matched the committed
-artifacts after runtime `task_id`/`context_id` normalization; Markdown matched
-byte-for-byte.
+**12/13**; semantic **13/13**. Regenerated Markdown artifacts
+(`scorecard-v2.md`, `comparison-v2.md`) matched the committed artifacts
+byte-for-byte. `comparison-v2.json` matched after normalizing runtime `task_id`
+and `context_id` values. `scorecard-v2.json` matched after the same
+normalization, except for the timing-dependent `sanitized_trace` field of
+`L2-09a` and `L2-09b`, whose optional `discover_card` event may be absent or
+present under the 0.1 s fault-injection timeout; pass/fail, terminal codes,
+cause codes, retry counts, and all declared invariants were identical.
 
 The commit was pushed after this check, and `git ls-remote` confirmed the remote
 branch ref at `cd4a314`. A separate network clone was attempted but was blocked
@@ -195,9 +200,12 @@ scorecard **24/24**, terminal/cause **24/24**, comparison path passes **13/13**
 per path, both-success **1/13**, both-fail-closed **12/13**, semantic **13/13**,
 and exact cross-path terminal/cause **10/13**.
 
-Generated artifacts matched the working-tree Markdown byte-for-byte. JSON
-matched after removing runtime `task_id` and `context_id` values; those IDs vary
-per run and are not evidence of a result change. Representative SHA-256 values:
+Generated Markdown artifacts matched the then-working-tree Markdown
+byte-for-byte. `comparison-v2.json` matched after removing runtime `task_id` and
+`context_id` values; those IDs vary per run and are not evidence of a result
+change. `scorecard-v2.json` matched after the same normalization, except for the
+timing-dependent `sanitized_trace` field of `L2-09a` and `L2-09b`. These hashes
+are historical to the pre-fix run.
 
 | Artifact | Working tree | Clean copy |
 | --- | --- | --- |

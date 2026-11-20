@@ -90,6 +90,9 @@ def test_v2_scorecard_scored_every_declared_invariant() -> None:
     assert by_id["L2-08c"]["attempt_count"] == 2
     assert by_id["L2-08c"]["retry_count"] == 1
     assert by_id["L2-08c"]["max_retries"] == 1
+    assert by_id["L2-09a"]["trace_reproducibility"] == "timing_dependent"
+    assert by_id["L2-09b"]["trace_reproducibility"] == "timing_dependent"
+    assert "trace_reproducibility" not in by_id["L2-01a"]
 
 
 def test_v2_comparison_separates_codes_and_semantics() -> None:

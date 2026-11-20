@@ -57,6 +57,7 @@ No misses under the frozen V2 path-specific expectations.
 - Each row records expected and observed status/codes, failure category, attempt count, retry count, max retries, human-judgment flag, every invariant result, and a sanitized trace.
 - Retry count is attempt_count minus one; max_retries is the permitted retry limit.
 - The Markdown table separates expected and observed fields and counts declared invariants only; the JSON also carries supplementary dimensions, sanitized trace, and evidence pointer.
+- L2-09a and L2-09b timeout-path traces are timing-dependent under the 0.1 s injected timeout: the discovery event may be absent or present and is not cited as reproducible evidence. Verdicts, codes, retries, and invariants are stable.
 - The L2-04b workflow expectation is task_failure / request_mismatch; the direct baseline expectation is request_mismatch / no cause.
 - Whole-workflow failure remains the policy; no partial-result status exists.
 - No hosted model, provider, external system, credential, or real data is used.

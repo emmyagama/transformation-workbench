@@ -44,10 +44,16 @@ ODI feasibility work is included.
 - Cross-path semantic matches: **13/13** using observed outcomes only:
   **1** both-success and **12** both-fail-closed.
 - `pip check`: **No broken requirements found.**
-- Regenerated artifacts matched the committed artifacts after runtime
-  `task_id`/`context_id` normalization; Markdown matched byte-for-byte.
-- The remote branch ref was confirmed at `cd4a314` after push. The detailed
-  commands and results are in `reproduction-v2.md`.
+- Regenerated Markdown artifacts (`scorecard-v2.md`, `comparison-v2.md`) matched
+  the committed artifacts byte-for-byte. `comparison-v2.json` matched after
+  normalizing runtime `task_id` and `context_id` values. `scorecard-v2.json`
+  matched after the same normalization, except for the timing-dependent
+  `sanitized_trace` field of `L2-09a` and `L2-09b`, whose optional
+  `discover_card` event may be absent or present under the 0.1 s
+  fault-injection timeout; pass/fail, terminal codes, cause codes, retry counts,
+  and all declared invariants were identical.
+- The prior evidence commit `cd4a314` was confirmed on the remote branch after
+  push. The detailed commands and results are in `reproduction-v2.md`.
 
 ### Prior evidence commit `f9ccce7`
 

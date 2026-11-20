@@ -55,6 +55,12 @@ The evidence bundle does not include raw request payloads, raw response
 payloads, loopback URLs, environment values, server logs, credentials, private
 paths, or synthetic case contents beyond the fixed fixture identifiers.
 
+For `L2-09a` and `L2-09b`, the timeout-path trace is timing-dependent under the
+0.1 s injected timeout. The `discover_card` event may be absent or present
+depending on whether discovery completes before the deadline. That trace must
+not be cited as reproducible evidence; the verdict, terminal/cause codes, retry
+count, and declared invariants are stable.
+
 ## Trace expectations observed
 
 - `L2-02a` and `L2-03b` fail while sending the evidence task; no completed
@@ -71,6 +77,14 @@ paths, or synthetic case contents beyond the fixed fixture identifiers.
   artifact during parsing; no solution task is started.
 - `L2-10d` records both specialist discoveries and sends, then rejects the
   option during evidence-reference validation; no report is rendered.
+
+## Known limitations
+
+- `L2-09a` and `L2-09b` use a 0.1 s fault-injection timeout. Whether a
+  `discover_card` event is recorded before the deadline is timing-dependent, so
+  the sanitized trace is not reproducible evidence. The case records mark these
+  rows `trace_reproducibility: timing_dependent`, and the scored outcomes remain
+  stable.
 
 ## Reproduction
 
