@@ -1,18 +1,36 @@
 # Level 2 owner summary v2
 
-**Status:** V2 reconciliation evidence commit `cd4a314` is pushed and
-clean-clone verified at that commit. Owner final review and the Level 2 decision
-remain pending. Level 2 is not declared passed.
+**Status:** V2 evidence was merged into `main` by PR #4 in merge commit
+`c7c935cf0c948f24c016d4f6f4abf350dffbfd8f`. Owner review was completed and
+the Level 2 decision was recorded on 2026-11-20. This summary records evidence
+and does not restate the owner-authored closure state or declare a new pass.
 
 **Pack:** `level2-evaluation-pack-v2` v2.0.0
-**Pushed V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
+**Final V2 evidence commit:** `a82d38f94735cbd6f476a11b6e843d9e02f375d1`
+**Merge commit:** `c7c935cf0c948f24c016d4f6f4abf350dffbfd8f`
+**Prior V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
 **Prior V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
 **V2 source commit:** `33f184d`
 **Evaluation date:** 2026-11-20
 
 ## Measured facts
 
-### Pushed reconciliation commit `cd4a314`
+### Final evidence commit `a82d38f` and merge commit `c7c935c`
+
+- PR #4 merged the branch into `main` with merge commit `c7c935c`; the merge
+  commit has two parents and was not squashed or rebased.
+- Clean-clone at `a82d38f`: **258 passed in 75.88s**; both V2 runners and
+  `pip check` exited `0`.
+- Clean-clone at merge commit `c7c935c`: **258 passed in 87.38s**; both V2
+  runners and `pip check` exited `0`.
+- Both runs reproduced scorecard **24/24**, terminal **24/24**, cause **24/24**,
+  no misses, all declared invariants scored; A2A **13/13**, baseline **13/13**,
+  exact cross-path terminal/cause **10/13**, semantic **13/13**.
+- Independent-review corrections D1 and D2 are included in `a82d38f`. The
+  timeout traces for `L2-09a`/`L2-09b` are flagged `timing_dependent` and are
+  not cited as reproducible evidence.
+
+### Prior reconciliation commit `cd4a314`
 
 - Clean clone at the exact pushed commit: **258 passed in 99.54s** using Python
   3.11.9 and the existing environment.
@@ -26,8 +44,9 @@ remain pending. Level 2 is not declared passed.
 - Cross-path semantic matches under the corrected observed-outcome definition:
   **13 of 13** (**1** both-success, **12** both-fail-closed).
 - `pip check`: no broken requirements.
-- Regenerated artifacts matched the committed artifacts after runtime ID
-  normalization; Markdown matched byte-for-byte.
+- Regenerated Markdown matched byte-for-byte. JSON matched after runtime ID
+  normalization except for the timing-dependent `L2-09a`/`L2-09b` timeout
+  trace field, which is disclosed and not cited as reproducible evidence.
 - Retry records distinguish attempts from retries: `L2-08c` records **2
   attempts**, **1 retry**, **max_retries=1**.
 - `L2-05b` failure category is **`intake_validation`**, not `unclassified`.
@@ -94,19 +113,20 @@ remain pending. Level 2 is not declared passed.
 
 ## Recommendations
 
-1. Owner review the committed V2 pack, erratum, literal-code scorecard, and
-   observed-outcome comparison, then record the Level 2 decision.
+1. Owner review of the merged V2 pack, erratum, literal-code scorecard, and
+   observed-outcome comparison was completed and the Level 2 decision was
+   recorded on 2026-11-20.
 2. Decide whether the A2A `task_failure` wrapping of evidence-side failures is
    accepted behavior or should be normalized in a later, separately scoped
    change. Do not change V2 expected values after seeing results without a
    version increment and written rationale.
 3. Keep Level 2 CLI-first. No UI, ODI feasibility, deployment, or production
-   readiness work begins until the Level 2 decision is recorded.
+   readiness work begins without separate owner authorization.
 
 ## Future work
 
-- Record the owner's Level 2 decision and update owner-authored status documents
-  if the decision changes their state.
+- Keep owner-authored status documents aligned with the recorded Level 2
+  decision.
 - Optionally add an error-taxonomy normalization proposal if exact cross-path
   terminal-code parity is required.
 - Prepare a separate bounded proposal only if hosted-model quality evidence is
@@ -114,9 +134,12 @@ remain pending. Level 2 is not declared passed.
 
 ## Unresolved findings
 
-- The technical reconciliation is committed and clean-clone verified at
-  `cd4a314`; the owner's Level 2 decision is still pending.
+- The technical evidence is merged at `c7c935c` and clean-clone verified.
+  Owner review was completed and the Level 2 decision was recorded on
+  2026-11-20; this summary does not restate the owner-authored closure state.
 - A2A wraps evidence-side failures as `task_failure` with a cause code in three
   shared cases; this is documented, not hidden.
+- The `L2-09a`/`L2-09b` timeout traces are timing-dependent and are not cited as
+  reproducible evidence.
 - No general A2A superiority, model-quality, cost, latency, savings, or
   production-readiness claim is supported.

@@ -1,12 +1,15 @@
 # Level 2 evidence bundle
 
-**Current status:** V2 reconciliation evidence commit `cd4a314` is pushed and
-was clean-clone verified at that commit. A follow-up docs commit records the
-verification result. Owner final review and the Level 2 decision remain pending.
-Level 2 is not declared passed.
+**Current status:** V2 evidence was merged into `main` by PR #4 in merge commit
+`c7c935cf0c948f24c016d4f6f4abf350dffbfd8f`. Owner review was completed and
+the Level 2 decision was recorded on 2026-11-20. This bundle records evidence;
+it does not restate the owner-authored closure state and does not declare Level 2
+closed on its own.
 
 **V2 pack:** `level2-evaluation-pack-v2` v2.0.0
-**V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
+**Final V2 evidence commit:** `a82d38f94735cbd6f476a11b6e843d9e02f375d1`
+**Merge commit:** `c7c935cf0c948f24c016d4f6f4abf350dffbfd8f`
+**Prior V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
 **Prior V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
 **V2 source commit:** `33f184d`
 **V1 baseline commit:** `d5a6c973cae4ee17cd66ed01352a64c159ceb0f8`
@@ -30,7 +33,26 @@ ODI feasibility work is included.
 
 ## V2 verification summary
 
-### Pushed reconciliation commit `cd4a314`
+### Final evidence commit `a82d38f` and merge commit `c7c935c`
+
+- PR #4 merged `level2-v2-evaluation-20261120` into `main` with merge commit
+  `c7c935c`; the merge commit has the expected two parents and was not squashed
+  or rebased.
+- Clean-clone at `a82d38f`: **258 passed in 75.88s**; scorecard, comparison, and
+  `pip check` all exited `0`.
+- Clean-clone at merge commit `c7c935c`: **258 passed in 87.38s**; scorecard,
+  comparison, and `pip check` all exited `0`.
+- Both runs reproduced scorecard **24/24**, terminal **24/24**, cause **24/24**,
+  no misses, all declared invariants scored; A2A **13/13**, baseline **13/13**,
+  exact cross-path terminal/cause **10/13**, semantic **13/13**.
+- Markdown artifacts matched byte-for-byte; JSON artifacts matched after runtime
+  `task_id`/`context_id` normalization. `L2-09a` and `L2-09b` timeout traces
+  remained empty in these runs and are flagged `timing_dependent`; their optional
+  `discover_card` event is not cited as reproducible evidence.
+- Independent-review corrections D1 (artifact-normalization claim) and D2
+  (timeout trace variance) are included in `a82d38f`.
+
+### Prior reconciliation commit `cd4a314`
 
 - Clean-clone at `cd4a314`: **258 passed in 99.54s**, using Python 3.11.9 and
   the existing `.venv`.
@@ -103,8 +125,8 @@ baseline has no A2A protocol semantics.
 
 ## Decision boundary
 
-Level 2 is not declared passed here. The runbook's final gate requires owner
-review of the V2 evidence and a recorded decision. The reconciliation is now
-committed at `cd4a314`, pushed, and clean-clone verified. Remaining work is the
-owner's Level 2 decision; the owner-authored runbook and roadmap status have not
-been edited in this change.
+Owner review of the V2 evidence was completed and the Level 2 decision was
+recorded on 2026-11-20. The evidence was merged to `main` in `c7c935c` through
+PR #4. This bundle does not declare Level 2 closed or convert the recorded
+decision into a new pass claim; closure state remains in the owner-authored
+documents.

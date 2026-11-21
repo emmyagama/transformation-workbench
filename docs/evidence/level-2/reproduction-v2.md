@@ -1,12 +1,15 @@
 # Level 2 reproduction and versions v2
 
 **Pack:** `level2-evaluation-pack-v2` v2.0.0
-**Pushed V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
+**Final V2 evidence commit:** `a82d38f94735cbd6f476a11b6e843d9e02f375d1`
+**Merge commit:** `c7c935cf0c948f24c016d4f6f4abf350dffbfd8f`
+**Prior V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
 **Prior V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
 **V2 source commit:** `33f184d`
 **Evaluation date:** 2026-11-20
-**Clean-clone status:** `cd4a314` pushed and verified at that commit; prior
-commit `f9ccce7` also verified at its commit.
+**Clean-clone status:** final evidence commit `a82d38f` and merge commit
+`c7c935c` verified at those exact commits; prior commits `cd4a314` and
+`f9ccce7` were also verified at their commits.
 
 ## Environment
 
@@ -165,6 +168,36 @@ branch ref at `cd4a314`. A separate network clone was attempted but was blocked
 by repeated connection resets; the local clean clone and remote ref confirmation
 are the recorded evidence.
 
+## Final fix and merge clean-clone checks
+
+The D1/D2 fix commit and the GitHub merge commit were each checked from an
+isolated local clone at the exact commit:
+
+```powershell
+git -c core.autocrlf=false clone --no-local <repository> $dest
+git -C $dest -c core.autocrlf=false checkout --quiet <exact-commit>
+$env:PYTHONPATH = Join-Path $dest "src"
+& <repository>\.venv\Scripts\python.exe -m pytest -q
+```
+
+| Checkout | Result | Runners | `pip check` |
+| --- | --- | --- | --- |
+| `a82d38f94735cbd6f476a11b6e843d9e02f375d1` | **258 passed in 75.88s** | scorecard and comparison exit `0` | exit `0` |
+| `c7c935cf0c948f24c016d4f6f4abf350dffbfd8f` | **258 passed in 87.38s** | scorecard and comparison exit `0` | exit `0` |
+
+Both runs reproduced scorecard **24/24**, terminal **24/24**, cause **24/24**,
+no misses, all declared invariants scored; A2A **13/13**, baseline **13/13**,
+exact cross-path terminal/cause **10/13**, both-success **1/13**,
+both-fail-closed **12/13**, semantic **13/13**. The fixture SHA-256 remained
+`69136fc840591c811fac66153122a3b091a0bea13445d770dafa294e6874e272`.
+
+Markdown artifacts matched byte-for-byte; JSON artifacts matched after runtime
+`task_id`/`context_id` normalization. `L2-09a` and `L2-09b` timeout traces
+remained empty in these runs and are flagged `timing_dependent`; the optional
+`discover_card` event is not cited as reproducible evidence. D1 (artifact
+normalization claim) and D2 (timeout trace variance) are corrected in
+`a82d38f`.
+
 ## Prior clean-clone check at `f9ccce7`
 
 The prior evidence commit was checked from an isolated clone, without resetting
@@ -224,5 +257,7 @@ are historical to the pre-fix run.
 - No latency, cost, savings, or productivity outcome is measured or claimed.
 - V1 scorecard/comparison JSON and Markdown were preserved; V2 writes new
   `-v2` artifacts.
-- The reconciliation is committed at `cd4a314` and clean-clone verified at that
-  commit. The remaining Level 2 gate is the owner's recorded decision.
+- The final evidence commit `a82d38f` and merge commit `c7c935c` are pushed and
+  clean-clone verified. Owner review was completed and the Level 2 decision was
+  recorded on 2026-11-20; this document does not restate the owner-authored
+  closure state.

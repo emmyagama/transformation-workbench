@@ -1,7 +1,9 @@
 # Level 2 requirement-to-evidence crosswalk v2
 
 **Pack:** `level2-evaluation-pack-v2` v2.0.0
-**Pushed V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
+**Final V2 evidence commit:** `a82d38f94735cbd6f476a11b6e843d9e02f375d1`
+**Merge commit:** `c7c935cf0c948f24c016d4f6f4abf350dffbfd8f`
+**Prior V2 evidence commit:** `cd4a3147a840c191dce6992618dc424523537824`
 **Prior V2 evidence commit:** `f9ccce75262b72651887c6b7e7872b71d217669e`
 **V2 source commit:** `33f184d`
 
@@ -18,11 +20,11 @@ remediated V2 state. See `erratum-v1.md` for the V1 strict-code correction and
 | Path-specific expected terminal and cause codes | `corpus-v2.json` `expected` / `baseline_expected`; no union policy in `thresholds-v2.json` | Complete |
 | Per-case scorecard including misses | `scorecard-v2.md` / `.json`; 24/24 passed, no misses | Complete |
 | Failure taxonomy and fault-injection evidence | `fault-injection-v2.md`; real workflow/coordinator paths | Complete |
-| Sanitized protocol traces | Each row records step, agent/skill, method, path, task/context ID, state, and attempt only | Complete |
+| Sanitized protocol traces | Each row records step, agent/skill, method, path, task/context ID, state, and attempt only; `L2-09a`/`L2-09b` timeout traces are flagged timing-dependent | Complete |
 | Baseline-versus-A2A comparison and limits | `comparison-v2.md` / `.json`; 13 shared variants with separate path expectations and explicit observed-outcome semantic definition | Complete |
-| Exact commands, versions, and reproducibility | `reproduction-v2.md`; 258-test full suite and both V2 runners | `cd4a314` pushed and clean-clone verified |
+| Exact commands, versions, and reproducibility | `reproduction-v2.md`; 258-test full suite and both V2 runners | `a82d38f` and merge commit `c7c935c` clean-clone verified |
 | Requirement-to-evidence crosswalk | This document | Complete |
-| Owner-reviewed summary separating facts, calculations, assumptions, recommendations, and future work | `owner-summary-v2.md` | Prepared; owner review pending |
+| Owner-reviewed summary separating facts, calculations, assumptions, recommendations, and future work | `owner-summary-v2.md` | Owner reviewed and Level 2 decision recorded 2026-11-20 |
 | No secrets, private paths, or real data | Synthetic fixture only; evidence uses relative paths and synthetic case IDs | Satisfied |
 | No write, business action, or approval bypass | `approval.py`; `action_method_raises` executed in V2; L2-05/L2-07 variants | Satisfied |
 | Bounded failure, no partial-completion claim | `CoordinatorResult.status` only `complete`; failure variants assert no report/result | Satisfied |
@@ -71,8 +73,10 @@ exchange. On the 13 shared variants:
 
 ## Gaps and limitations
 
-- The reconciliation commit `cd4a314` is pushed and clean-clone verified. The
-  remaining gate is the owner's Level 2 decision.
+- The final evidence commit `a82d38f` and merge commit `c7c935c` are pushed and
+  clean-clone verified. Owner review was completed and the Level 2 decision was
+  recorded on 2026-11-20; this crosswalk does not restate the owner-authored
+  closure state.
 - The sample is small and deterministic; it tests orchestration and contracts,
   not model reasoning or user-perceived answer quality.
 - The baseline has no A2A protocol trace, discovery, retry, or timeout
